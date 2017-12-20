@@ -1,0 +1,14 @@
+{*<div class="wleft">{$this->currentPage.label}</div>*}
+  {*<div class="wright"></div>*}
+  <div class="wleftContent">
+      {$this->currentPage.content} 
+{if $this->currentPage.alias == 'pdd'}
+<br class="cb"/>
+
+<a href="#" class="bottom_btns fl">Правила дорожного движения</a>
+<a href="#" class="bottom_btns fr">Дорожные знаки</a>
+
+<div class="fb-comments" data-href="http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}" data-width="740" data-num-posts="10"></div>
+{/if}
+</div>{*<div class="wbot cb"></div>*}
+

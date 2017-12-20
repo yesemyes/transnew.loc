@@ -1,0 +1,23 @@
+QUERY 
+SELECT `text`.`id`,`text`.`pid`,`text`.`alias`,`text`.`menu`,`text`.`position`,`text`.`place`,`text_ml`.`lng_id`,`text_ml`.`title`,`text_ml`.`content` FROM   `text` LEFT JOIN text_ml USING (`id`)  
+ WHERE `alias`='technical' AND `lng_id`='7' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.91150403023
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Helper/HelperFunction.class.php	 LINE 	239
+File => /home/transinf/public_html/cls/Helper/Helper.class.php	 LINE 	22
+File => /home/transinf/public_html/template_c/%%82^826^82691057%%top.tpl.html.php	 LINE 	10
+File => /home/transinf/public_html/template_c/%%82^826^82691057%%top.tpl.html.php	 LINE 	10
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%74^74C^74C64879%%body.tpl.html.php	 LINE 	4
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%5E^5ED^5ED718EC%%index.tpl.html.php	 LINE 	127
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/index.php	 LINE 	23

@@ -1,0 +1,66 @@
+{if isset($_where)}
+{assign var=condWhere value='' }
+{assign var=condLimit value='' }
+{assign var=condOrder value='' }
+{assign var=condPage value='' }
+
+{if isset($_where)}
+{assign var=condWhere value=$_where }
+{/if}
+
+{if isset($_imit)}
+{assign var=condLimit value=$_imit }
+{/if}
+
+{if isset($_order)}
+{assign var=condOrder value=$_order }
+{else}
+{assign var=condOrder value="filed_srtat_date DESC " }
+{/if}
+
+
+{if isset($_page)}
+{assign var=condPage value=$_page }
+{/if}
+
+{assign var=_offers value=$this->getOffers($condWhere,$condOrder,$condLimit,$condPage)}
+{assign var=offer value=$_offers.found.0}
+{if $offer.id}
+{assign var=offer_options value=$this->getOfferOptionsAll($offer.id)}
+
+{assign var=offer_images value=$this->getOfferImages($offer.id)}
+{/if}
+{/if}
+{assign var=currnecys value=$db->getOptions('currency','id','value',$this->defLng.id,'active')}
+{assign var=_filed_stateoptions value=$db->getOptions('state','id','value',$this->defLng.id,'active') }
+{assign var=_bodyoptions value=$db->getOptions('body','id','value',$this->defLng.id,'active','','position') }
+{assign var=clors value=$this->dictonary.color_adv}
+<form action="{$this->path}" method="post" id="signupForm"   >
+<div class="errors" id="errors"></div>
+<div id="add-offer-tabs">
+  <ul>
+    <li ><a href="#main-data">{Trans term="main_data" default="Оснавные парамерты"}*</a></li>
+    <li ><a href="#options-data">{Trans term="options_data" default="Комплектация"}</a></li>
+    <li ><a href="#images-data">{Trans term="images_data" default="Фотографии"}</a></li>
+    <li ><a href="#contact-data">{Trans term="contact_data" default="Контактная информация"}</a></li>
+  </ul>
+  <div id="main-data">{include file="users/add-offer-tabs/main.tpl.html"}<br  class="cb"/></div>
+  <div id="options-data">{include file="users/add-offer-tabs/options.tpl.html"}<br  class="cb"/></div>
+  <div id="images-data">{include file="users/add-offer-tabs/images.tpl.html"}<br  class="cb"/></div>
+  <div id="contact-data">{include file="users/add-offer-tabs/contact.tpl.html"}<br  class="cb"/></div>
+</div>
+<div class="btnbord cb" style="text-align: center;">
+  {*<div class="yelbtn1 fl">
+    <input type="reset" name="reset"  value="{Trans param='user_reset'}" class="pointer" />
+  </div>*}
+  <span class="yelbtn2 margR5"></span>
+  <div class="yelbtn1">
+    <button type="button" value="user_prev" style="display:none" id="user_prev" name="addThisOffer" class="pointer" >{Trans param='user_prev'}</button>
+    <button type="submit"   value="user_submit" style="display:none"   id="user_submit" name="addThisOffer" class="pointer" >{Trans param='user_submit'}</button>
+    <button type="submit"   value="user_next"      id="user_next" name="addThisOffer" class="pointer" >{Trans param='user_next'}</button>
+  </div>
+  <span class="yelbtn2 fl"></span> </div>
+</form>
+<script type="text/javascript" language="javascript" >
+	{include file=users/jsValidateMessages.tpl.html}
+</script>

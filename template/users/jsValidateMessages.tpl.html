@@ -1,0 +1,82 @@
+{strip}
+var _messages={ldelim} 
+"main[filed_car_brand]":{ldelim}
+                                        required:"{Trans param='filed_car_brand_required'}",
+                                        min:"{Trans param='filed_car_brand_required'}"
+                                        {rdelim},
+"main[filed_car_brand_model]":{ldelim}
+                                        required:"{Trans param='filed_car_brand_model_required'}",
+                                        min:"{Trans param='filed_car_brand_model_required'}"
+                                        {rdelim},
+"main[filed_modification]":{ldelim}required:"{Trans param='filed_modification_required'}"{rdelim},
+"main[filed_gearbox]":{ldelim}
+                                        required:"{Trans param='filed_gearbox_required'}",
+                                        min:"{Trans param='filed_gearbox_required'}"
+                                        {rdelim},
+"main[filed_engine]":{ldelim}
+													  required:"{Trans param='filed_engine_required'}",
+													  range: $.validator.format("{Trans param='filed_engine'} {Trans param='value_betWeen'} {0} {Trans param='and'}  {1}.")
+                                                      {rdelim},
+"main[filed_engine_power]":{ldelim}
+													  required:"{Trans param='filed_engine_power_required'}",
+													  range: $.validator.format("{Trans param='filed_engine_power'} {Trans param='value_between'} {0} {Trans param='and'}  {1}.")
+                                                      {rdelim},                                                      
+                                                      
+"main[filed_body]":{ldelim}required:"{Trans param='filed_bargaining_filed_body'}"{rdelim},
+"main[filed_drive]":{ldelim}required:"{Trans param='filed_drive_body_required'}"{rdelim},
+"main[filed_rudder]":{ldelim}required:"{Trans param='filed_rudder_required'}"{rdelim},
+"main[filed_fuel]":{ldelim}required:"{Trans param='filed_fuel_required'}"{rdelim},
+"main[filed_warranty]":{ldelim}required:"{Trans param='filed_warranty_required'}"{rdelim},
+"main[filed_release_date_year]":{ldelim}
+                                            required:"{Trans param='filed_release_date_year_required'}",
+                                            min:"{Trans param='filed_release_date_year_required'}"
+                                            {rdelim},
+"main[filed_release_date_month]":{ldelim}required:"{Trans param='filed_release_date_month_required'}"{rdelim},
+
+"main[filed_duration]":{ldelim}required:"{Trans param='filed_duration_required'}"{rdelim},
+
+
+"main[filed_milage]":{ldelim}
+													     required:"{Trans param='filed_milage_required'}",
+                                                         digits: "{Trans param='user_phone1_code'}",
+                                                         range: $.validator.format("{Trans param='filed_milage'} {Trans param='value_between'} {0} {Trans param='and'}  {1}.")
+                                                         {rdelim},
+"main[filed_state]":{ldelim} required:"{Trans param='filed_state'}"{rdelim},
+"main[filed_price]":{ldelim}
+                                                                            
+                                                                                   
+														 required:"{Trans param='filed_price'}",
+                                                         digits: "{Trans param='user_phone1_code'}",
+                                                         range: $.validator.format("{Trans param='filed_price'} {Trans param='value_between'} {0} {Trans param='and'}  {1}.")
+                                                        
+                                                        {rdelim},
+"main[filed_currency]":{ldelim}required:"{Trans param='filed_currency'}"{rdelim},
+"main[filed_color]":{ldelim}required:"{Trans param='filed_color'}"{rdelim},
+
+"main[filed_customs]":{ldelim}required:"{Trans param='filed_customs'}"{rdelim},
+
+"main[user_phone1_code]":{ldelim}
+													  required:"{Trans param='Phone1Code_required'}",
+													  digits: "{Trans param='user_phone1_code'}",
+													  maxlength:"{Trans param='user_phone1_code_maxlength'}"
+                                                      {rdelim},
+                                                      
+"main[user_phone2_code]":{ldelim}
+													  
+                                                      digits: "{Trans param='user_phone1_code'}",
+													  maxlength:"{Trans param='user_phone1_code_maxlength'}"
+                                                      
+                                                      {rdelim},
+"user_phone1":{ldelim}
+													  required:"{Trans param='Phone1_required'}",
+ 													  digits: "{Trans param='user_phone1_code'}",
+													  maxlength:"{Trans param='user_phone1_code_maxlength'}"
+                                                      {rdelim},
+                                                      
+"user_phone2":{ldelim}
+
+													  digits: "{Trans param='user_phone1_code'}",
+													  maxlength:"{Trans param='user_phone1_code_maxlength'}"
+                                                      {rdelim}
+{rdelim}                                                      
+{/strip}

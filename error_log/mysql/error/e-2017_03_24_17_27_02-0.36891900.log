@@ -1,0 +1,15 @@
+QUERY 
+ UPDATE services SET `active`='1',`alias`='garajam',`servicescategory`='93',`sub_servicescategory`='0',`image`='',`logo`='1490270470-7917598.png',`date`='2017-03-23',`email`='parts@garaj.am',`phone`='093014848',`phone1`='077342030',`url`='www.garaj.am',`person_name`=' ',`person_phone`='',`person_email`=' ',`customer`='0',`latitude`='40.14510205535174',`longitude`='44.4971063067627',`map`='1' WHERE id=235
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+Duplicate entry 'garajam' for key 'alias'
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Admin/form.class.php	 LINE 	584
+File => /home/transinf/public_html/cls/Admin/form.class.php	 LINE 	412
+File => /home/transinf/public_html/cls/Admin/form.class.php	 LINE 	72
+File => /home/transinf/public_html/cls/Admin/admin.class.php	 LINE 	58
+File => /home/transinf/public_html/admin/index2.php	 LINE 	10

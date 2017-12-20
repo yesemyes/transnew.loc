@@ -1,0 +1,15 @@
+QUERY 
+SELECT `news`.`id`,`news`.`active`,`news`.`last`,`news`.`alias`,`news`.`position`,`news`.`href`,`news`.`youtube`,`news`.`date`,`news`.`newscategory`,`news`.`image`,`news`.`image_last`,`news`.`view_count`,`news_ml`.`lng_id`,`news_ml`.`content`,`news_ml`.`title`,`news_ml`.`subtitle`,`news_ml`.`small` FROM   `news` LEFT JOIN news_ml USING (`id`)  
+ WHERE `active` = 1 AND `alias` = 'calculators' AND `lng_id` = '7' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.05755496025
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	64
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	15
+File => /home/transinf/public_html/index.php	 LINE 	10

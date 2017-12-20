@@ -1,0 +1,15 @@
+QUERY 
+SELECT menu.id,pid,label,alias FROM   `menu` LEFT JOIN menu_ml USING (`id`)  
+ WHERE lng_id = 7    AND bottommenu AND active 
+ ORDER BY  `position` asc 
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+MySQL server has gone away
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	259
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	68
+File => /home/transinf/public_html/index.php	 LINE 	10

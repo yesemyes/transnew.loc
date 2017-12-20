@@ -1,0 +1,17 @@
+QUERY 
+SELECT `calculators`.`id`,`calculators`.`pid`,`calculators`.`alias`,`calculators`.`active`,`calculators`.`position`,`calculators_ml`.`lng_id`,`calculators_ml`.`title`,`calculators_ml`.`content` FROM   `calculators` LEFT JOIN calculators_ml USING (`id`)  
+ WHERE `active` AND `lng_id` = '7' 
+ ORDER BY  `position` ASC 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+2.2190349102
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Content/feCalculators.class.php	 LINE 	45
+File => /home/transinf/public_html/cls/Content/feCalculators.class.php	 LINE 	29
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

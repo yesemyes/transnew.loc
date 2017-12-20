@@ -1,0 +1,30 @@
+<div style="text-align:right; color:#ffee00; cursor:pointer;" id="loanCloser"><strong>x</strong></div>
+<div style="padding:5px; margin:5px"> {assign var=message value=$this->LoadText('loan_calculator_more',0)}
+  {$message.content} <br class="cb" />
+  <br class="cb" />
+  <label for="firstpayment" style="margin-right:20px;">{Trans param='firstpayment'}:</label>
+  $
+  <input type="text"  id="firstpayment" class="inp sliderinp" value="{$this->config.downpay_min}" readonly="readonly" />
+  <div class="sl1">
+    <div id="dinp1"></div>
+  </div>
+  <br/>
+  <label for="permonth" style="margin-right:20px;">{Trans param='permonth'}:</label>
+  $
+  <input type="text"  id="permonth" class="inp sliderinp" value="{$this->config.rate_min}" readonly="readonly" />
+  <div class="sl1" >
+    <div  id="dinp2"></div>
+  </div>
+  <br/>
+  <label for="permonth" style="margin-right:20px;">{Trans param='monthcount'}:</label>
+  <input type="text"  id="monthcount" class="inp sliderinp" value="12" readonly="readonly" />
+  <div class="sl1" >
+    <div  id="dinp3"></div>
+  </div>
+  <br/>
+  <div id="loanReslut" class="fs15 fr"></div>
+  <br class="cb" />
+  <br class="cb" />
+  <div style="cursor:pointer;" class="login-btn fr" id="loanCloser2"><strong>{Trans param='close'}</strong></div>
+  <br />
+</div>

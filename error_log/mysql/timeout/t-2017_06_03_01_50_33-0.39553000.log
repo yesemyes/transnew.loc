@@ -1,0 +1,18 @@
+QUERY 
+SELECT `brandmodel`.`id`,`brandmodel`.`pid`,`brandmodel`.`label`,`brandmodel`.`position`,`brandmodel`.`alias`,`brandmodel`.`image`,`brandmodel`.`link1`,`brandmodel`.`link2`,`brandmodel`.`home`,`brandmodel`.`active`,`brandmodel`.`is_usssr`,`brandmodel`.`offers_count`,`brandmodel_ml`.`lng_id`,`brandmodel_ml`.`short`,`brandmodel_ml`.`full` FROM   `brandmodel` LEFT JOIN brandmodel_ml USING (`id`)  
+ WHERE lng_id=5 AND `active` AND pid = 0   
+ ORDER BY  label 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+3.33851099014
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	825
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	340
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	44
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

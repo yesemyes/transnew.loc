@@ -1,0 +1,38 @@
+{strip}
+{assign var=TCID value=$_offer.id|@IdMaker}
+
+{if $offer.filed_main_image}
+    {assign var=_path  value="/img/offers/small/`$offer.filed_main_image`"}
+    {assign var=_pathBig  value="/img/offers/big/`$offer.filed_main_image`"}
+{elseif is_array($images)}
+	{assign var=firstImage value=$images.0.image}
+	{assign var=_path  value="/img/offers/thumb/"|cat:$firstImage}
+{else}
+	{assign var=_path  value="/img/brandmodel/image/"|cat:$images}
+{/if}
+
+{assign var=imgAltTitle  value="`$_offer.brand` `$_offer.model` `$_offer.year` "}
+{Link page='cars' action='user' brand_alias=$_offer.brand_alias model_alias=$_offer.model_alias tcid=$TCID assign=_href}
+
+
+<a href="{$_href}">
+{if $offer.filed_main_image}
+<img src="{CatImageToSize width=130 height=80 frame=true base="/img/offers/big/" image=$offer.filed_main_image}" alt="{$imgAltTitle}" title="{$imgAltTitle}" />
+{else}
+<img src="{FithImageToSize width=130 height=80 frame=true base="{$_path}"}" alt="{$imgAltTitle}" title="{$imgAltTitle}" />
+{/if}
+</a>
+<a href="{$_href}">{$_offer.brand} {$_offer.model} {$_offer.year} </a>
+<span class="price">
+{if $_offer.filed_contract}{Trans param='by_contract'} {else}
+		 
+         
+        
+         {$_offer.price|@number_format:0}&nbsp;{$_offer.currency}
+         
+         
+{/if}
+</span>
+
+
+{/strip}

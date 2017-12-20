@@ -1,0 +1,14 @@
+QUERY 
+SELECT `state`.`id` as `key`,`value` as `value` FROM  `state` INNER JOIN state_ml ON (`state`.`id` = `state_ml`.`id` AND `state_ml`.`lng_id`=7)  WHERE active  ORDER BY  position ;
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+MySQL server has gone away
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	743
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

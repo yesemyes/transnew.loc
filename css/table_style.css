@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+.tb { width: 762px; height: auto; background: url(images/tb_bg.png) repeat; }
+.titles { height: 42px; background: url(images/tr_bg.png) repeat-x; }
+.fisrt { height: 35px; color: #00b9ff;background: rgba(0, 0, 0, 0.13);}
+.title { color: #00b9ff; width: 290px; font-size: 12px; /*padding-left: 13px; */}
+.first_title { color: #fff; width: 290px; font-size: 17px; padding-left: 13px; }
+.rows { height: 33px; color: #FFF; }
+.tb .just { padding-left: 10px; }
+.shadow { background: url(images/shadow.png) repeat-y; width: 11px; }
+.first_shadow { background: url(images/first_shadow.png) repeat-y; width: 11px; }
+.tb .merge { padding-left: 125px; }

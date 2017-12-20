@@ -1,0 +1,14 @@
+QUERY 
+SELECT count(`id`) AS qty FROM   `siteusers` LEFT JOIN siteusers_ml USING (`id`)  
+ WHERE `active`='1' AND `lng_id` ='7' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.12529706955
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	69
+File => /home/transinf/public_html/index.php	 LINE 	10

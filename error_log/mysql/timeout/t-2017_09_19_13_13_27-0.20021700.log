@@ -1,0 +1,16 @@
+QUERY 
+SELECT login FROM   `siteusers` LEFT JOIN siteusers_ml USING (`id`)  
+ WHERE `id` = '4212' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+28.1112658978
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	136
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	38
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

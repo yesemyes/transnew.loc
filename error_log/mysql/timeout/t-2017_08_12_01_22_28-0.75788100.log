@@ -1,0 +1,15 @@
+QUERY 
+SELECT `pddtest_tickets_rel`.`tickets` as `key`,`id` as `value` FROM  `pddtest_tickets_rel`  WHERE `id`='23' ;
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+2.1565618515
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Content/fePdd.class.php	 LINE 	182
+File => /home/transinf/public_html/cls/Content/fePdd.class.php	 LINE 	29
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

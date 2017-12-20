@@ -1,0 +1,17 @@
+.left-ico,.right-ico {
+    cursor: pointer;
+    display: block;
+    height: 30px!important;
+	width: 30px!important;
+	margin :35px 0!important;
+    
+}
+.left-ico {
+    background-image: url("fancy/fancybox.png") !important;
+    background-position: -40px -30px !important;
+}
+
+.right-ico {
+    background-image: url("fancy/fancybox.png") !important;
+    background-position: -40px -60px !important;
+}

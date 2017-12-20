@@ -1,0 +1,11 @@
+<div id="services_logo_tpl_html">
+<div id="services_logo">
+{if $offer.logo}
+{include file=services/imageblock-logo.tpl.html}
+{/if}
+</div>
+<div id="ifContainer" class="fl">
+
+<iframe id="myIframe" src="{$this->path}?external=true&itpl=services/uploader.tpl.html&action=uploadFile&pl=services_logo" frameborder="0" scrolling="no" style="height:50px; clear:left; width:300px;"> </iframe>
+</div>
+</div>

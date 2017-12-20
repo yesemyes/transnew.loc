@@ -1,0 +1,30 @@
+QUERY 
+
+	SELECT 
+	`driver_count_category`.`driver_count_category_id` as `id`  ,
+	`driver_count_category_description`.`driver_count_category_name` as `title` 
+	
+	FROM `driver_count_category` LEFT JOIN  `driver_count_category_description` USING(`driver_count_category_id`) 
+	WHERE `driver_count_category_description`.`driver_count_category_language_id` = '7'
+	
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+14.0339930058
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/inc/insert.inc	 LINE 	87
+File => /home/transinf/public_html/cls/Smarty/internals/core.run_insert_handler.php	 LINE 	51
+File => /home/transinf/public_html/template_c/%%35^35F^35FCD071%%appa.tpl.html.php	 LINE 	26
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%E8^E8C^E8C0AB83%%middle.tpl.html.php	 LINE 	10
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%DC^DCE^DCECB867%%body.tpl.html.php	 LINE 	8
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%5E^5ED^5ED718EC%%index.tpl.html.php	 LINE 	127
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/index.php	 LINE 	23

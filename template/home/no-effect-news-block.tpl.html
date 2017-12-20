@@ -1,0 +1,12 @@
+{strip}
+{Link assign=_href page='news' catalias=$item.catalias alias=$item.alias}
+
+{if $item.title}
+<div class="homeNewsItem">
+
+
+<a style="text-decoration: none;" href="{$_href}">{$item.title}</a>
+<span class="date">{$item.date|date_format:$this->config.news_date_format}</span>
+</div>
+{/if}
+{/strip}

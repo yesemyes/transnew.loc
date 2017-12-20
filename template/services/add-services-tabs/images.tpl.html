@@ -1,0 +1,31 @@
+<div id="images_tab">
+<div style="padding:5px;" class="fl">
+ <label for="filed_options">{Trans param='filed_main_photos'}</label>
+ <br class="cb" />
+ <div class="margL10 fl" >{include file=services/offer_main_photo.tpl.html}</div>
+ <br class="cb" />
+</div>
+
+<div style="padding:5px;" class="fl">
+ <label for="filed_options">{Trans param='logo'}</label>
+ <br class="cb" />
+ <div class="margL10 fl" >{include file=services/services_logo.tpl.html}</div>
+ <br class="cb" />
+</div>
+
+<div class="fl" style="padding:5px;">
+<div class="formtit w100 textR fl">
+  <label for="filed_options">{Trans param='filed_photos'}</label>
+</div>
+<br class="cb" />
+<div class="margL10 fl" >{include file=services/offer_photos.tpl.html}</div>
+<br class="cb" />
+</div>
+
+
+
+</div>
+<br class="cb"/>
+<button type="button" name="btnPrev" value=""  id="btnPrev" onclick="prevTab()">{Trans term="btnPrevlabel" default="Назад"}</button>
+<button type="button" name="btnNext" value=""  id="btnNext" onclick="nextTab(this,1)">{Trans term="btnNext" default="Далее"}</button>
+

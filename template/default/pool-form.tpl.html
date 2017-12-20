@@ -1,0 +1,15 @@
+<form action="{Link page='home' action='pool-voting'}?pool={$pool.id}" method="post" class="pool-voting" onsubmit="return poolVoting(this)">
+<h2>{$pool.title}</h2>
+<div class="pool_questions">
+{foreach from=$pool.questions item=question}
+<label for="pool_question_{$pool.id}_{$question.id}" style="display:block;" class="pool-relult">
+<input type="radio" id="pool_question_{$pool.id}_{$question.id}" name="pool_question[{$pool.id}]" value="{$question.id}" style="position: relative;top: 2px;"/>
+{$question.title}
+</label>
+{/foreach}
+<input type="hidden" name="action" value="pool-voting"/>
+<div class="pool-relult" style="padding-top:5px">
+<button class="btn fr" style="width: 82px;">{Trans term='vote'}</button>
+</div>
+</div>
+</form>

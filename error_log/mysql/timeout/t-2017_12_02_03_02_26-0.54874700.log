@@ -1,0 +1,31 @@
+QUERY 
+SELECT 
+    `use_category`.`use_category_id` as `id`  ,
+    `use_category_description`.`use_category_name` as `title`
+    FROM `use_category` 
+    LEFT JOIN  `use_category_description` ON (`use_category`.`use_category_id` = `use_category_description`.`use_category_id`) 
+    LEFT JOIN `truck_price` ON (`use_category`.`use_category_id` = `truck_price`.`truck_price_use_category_id`)
+    WHERE `use_category_description`.`use_category_language_id` = '7'
+    AND `use_category`.`use_category_id` = `truck_price`.`truck_price_use_category_id`
+			GROUP BY `use_category`.`use_category_id`
+			ORDER BY `use_category`.`use_category_id`
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.59868121147
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/inc/insert.inc	 LINE 	233
+File => /home/transinf/public_html/template_c/%%35^35F^35FCD071%%appa.tpl.html.php	 LINE 	15
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%E8^E8C^E8C0AB83%%middle.tpl.html.php	 LINE 	10
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%DC^DCE^DCECB867%%body.tpl.html.php	 LINE 	8
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%5E^5ED^5ED718EC%%index.tpl.html.php	 LINE 	127
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/index.php	 LINE 	23

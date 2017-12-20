@@ -1,0 +1,110 @@
+<table class="offerList_offerList" border="0px"  cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
+  <tr class="offerList_fisrt">
+    <td class="offerList_first_title">
+    {OrderingLink path=$this->path order_by=brandmodel direction=asc query=$this->query term="offer_model"}
+    </td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">
+    {OrderingLink path=$this->path order_by=price direction=asc query=$this->query term="offer_price"}
+     </td>
+    <td class="offerList_shadow"></td>
+ <td class="offerList_first_title">{Trans term="offer_photo" default="Фото"}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">
+     {OrderingLink path=$this->path order_by=year direction=asc query=$this->query term="offer_year"}
+   </td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">
+     {OrderingLink path=$this->path order_by=engine direction=asc query=$this->query term="offer_engine"}
+    
+     </td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">
+    
+    {OrderingLink path=$this->path order_by=milage direction=asc query=$this->query term="offer_milage"}
+    </td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title"> {Trans term="offer_add_to_fav" } </td>
+  </tr>
+  {if ! empty($this->_offers.found)}
+  {foreach from=$this->_offers.found item=offer}
+  {Link page='cars' action='user' brand=$offer.brandalias model=$offer.modelalias name=$offer.name assign=offerHref}
+	{assign var=selected value=0}
+	{foreach from=$this->selected item=item}
+		{if $offer.id == $item}
+			{assign var=selected value=1}
+		{/if}
+	{/foreach}
+  <tr class="offerList_last">
+    <td class="offerList_first_title"><a href="{$offerHref}" class="offerList_simple">{$offer.brandmodel}</a></td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">{if $offer.filed_contract != 1}{if $offer.filed_currency == 3}{$offer.filed_price|nf}{else}{$offer.service_price/$this->config.USD_RATE|ceil|nf} {/if}${else} {Trans param='filed_contract'} {/if}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just"><a style="display: block;overflow: hidden;height: 80px;width: 130px;margin: 0 auto;" href="{$offerHref}" class="offerList_simple">
+    {if $offer.filed_main_image}
+<img src="{CatImageToSize width=130 height=80 frame=false base='/img/offers/big/' image=$offer.filed_main_image}" alt="{$offer.brandmodel}" />
+{else}
+    <img src="{FithImageToSize width=130 height=80 frame=true base="{$_path}"}" alt="{$imgAltTitle}" title="{$imgAltTitle}" />
+    {/if}
+    </a></td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">{$offer.filed_release_date_year}</td>
+    <td class="offerList_shadow"></td>
+<td class="offerList_just">{if $offer.filed_engine && $offer.filed_engine !=0}{$offer.filed_engine} {Trans term="liter"}{else}-{/if}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">{$offer.filed_milage*$offer.filed_milage_kayficent|nf} {Trans term="km"}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">
+	<a href="{$offerHref}" data-offer-id="{$offer.id}" data-offer-img="{$offer.filed_main_image}" data-name="{$offer.brandmodel}, {$offer.filed_release_date_year}, {$offer.service_price|nf} AMD,{$offer.filed_engine*1000|nf} {Trans term="cm3"},{$offer.filed_milage*$offer.filed_milage_kayficent|nf} {Trans term="km"}" class="{if $selected==1}offerList_added {/if} offerList_plus">{if $selected !=1}+{/if}</a></td>
+  </tr>
+  <tr class="offerList_lines" >
+    <td colspan="13"><div class="offerList_line"></div></td>
+  </tr>
+  {/foreach}
+  <tr class="offerList_lines" >
+    <td colspan="13">
+    {BulidQuery query=$this->query assign=queryTail}
+    
+    {include file="default/paging.tpl.html" className="offerListPaginator" found_rows=$this->_offers.total limit=$this->_offers.limit page=$this->_offers.page tail=$queryTail}
+    </td>
+  </tr>
+  {else}
+  <tr class="offerList_lines" >
+    <td colspan="13"><div class="offerList_line">{Trans term="NO_DATA_FOUND"}</div></td>
+  </tr>
+  {/if}
+</table>
+{* $smarty.cookies|@print_r *}
+
+<table class="saved_items" style="display:none;" cellspacing="0">
+ 
+ <tr class="offerList_fisrt" style="background-position-x: -3px;">
+    <td class="offerList_first_title" >
+    {Trans term="offer_model"}
+    </td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">
+    {Trans term="offer_price"}
+     </td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">{Trans term="offer_photo" default="Ð¤Ð¾Ñ‚Ð¾"}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">
+     {Trans term="offer_year"}
+   </td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">
+     {Trans term="offer_engine"}
+    
+     </td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_first_title">
+    {Trans term="offer_milage"}
+    </td>
+ </tr>
+
+</table>
+
+<input id="show_list" {if !$smarty.cookies.___trans_info_saved_items}style="display: none;" {/if}type="button" onclick="show_offerList()" value="{Trans term = 'SHOWSAVEDITEMS'}" />
+<input id="remove_list" {if !$smarty.cookies.___trans_info_saved_items}style="display: none;" {/if} type="button" onclick="remove_offerList()" value="{Trans term = 'REMOVESAVEDITEMS'}" />
+<input type="button" {if !$smarty.cookies.___trans_info_saved_items}style="display: none;" {/if} id="show_all" onclick="show_table()" value="{Trans term = 'showall'}" />

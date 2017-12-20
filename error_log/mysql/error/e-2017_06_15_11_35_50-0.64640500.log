@@ -1,0 +1,15 @@
+QUERY 
+ INSERT INTO `siteusers`  SET `login`='Lusina995',`name`='Lusina',`email`='lusina995@gmail.com',`password`='2550d36f011dbd68ae5643e5a12c158f',`data_currentcar_brand`='0',`data_currentcar_brand_model`='0',`regdate`='2017-06-15',`date_of_birth`='1999-11-30' 
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+Duplicate entry 'lusina995@gmail.com' for key 'email'
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	450
+File => /home/transinf/public_html/cls/Content/feUsers.class.php	 LINE 	271
+File => /home/transinf/public_html/cls/Content/feUsers.class.php	 LINE 	63
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

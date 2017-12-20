@@ -1,0 +1,23 @@
+<div style="width:310px; height:65px; padding:10px">
+<div class="wleft_18">{Trans term = 'choose_pic'}</div>
+
+
+
+{$this->answers }
+<div style="text-align:left; float:left; padding:2px;font-size: 14px;">
+
+<label class="fl" style="color: #000;"><input type="radio" name="image_type"  onclick="imageType=this.value; "    class="image_type_main" value="image_default" checked="checked">&nbsp;{Trans term="use_our_images"}</label> 
+<label class="fl" style="color: #000;"><input type="radio"  name="image_type" onclick="imageType=this.value; "  class="image_type_main" value="image_original" >
+&nbsp;
+{Trans term="use_original_images"}</label>
+
+
+<br class="cb"/>
+</div>
+{*<div class="wleftContent">{$this->currentPage.content}</div>*}
+<div class="cb"></div>
+<div style="text-align:right;clear:both;margin-top: 20px;">
+<button onclick="startExam()" class="pdd_btn">{Trans term="star_Exam"}</button>
+</div>
+<div class="cb"></div>
+</div>

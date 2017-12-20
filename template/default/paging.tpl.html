@@ -1,0 +1,13 @@
+{strip}
+
+{if $found_rows > $limit}
+
+<div class="paginator-continer">
+  <div class="page_centre"> {ProcessPaging assign=_pagingObj found_rows=$found_rows limit=$limit pagesPerPage=$this->config.fe_paging_per_page page=$page} 
+    {PagingLinkGenreator assign=_pagingObj path=$this->path_params paging=$_pagingObj paging_index=$paging_index} 
+    {if $_pagingObj->prevPage} <a href="{$_pagingObj->prevPage}{if $tail}?{$tail}{/if}" rel="{$_pagingObj->prevPagenum}"  class="{$className|default:''} pageprev"> <span class="prev_page"></span> </a> {/if}  
+    {foreach from=$_pagingObj->links item=item key=key} <a href="{$item}{if $tail}?{$tail}{/if}" rel="{$key}"	class=" {$className|default:''} paging{if $page ==$key} current{/if}" title="{$page}-{$key}"><span>{$key}</span></a> {/foreach}  
+    {if $_pagingObj->nextPage} <a href="{$_pagingObj->nextPage}{if $tail}?{$tail}{/if}" rel="{$_pagingObj->nextPageNum}" class="{$className|default:''} pagenext "> <span class="next_page"></span></a> {/if} </div>
+</div>
+{/if}
+{/strip} 

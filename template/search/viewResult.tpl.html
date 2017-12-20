@@ -1,0 +1,33 @@
+<br class="cb" /><br class="cb" />
+<div class="Tblsubtit topBord"><span class="fl bold"><u>{Trans param=$_caption}</u></span><span class="fr">{Trans param='found'}:{$_found|@count}</span></div>
+<ul class="UlNoStyle">
+{foreach from=$_found item = fitem name=ss}
+{if $_caption != 'InOffers'}
+	{include file=search/atom.tpl.html   _last=$smarty.foreach.ss.last fitem = $fitem}
+{else}
+	{include file=cars/offerlist.atom.tpl.html item = $fitem}
+{/if}
+{/foreach} 
+</ul>
+
+
+{*
+<ul >
+  <li>
+  "{$smarty.get.search}"&nbsp;
+  {Trans param=$_caption}
+  &nbsp;{Trans param='found'}&nbsp;{$_found|@count}
+    <ul>
+      {foreach from=$_found item = fitem}
+      <li> <a href="{$fitem._link}">{$fitem.title}</a> </li>
+      {/foreach}
+    </ul>
+  </li>
+</ul>
+*}
+<script type="text/javascript" language="javascript">
+var term = "{$smarty.get.search}";
+{literal}
+
+{/literal}
+</script>

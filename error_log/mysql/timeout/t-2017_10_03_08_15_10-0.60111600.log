@@ -1,0 +1,15 @@
+QUERY 
+SELECT menu.id,pid,label,alias,href FROM   `menu` LEFT JOIN menu_ml USING (`id`)  
+ WHERE lng_id = 7    AND topmenu='right' AND active    
+ ORDER BY  `position` asc 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.22695207596
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	259
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	64
+File => /home/transinf/public_html/index.php	 LINE 	10

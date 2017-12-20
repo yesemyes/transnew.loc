@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+.offerList { width: 771px; height: auto; background: url(images/tb_bg.png) repeat; font-size:12px }
+.offerList_titles { height: 39px; background: url(images/tr_bg.png) repeat-x; }
+.offerList_fisrt { height: 39px; color: #67d5ff; background: url(pdd_style/right_bg.png) repeat; font-size: 13px;}
+
+.offerList_title { color: #67d5ff; padding-right: 10px; font-size: 1em; background: url(images/arrow_blue_down.png) right center no-repeat; text-decoration: none; }
+.offerList_title:hover, .offerList_title_sort { color: #67d5ff; padding-right: 10px; background: url(images/arrow_up.png) right center no-repeat; text-decoration: none; }
+
+.offerList_title2 { padding-right: 10px; font-size: 0.9em; color: #fff; background: url(images/arrow_up_white.png) right center no-repeat; text-decoration: none; }
+.offerList_title2:hover, .offerList_title2_sort { padding-right: 10px; font-size: 0.9em; color: #fff; background: url(images/arrow_down.png) right center no-repeat; text-decoration: none; }
+
+
+.offerList_first_title { padding-left: 13px; }
+.offerList_rows { height: 33px; color: #FFF; }
+.offerList_last { height: 80px; }
+.offerList_shadow { background: url(images/shadow.png) repeat-y; width: 11px; }
+.offerList_first_shadow { background: url(images/first_shadow.png) repeat-y; width: 11px; }
+
+a.offerList_simple,
+a.offerList_simple:hover, 
+a.offerList_simple:visited,
+a.offerList_simple:active,
+a.offerList_simple:link{ color: #67d5ff; /*text-decoration: underline; */}
+.offerList_just { color: #fff; text-align: center; }
+.offerList_plus { color: #fff; text-decoration: none; }
+.offerList_line { background: url(images/line_pic.png) repeat-x; height: 2px; width: 750px; margin-left: 10px; }
+.offerList_bg { background: url(images/bg.png) repeat-x; padding: 5px; }

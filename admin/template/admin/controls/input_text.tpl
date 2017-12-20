@@ -1,0 +1,1 @@
+<input type="text" name="{$_name}" id="{$_id}" value='{$_value|htmlentities|default:$_setting.default}'  {include file=controls/events.tpl.html _setting=$_setting}/>

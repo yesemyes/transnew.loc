@@ -1,0 +1,54 @@
+<div  id="content" class="advanced_c2">
+  <table cellpadding="0" cellspacing="0" width="735" align="center" style="margin:0 auto; ">
+    <tr>
+      <td width="331" valign="top">
+      <div class="specialProjectTit">{Trans term="Location_and_access" default="????? ? ????? ???????"}</div>
+      <table cellpadding="10" cellspacing="0" width="100%" class="blubg" style="min-height:0">
+      
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_address" default="?????:"}</td>
+            <td  style="color:#ffffff; font-size:13px">{$this->catalog.addres}</td>
+          </tr>
+          {if $this->catalog.phone}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_phone" default="???.:"}</td>
+            <td  style="color:#ffffff; font-size:13px">{$this->catalog.phone}</td>
+          </tr>
+          {/if}
+          {if $this->catalog.phone1}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_phone" default="???.:"}</td>
+            <td  style="color:#ffffff; font-size:13px">{$this->catalog.phone1}</td>
+          </tr>
+          {/if}
+          {if $this->catalog.url && $this->catalog.url !='http://'}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_url" default="?????:"}</td>
+            <td style="color:#ffffff; font-size:13px"><a href="{$this->catalog.url}">{$this->catalog.url}</a></td>
+          </tr>
+          {/if}
+           {if $this->catalog.email}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_e_mail" default="E-mail:"}</td>
+            <td style="color:#ffffff; font-size:13px"><a href="mailto:{$this->catalog.email}">{$this->catalog.email}</a></td>
+          </tr>
+          {/if}
+        </table></td>
+      <td  valign="top" style="padding-left: 20px;">
+      
+      {FithImageToSize width=250 height=250 frame=true base='/img/services/big/' image=$this->catalog.image assign=srcImage}
+      
+      <img src="{$srcImage}" width="215"/>
+      
+
+      </td>
+    </tr>
+    
+	{if !empty($this->catalog.brands)}
+	<tr>
+    <td >{Trans term="sale_off_brands" default="???????:"}</td>
+    <td>&nbsp;</td>
+	</tr>
+	{/if}
+  </table>
+</div>

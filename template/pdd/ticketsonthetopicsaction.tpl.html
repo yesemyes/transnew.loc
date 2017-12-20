@@ -1,0 +1,12 @@
+<div class="fl">
+{*<div class="wleft">{$this->currentPage.label}</div>
+<br class="cb"/>*}
+	<div class="cb fl">
+		<div class="quest" style="background: url(/images/pdd-block-bg.png) repeat">
+        {foreach from=$this->pddticketcategory item=category key=key}
+			<a href="{Link page='pdd' action='marathon'}?category={$category.id}">{$category.label}</a>
+		{/foreach}  
+		</div>
+	</div>
+</div>
+{include file=default/right.tpl.html}

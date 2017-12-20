@@ -1,0 +1,17 @@
+QUERY 
+SELECT `cameras`.`id`,`cameras`.`alias`,`cameras`.`position`,`cameras`.`latitude`,`cameras`.`longitude`,`cameras`.`angle`,`cameras`.`active`,`cameras`.`camera_type`,`cameras`.`map`,`cameras`.`city`,`cameras`.`street`,`cameras`.`max_speed`,`cameras`.`dubleside`,`cameras_ml`.`lng_id`,`cameras_ml`.`address`,`cameras_ml`.`description` FROM   `cameras` LEFT JOIN cameras_ml USING (`id`)  
+ WHERE `active`='1' AND `lng_id`='7' 
+ ORDER BY  `position` ASC 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+36.7365748882
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Content/feRoadpolice.class.php	 LINE 	90
+File => /home/transinf/public_html/cls/Content/feRoadpolice.class.php	 LINE 	20
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

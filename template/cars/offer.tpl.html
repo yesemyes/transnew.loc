@@ -1,0 +1,205 @@
+{*<script src="/scripts/jquery.dimensions.js" type="text/javascript" ></script>*}
+{strip}
+{assign var=condWhere value='' }
+{assign var=condLimit value='' }
+{assign var=condOrder value='' }
+{assign var=condPage value='' }
+
+{if isset($_where)}
+{assign var=condWhere value=$_where }
+{/if}
+
+{if isset($_imit)}
+	{assign var=condLimit value=$_imit }
+{/if}
+
+{if isset($_order)}
+	{assign var=condOrder value=$_order }
+{else}
+	{assign var=condOrder value="filed_srtat_date DESC " }
+{/if}
+
+{literal} 
+	<script type="text/javascript" language="javascript" >
+$(document).ready
+(
+ function()
+ {
+	$("a[rel='bigContiner']").colorbox({preloading:true,current:''});
+ });
+</script> 
+	{/literal}
+{if isset($_page)}
+{assign var=condPage value=$_page }
+{/if}
+
+{*assign var=_offers value=$this->getOffers($condWhere,$condOrder,$condLimit,$condPage)*}
+
+{assign var=offer value=$this->_offers.found.0}
+
+{assign var =_options value=$this->getOfferOptions($offer.id)}
+
+
+{assign var=imgAltTitle  value="`$this->dictonary.brandmodel[$offer.filed_car_brand]` `$this->dictonary.brandmodel[$offer.filed_car_model]` `$offer.filed_release_date_year` "}
+
+
+{assign var =_images value=$this->getOfferImages($offer.id)}
+<div class="blueleft">{$this->currentPage.label}</div>
+<div class="blueright"></div>
+<div class="fl" style="width:230px;">
+  <div id="bigImageDiv" style="margin-left:1px;"> {assign var=_path  value=0}
+    {if $offer.filed_main_image}
+    {assign var=_path  value="/img/offers/small/`$offer.filed_main_image`"}
+    {assign var=_pathBig  value="/img/offers/big/`$offer.filed_main_image`"}
+    {if $_path} <a href="{$_pathBig}" rel="bigContiner" id="bga" > <img src="{$_path}" id="bigImage" rel="bigContiner" style="cursor:pointer;" alt="{$imgAltTitle}" title="{$imgAltTitle}" /> </a> {/if}
+    
+    {elseif is_array($_images)}
+    {assign var=_path  value="/img/offers/small/`$_images.0.image`"}
+    {assign var=_pathBig  value="/img/offers/big/`$_images.0.image`"} <a href="{$_pathBig}" rel="bigContiner" id="bga" > {if $_path} <img src="{$_path}" id="bigImage" rel="bigContiner" style="cursor:pointer;" alt="{$imgAltTitle}" title="{$imgAltTitle}" /> {/if} </a> {elseif $_images}
+    
+    {assign var=_path  value="/img/brandmodel/image/`$_images`"}
+    {assign var=_pathBig   value="/img/brandmodel/big/`$_images`"}
+    <center>
+      {if $_path} <img src="{$_path}" id="bigImage" rel="#bigContiner" style="cursor:pointer; background:#fff; padding:10px;"  alt="{$imgAltTitle}" title="{$imgAltTitle}" />{/if}
+    </center>
+    {/if} </div>
+</div>
+<div style="background:#495159; padding:10px; float:left; -moz-border-radius:3px; -webkit-border-radius:3px; width:350px;"> <span class="w150 fl marg3"><strong>{Trans param='date_of_manufacture'}</strong></span> <span class="fl">{if $offer.filed_release_date_month}{$offer.filed_release_date_month}/{/if}{$offer.filed_release_date_year}</span> <br class="cb" />
+  <span class="w150 fl marg3"><strong>{Trans param='FILED_PRICE'}</strong></span> <span class="fl" style="width:150px">{if $offer.filed_contract}
+  {Trans param='by_contract'}
+  {else} <span id="{$offer.id}" class="cPriceBlockItem" style=" position:relative;"><font class="yellow fs14"><strong>{$offer.filed_price|@number_format:0}</strong></font> <strong>{ $this->dictonary.currency[$offer.filed_currency]}</strong><img src="/img/black_arr.gif" alt="" title="" hspace="5" />
+  <ul class="UlNoStyle cPriceBlock" style="background:#fff; color:#000;">
+    {assign var=allCurencys value=$this->getPrices($offer.filed_price,$this->dictonary.currency[$offer.filed_currency],$offer.service_price)}
+    {foreach from=$allCurencys item=pr key=crrency name=pp}
+    {if !$smarty.foreach.pp.first}
+    <li> {$pr|@number_format:0}&nbsp;{$crrency}&nbsp;</li>
+    {/if}
+    {/foreach}
+  </ul>
+  </span> {/if} </span> <br class="cb" />
+  {if $offer.filed_customs} <span class="w150 fl marg3"><strong>{Trans param='filed_customs'}</strong></span> <span class="fl marg3"> {$this->dictonary.customs[$offer.filed_customs]} </span><br class="cb" />
+  {/if}
+  
+  {if $offer.filed_bargaining} <span class="w150 fl marg3"><strong>{Trans param='FILED_BARGAINING'}</strong></span> <span class="fl marg3"> {$this->dictonary.bargaining[$offer.filed_bargaining]} </span><br class="cb" />
+  {/if}
+  {*$offer|@print_r*}
+  {if !$offer.isnew} 
+      <span class="w150 fl marg3"><strong>{Trans param='FILED_MILAGE'}</strong></span> <span class="fl marg3"> {$offer.filed_milage}&nbsp;{$this->dictonary.milage_kayficent[$offer.filed_milage_kayficent]}</span> <br class="cb" />
+     
+      {if $offer.filed_state} <span class="w150 fl marg3"><strong>{Trans param='FILED_STATE'}</strong></span> <span class="fl marg3">{$this->dictonary.state[$offer.filed_state]}</span><br class="cb" />{/if} 
+  {else} 
+  	<span class="w150 fl marg3"><strong>{Trans param='FILED_STATE'}</strong></span> <span class="fl marg3">{Trans param='New_Not_used'}</span> <br class="cb" />
+  {/if} 
+  <div class="w150 fl marg3"><strong>{if $offer.dealer}{Trans param='dealer'}{else}{Trans param='saler'}{/if}</strong></div> <div class="fl marg3" style="width:200px;">{$offer.filed_saler}{$offer.saler}&nbsp;<br />
+  {if $offer.phone1 &&  $offer.phone1|@trim  !="()"} {$offer.phone1}{/if}{if $offer.phone1 &&  $offer.phone1|@trim  !="()" && $offer.phone2 &&  $offer.phone2|@trim  !="()"}, {/if}{if $offer.phone2 &&  $offer.phone2|@trim  !="()"}{$offer.phone2}{/if}<br />
+  {if $offer.dealer}
+  {$offer.user_description}&nbsp;
+  {$offer.user_addres}&nbsp;
+  {/if} </div> <br class="cb" />
+  <span class="w150 fl marg3"><strong>{Trans param='FILED_startdate'}</strong></span> <span class="fl marg3">{$offer.filed_srtat_date|date_format:"%d/%m/%Y"} </span><br class="cb" />
+</div>
+<div class="cb"> <br class="cb"/>
+  {assign var=_qty value=$_images|@count}
+  
+  {if $_qty>1}
+  
+  {if $_qty > 3}
+  <div id="jCarouselLiteDemo2" class="cEnd">
+    <div class="primaryContent">
+      <div id="demo" class="cEnd tabs-container">
+        <div class="carousel default"> <a class="prev" href="#"></a>
+          <div class="jCarouselLite">
+            <ul>
+              {section loop=$_images start=0 name=looper}
+              {assign var=_item value=$_images[looper]}
+              {assign var=_path  value="/img/offers/thumb/`$_item.image`"}
+              {assign var=_bpath  value="/img/offers/small/`$_item.image`"}
+              {assign var=_obpath  value="/img/offers/big/`$_item.image`"}
+              <li style="width:100px;">
+                <center>
+                  <a href="{$_obpath}"  rel="bigContiner"> {if $_path} <img src="{$_path}"  class="pointer"  /> {/if} </a>
+                </center>
+              </li>
+              {/section}
+            </ul>
+          </div>
+          <a class="next" href="#"></a> </div>
+      </div>
+    </div>
+  </div>
+  {elseif $_qty > 0}
+  <center>
+    <ul class="UlNoStyle" style="width:360px;">
+      {section loop=$_images start=0 name=looper}
+      
+      
+      {assign var=_item value=$_images[looper]}
+      {assign var=_path  value="/img/offers/thumb/`$_item.image`"}
+      {assign var=_bpath  value="/img/offers/small/`$_item.image`"}
+      {assign var=_obpath  value="/img/offers/big/`$_item.image`"}
+      <li style="width:100px;margin: 10px" class="fl"><a href="{$_obpath}"  rel="bigContiner"> {if $_path} <img src="{$_path}"  class="pointer"  alt="" /> {/if} </a> </li>
+      {/section}
+    </ul>
+  </center>
+  {/if}
+  {elseif $_qty == 1 && !is_array($_images)}
+  <center>
+    {assign var=_path  value="/img/brandmodel/image/`$_images`"} <img src="{$_path}"  class="pointer"  />
+  </center>
+  {elseif $_qty == 1 &&  is_array($_images)}
+   <center>
+   {assign var=_obpath  value="/img/offers/big/`$_images.0.image`"}
+    {assign var=_path  value="/img/offers/thumb/`$_images.0.image`"}
+    <a href="{$_obpath}"  rel="bigContiner">  <img src="{$_path}"  class="pointer"  /></a>
+  </center>
+  {/if} </div>
+<br class="cb" />
+{* offer *} <br class="cb" />
+<div style="float:left; padding:2px 10px 0 10px; position:relative; font-weight:bold; cursor:pointer; margin-bottom:-2px" class="actTd"  id="TDHighlights" onclick="offerTAbChange('Highlights','Completion')">{Trans param='Highlights'}</div>
+{if !empty($_options)}
+<div style="float:left; padding:2px 10px 0 10px; position:relative; font-weight:bold; cursor:pointer; margin-bottom:-2px" id="TDCompletion" onclick="offerTAbChange('Completion','Highlights')">{Trans param='Completion'}</div>
+{/if} <br class="cb" />
+<div class="highlightDiv" id="Highlights" >
+  <div style="float:left; {if $offer.description} width:300px;border-right:1px solid #fff; padding-right:5px{/if}"> <span class="fl w150 marg3"> <strong>{Trans param='FILED_CAR_BRAND'}</strong></span> <span class="fl marg3">{$this->dictonary.brandmodel[$offer.filed_car_brand]}</span> <br class="cb" />
+    <span class="fl w150 marg3"> <strong>{Trans param='FILED_CAR_BRAND_MODEL'}</strong></span> <span class="fl marg3"> {$this->dictonary.brandmodel[$offer.filed_car_brand_model]}</span> <br class="cb" />
+    {if $offer.filed_modification} <span class="fl w150 marg3"><strong>{Trans param='modification'}</strong></span> <span class="fl marg3">{$offer.filed_modification}</span> <br class="cb" />
+    {/if} <span class="fl w150 marg3"><strong>{Trans param='FILED_BODY'}</strong></span> <span class="fl marg3">{$this->dictonary.body[$offer.filed_body]}</span> <br class="cb" />
+    {if $offer.filed_color} <span class="fl w150 marg3"><strong>{Trans param='filed_color'}</strong></span> <span class="fl marg3">{$this->dictonary.color[$offer.filed_color]}
+    {if $offer.filed_metalic} &nbsp;{Trans param='filed_metalic'}{/if} </span> <br class="cb" />
+    {/if} <span class="fl w150 marg3"><strong>{Trans param='FILED_ENGINE'}</strong></span> <span class="fl marg3">{$offer.filed_engine}&nbsp;{Trans param='mensuration_of_volume'}</span> <br class="cb" />
+    {if $offer.filed_engine_power} <span class="fl w150 marg3"> <strong>{Trans param='FILED_POWER'}</strong></span> <span class="fl marg3">{$offer.filed_engine_power} {Trans param='mensuration_of_power'} ({math equation="ceil(x*0.735)" x=$offer.filed_engine_power}{*$offer.filed_engine_power*0.735*} {Trans param='ad_mensuration_of_power'} ) </span> {/if} <br class="cb" />
+    <span class="fl w150 marg3"><strong>{Trans param='gearbox'}</strong></span> <span class="fl marg3">{$this->dictonary.gearbox[$offer.filed_gearbox]}</span> <br class="cb" />
+    <span class="fl w150 marg3"><strong>{Trans param='FILED_DRIVE'}</strong></span> <span class="fl marg3">{$this->dictonary.drive[$offer.filed_drive]}</span> {if $offer.filed_rudder} <br class="cb" />
+    <span class="fl w150 marg3"><strong>{Trans param='rudder'}</strong></span> <span class="fl marg3">{$this->dictonary.rudder[$offer.filed_rudder]}</span> {/if} </div>
+  <div style="float:right; width:260px;  overflow:hidden; padding-left:5px; text-indent:5px; height:100%">{$offer.description}</div>
+</div>
+{if !empty($_options)}
+<div class="highlightDiv" style="display:none" id="Completion" >
+  <ul class="UlNoStyle">
+    {assign var =lockeds value=""}
+    {foreach from=$_options key=p item=opt name=opeach}
+    {assign var=found value=$lockeds|@strstr:$p}
+    {if !$found}
+    <li class="fl w250" style="margin:7px;"><strong class="fs15 yellow">{$p}</strong> {if !empty($opt)}
+      <ul>
+        {foreach from=$opt  item=_opt}
+        <li class="fs12"><strong>{$_opt}</strong> {if key_exists($_opt,$_options)}
+          {assign var =lockeds value=$lockeds|cat:"|`$_opt`|"}
+          <ul>
+            {foreach from=$_options.$_opt item=i}
+            <li class="fs11">{$i}</li>
+            {/foreach}
+          </ul>
+          {/if} </li>
+        {/foreach}
+      </ul>
+      {/if} </li>
+    {if $smarty.foreach.opeach.index %2} <br class="cb"/>
+    {/if}
+    {/if}
+    {/foreach}
+  </ul>
+</div>
+{/if} <br class="cb" />
+<div style="padding:10px; text-align:left;"> &nbsp; </div>++++++++++++++
+{/strip} 

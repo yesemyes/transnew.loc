@@ -1,0 +1,20 @@
+<div class="contentMiddle">
+  <div class="blueleft">{$this->currentPage.label}</div>
+  <div class="blueright"></div>
+  {assign var=InNews value=$this->searchInNews()}
+  {assign var=InOffers value=$this->searchInOffers()}
+  {assign var=InBarndsAndModel value=$this->searchInBarndsAndModel()}
+  
+  <div class="ModelMainTbl">
+    <div class="titles2 shadowbg">{$this->currentPage.label}</div>
+    <div class="pad10">
+   
+      {include file = search/viewResult.tpl.html _found=$InOffers _caption="InOffers"}
+      {include file = search/viewResult.tpl.html _found=$InBarndsAndModel _caption="InBarndsAndModel"}
+      {include file = search/viewResult.tpl.html _found=$InNews _caption="InNews"}
+ 
+
+  
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+QUERY 
+SELECT `menu`.`id`,`menu`.`pid`,`menu`.`active`,`menu`.`topmenu`,`menu`.`bottommenu`,`menu`.`alias`,`menu`.`position`,`menu`.`private`,`menu`.`noindex`,`menu`.`href`,`menu_ml`.`lng_id`,`menu_ml`.`label`,`menu_ml`.`description`,`menu_ml`.`keyword`,`menu_ml`.`content`,`menu_ml`.`title` FROM   `menu` LEFT JOIN menu_ml USING (`id`)  
+ WHERE  `lng_id` = '7'  AND alias='pdd' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.96602296829
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	77
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	15
+File => /home/transinf/public_html/index.php	 LINE 	10

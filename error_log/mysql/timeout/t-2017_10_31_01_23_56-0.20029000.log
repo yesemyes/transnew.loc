@@ -1,0 +1,21 @@
+QUERY 
+SELECT `passenger_price_price` as `price`
+        					FROM `passenger_price`
+        					WHERE `passenger_price_use_category_id` =3
+        					  AND `passenger_price_driver_count_category` =4
+        					  AND `passenger_price_passenger_power_category_id` =6
+        					  AND  `passenger_price_trailer`=1
+        					  
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+3.52055501938
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	390
+File => /home/transinf/public_html/cls/Content/feCalculators.class.php	 LINE 	171
+File => /home/transinf/public_html/cls/Content/feCalculators.class.php	 LINE 	29
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

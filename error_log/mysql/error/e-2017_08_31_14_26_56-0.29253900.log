@@ -1,0 +1,14 @@
+QUERY 
+
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Content/feUsers.class.php	 LINE 	821
+File => /home/transinf/public_html/cls/Content/feUsers.class.php	 LINE 	63
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

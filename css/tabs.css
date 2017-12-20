@@ -1,0 +1,287 @@
+/*! jQuery UI - v1.9.1 - 2012-10-25
+* http://jqueryui.com
+* Includes: jquery.ui.core.css, jquery.ui.accordion.css, jquery.ui.autocomplete.css, jquery.ui.button.css, jquery.ui.datepicker.css, jquery.ui.dialog.css, jquery.ui.menu.css, jquery.ui.progressbar.css, jquery.ui.resizable.css, jquery.ui.selectable.css, jquery.ui.slider.css, jquery.ui.spinner.css, jquery.ui.tabs.css, jquery.ui.tooltip.css, jquery.ui.theme.css
+* Copyright 2012 jQuery Foundation and other contributors; Licensed MIT */
+#tabs { width: 491px; font-size: 10px; }
+#tabs .icon { float: left; width: 54px; height: 24px; padding-top: 4px; }
+#tabs .icon:hover { background: #cccccc; }
+#tabs .sub { font-size: 11px; color: #000; margin-right: 20px; }
+.rc5 { -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; behavior: url(/PIE.php); }
+.fl { float: left; }
+#tabs .icon_blok { margin: 0px 8px 2px 0px; }
+/* Layout helpers
+----------------------------------*/
+
+.ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; list-style: none; }
+.ui-helper-clearfix:before, .ui-helper-clearfix:after { content: ""; display: table; }
+.ui-helper-clearfix:after { clear: both; }
+.ui-helper-clearfix { zoom: 1; }
+.ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter: Alpha(Opacity=0); }
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+
+
+
+
+
+
+
+
+.ui-tabs { position: relative; padding: .2em; zoom: 1; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav { margin: 0; padding: .2em .2em 0; }
+.ui-tabs .ui-tabs-nav li { list-style: none; float: left; position: relative; top: 0; margin: 0px 25px 0 0; border-bottom: 0; padding: 0; white-space: nowrap; }
+.ui-tabs .ui-tabs-nav li a { float: left; margin: 0px 10px 5px 10px; text-decoration: none; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-active { margin-bottom: -1px; padding-bottom: 1px; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-tabs-loading a { cursor: text; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 1em 1.4em; background: none; }
+.ui-tooltip { padding: 8px; position: absolute; z-index: 9999; max-width: 300px; -webkit-box-shadow: 0 0 5px #aaa; box-shadow: 0 0 5px #aaa; }
+/* Fades and background-images don't work well together in IE6, drop the image */
+* html .ui-tooltip { background-image: none; }
+body .ui-tooltip { border-width: 2px; }
+/* Component containers
+----------------------------------*/
+
+.ui-widget-content { }
+.ui-widget-content a { color: #222222/*{fcContent}*/; }
+.ui-widget-header { }
+.ui-widget-header a { color: #222222/*{fcHeader}*/; }
+/* Interaction states
+----------------------------------*/
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { font-weight: normal/*{fwDefault}*/; color: #555555/*{fcDefault}*/; background: none; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #0065b0/*{fcDefault}*/; text-decoration: none; background: url(adv-search/dash.jpg) repeat-x bottom; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { color: #3a3a3a/*{fcHover}*/; background: none; }
+.ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited { color: #212121/*{fcHover}*/; text-decoration: none; background: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { color: #212121/*{fcActive}*/; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #3a3a3a/*{fcActive}*/; text-decoration: none; background: url(adv-search/tab_arrow.jpg) no-repeat bottom center; padding-bottom: 5px }
+/*///radio////*/
+#radio .ui-helper-hidden { display: none; }
+#radio .ui-helper-hidden-accessible { position: absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
+#radio .ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+#radio .ui-helper-clearfix:before, #radio .ui-helper-clearfix:after { content: ""; display: table; }
+#radio .ui-helper-clearfix:after { clear: both; }
+#radio .ui-helper-clearfix { zoom: 1; }
+#radio .ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter: Alpha(Opacity=0); }
+/* Interaction Cues
+----------------------------------*/
+#radio .ui-state-disabled { cursor: default !important; }
+/* Icons
+----------------------------------*/
+
+/* states and images */
+#radio .ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+
+/* workarounds */
+* html .ui-autocomplete { width: 1px; } /* without this, the menu expands to 100% in IE6 */
+#radio .ui-button { display: inline-block; position: relative; padding: 0; margin-right: -5px; cursor: pointer; text-align: center; zoom: 1; overflow: visible; } /* the overflow property removes extra width in IE */
+#radio .ui-button, #radio .ui-button:link, #radio .ui-button:visited, #radio .ui-button:hover, #radio .ui-button:active { text-decoration: none; }
+#radio .ui-button-icon-only { width: 2.2em; } /* to make room for the icon, a width needs to be set here */
+#radio button.ui-button-icon-only { width: 2.4em; } /* button elements seem to need a little more width */
+#radio .ui-button-icons-only { width: 3.4em; }
+#radio button.ui-button-icons-only { width: 3.7em; }
+/*button sets*/
+#radio .ui-buttonset { margin-right: 7px; }
+#radio .ui-buttonset .ui-button { margin-left: 0; margin-right: -5px; }
+#radio { margin-left: 64px; width: 320px; float: left; }
+#radio .l_round { border-bottom-left-radius: 5px; border-top-left-radius: 5px; }
+#radio .r_round { border-bottom-right-radius: 5px; border-top-right-radius: 5px; }
+body #radio .ui-tooltip { border-width: 2px; }
+/* Interaction states
+----------------------------------*/
+#radio .ui-state-default, #radio .ui-widget-content .ui-state-default, #radio .ui-widget-header .ui-state-default { background: url(adv-search/radio2.jpg) repeat-x; width: 153px; height: 19px; font-weight: normal/*{fwDefault}*/; color: #0065b0/*{fcDefault}*/; padding-top: 5px; }
+#radio .ui-state-default a, #radio .ui-state-default a:link, #radio .ui-state-default a:visited { color: #555555/*{fcDefault}*/; text-decoration: none; }
+#radio .ui-state-hover a, #radio .ui-state-hover a:hover, #radio .ui-state-hover a:link, #radio .ui-state-hover a:visited { color: #212121/*{fcHover}*/; text-decoration: none; }
+#radio .ui-state-active, #radio .ui-widget-content .ui-state-active, #radio .ui-widget-header .ui-state-active { background: url(adv-search/radio.jpg) repeat-x; width: 153px; height: 19px; font-weight: normal/*{fwDefault}*/; color: #fff/*{fcActive}*/; padding-top: 5px; }
+#radio .ui-state-active a, #radio .ui-state-active a:link, #radio .ui-state-active a:visited { color: #212121/*{fcActive}*/; text-decoration: none; }
+/* Slider
+----------------------------------*/
+
+.sl .ui-datepicker-cover { position: absolute; /*must have*/ z-index: -1; /*must have*/ filter: mask(); /*must have*/ top: -4px; /*must have*/ left: -4px; /*must have*/ width: 200px; /*must have*/ height: 200px; /*must have*/ }
+.sl .ui-dialog { position: absolute; padding: .2em; width: 300px; overflow: hidden; }
+.sl .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative; }
+.sl .ui-dialog .ui-dialog-title { float: left; margin: .1em 16px .1em 0; }
+.sl .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px; }
+.sl .ui-dialog .ui-dialog-titlebar-close span { display: block; margin: 1px; }
+.sl .ui-dialog .ui-dialog-titlebar-close:hover, .ui-dialog .ui-dialog-titlebar-close:focus { padding: 0; }
+.sl .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }
+.sl .ui-dialog .ui-dialog-buttonpane { text-align: left; border-width: 1px 0 0 0; background-image: none; margin: .5em 0 0 0; padding: .3em 1em .5em .4em; }
+.sl .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { float: right; }
+.sl .ui-dialog .ui-dialog-buttonpane button { margin: .5em .4em .5em 0; cursor: pointer; }
+.sl .ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
+.sl .ui-draggable .ui-dialog-titlebar { cursor: move; }
+.ui-menu { list-style: none; padding: 2px; margin: 0; display: block; outline: none; }
+.ui-menu .ui-menu { margin-top: -3px; position: absolute; }
+.ui-menu .ui-menu-item { margin: 0; padding: 0; zoom: 1; width: 100%; }
+.ui-menu .ui-menu-divider { margin: 5px -2px 5px -2px; height: 0; font-size: 0; line-height: 0; border-width: 1px 0 0 0; }
+.ui-menu .ui-menu-item a { text-decoration: none; display: block; padding: 2px .4em; line-height: 1.5; zoom: 1; font-weight: normal; }
+.ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active { font-weight: normal; margin: -1px; }
+.ui-menu .ui-state-disabled { font-weight: normal; margin: .4em 0 .2em; line-height: 1.5; }
+.ui-menu .ui-state-disabled a { cursor: default; }
+/* icon support */
+.ui-menu-icons { position: relative; }
+.ui-menu-icons .ui-menu-item a { position: relative; padding-left: 2em; }
+/* left-aligned */
+.ui-menu .ui-icon { position: absolute; top: .2em; left: .2em; }
+/* right-aligned */
+
+.ui-slider { position: relative; text-align: left; }
+.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 7px; height: 16px; cursor: default; }
+.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+.ui-slider-horizontal { height: .8em; }
+.ui-slider-horizontal .ui-slider-handle { margin-top: -3px; }
+.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+.ui-slider-horizontal .ui-slider-range-min { left: 0; }
+.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+.ui-slider-vertical { width: .8em; height: 100px; }
+.ui-slider-vertical .ui-slider-handle { left: -.3em; margin-left: 0; margin-bottom: -.6em; }
+.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
+.ui-slider-vertical .ui-slider-range-min { bottom: 0; }
+.ui-slider-vertical .ui-slider-range-max { top: 0; }
+/* TR overrides */
+.ui-spinner .ui-icon-triangle-1-s { /* need to fix icons sprite */
+background-position: -65px -16px; }
+/* Fades and background-images don't work well together in IE6, drop the image */
+* html .ui-tooltip { background-image: none; }
+.range_num {width: 205px;
+background: url(/css/images/range_n.png) top center no-repeat;
+margin-left: 3px;
+font-size: 12px;
+color: #000;
+margin-top: 6px; }
+.range_num input { margin-top: 5px; font-size: 10px; color: #000; border: 0; color: #000; width: 102px; margin-left: 30px; margin-right: 12px; background-color: transparent;}
+/* Component containers
+----------------------------------*/
+.sl .ui-widget { font-size: 1.1em/*{fsDefault}*/; }
+.sl .ui-widget .ui-widget { font-size: 1em; }
+.sl .ui-widget input, .sl .ui-widget select, .sl .ui-widget textarea, .sl .ui-widget button {  font-size: 1em; }
+.sl .ui-widget-content {/*{borderColorContent}*/; background: url(adv-search/slider_bg.jpg) repeat-x/*{bgColorContent}*/; color: #222222/*{fcContent}*/; height: 8px; width: 210px; border: 0px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; behavior: url(/PIE.php); }
+.sl .ui-widget-content a { color: #222222/*{fcContent}*/; }
+.sl .ui-widget-header { background: url(adv-search/filled_bg.jpg) repeat-x; color: #222222/*{fcHeader}*/; font-weight: bold; }
+.sl .ui-widget-header a { color: #222222/*{fcHeader}*/; }
+/* Interaction states
+----------------------------------*/
+.sl .ui-state-default, .sl .ui-widget-content .ui-state-default, .sl.ui-widget-header .ui-state-default { background: url(adv-search/range_ico.jpg) no-repeat center; font-weight: normal/*{fwDefault}*/; color: #555555/*{fcDefault}*/; border-radius: 0px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; behavior: url(/PIE.php); }
+.sl .ui-state-default a, .sl .ui-state-default a:link, .sl .ui-state-default a:visited { color: #555555/*{fcDefault}*/; text-decoration: none; }
+.sl .ui-state-hover, .sl .ui-widget-content .ui-state-hover, .sl .ui-widget-header .ui-state-hover, .sl .ui-state-focus, .sl .ui-widget-content .ui-state-focus, .sl .ui-widget-header .ui-state-focus { background: url(adv-search/range_ico.jpg) no-repeat center; font-weight: normal/*{fwDefault}*/; color: #212121/*{fcHover}*/; }
+.sl .ui-state-hover a, .sl .ui-state-hover a:hover, .sl. ui-state-hover a:link, .sl .ui-state-hover a:visited {
+color: #212121/*{fcHover}*/;
+text-decoration: none;
+}
+.sl .ui-state-active, .sl .ui-widget-content .ui-state-active, .sl .ui-widget-header .ui-state-active { font-weight: normal/*{fwDefault}*/; color: #212121/*{fcActive}*/; }
+.sl .ui-state-active a, .sl .ui-state-active a:link, .sl .ui-state-active a:visited { color: #212121/*{fcActive}*/; text-decoration: none; }
+/* Combo
+----------------------------------*/
+
+
+.combo .ui-combobox { position: relative; display: inline-block; }
+.combo .ui-combobox-toggle { position: absolute; top: 8px; bottom: 0; margin-left: -1px; padding: 0; /* adjust styles for IE 6/7 */
+height: 25px; }
+.combo .ui-combobox-input { margin: 0; padding-left: 5px; width: 145px; height: 23px; }
+/* Layout helpers
+----------------------------------*/
+.combo .ui-helper-hidden { display: none; }
+.combo .ui-helper-hidden-accessible { position: absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
+.combo .ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+.combo .ui-helper-clearfix:before, .combo .ui-helper-clearfix:after { content: ""; display: table; }
+.combo .ui-helper-clearfix:after { clear: both; }
+.combo .ui-helper-clearfix { zoom: 1; }
+.combo .ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter: Alpha(Opacity=0); }
+/* Interaction Cues
+----------------------------------*/
+.combo .ui-state-disabled { cursor: default !important; }
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.combo .ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+.combo .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.ui-autocomplete { position: absolute; top: 0; /* #8656 */ cursor: default; }
+/* workarounds */
+* html .combo .ui-autocomplete { width: 1px; } /* without this, the menu expands to 100% in IE6 */
+.combo .ui-button { display: inline-block; position: relative; padding: 0; margin-right: .1em; cursor: pointer; text-align: center; zoom: 1; overflow: visible; } /* the overflow property removes extra width in IE */
+.combo .ui-button, .combo .ui-button:link, .combo .ui-button:visited, .combo .ui-button:hover, .combo .ui-button:active { text-decoration: none; }
+.combo .ui-button-icon-only { width: 2.2em; } /* to make room for the icon, a width needs to be set here */
+button .combo .ui-button-icon-only { width: 2.4em; } /* button elements seem to need a little more width */
+.combo .ui-button-icons-only { width: 3.4em; }
+button .combo.ui-button-icons-only { width: 3.7em; }
+/*button text element */
+
+/*button icon element(s) */
+.combo .ui-button-icon-only .ui-icon, .combo .ui-button-text-icon-primary .ui-icon, .combo .ui-button-text-icon-secondary .ui-icon, .combo .ui-button-text-icons .ui-icon, .combo .ui-button-icons-only .ui-icon { position: absolute; top: 50%; margin-top: -8px; }
+.combo .ui-button-icon-only .ui-icon { left: 40%; margin-top: -4px }
+.combo .ui-button-text-icon-primary .ui-button-icon-primary, .combo .ui-button-text-icons .ui-button-icon-primary, .combo .ui-button-icons-only .ui-button-icon-primary { left: .5em; }
+.combo .ui-button-text-icon-secondary .ui-button-icon-secondary, .combo .ui-button-text-icons .ui-button-icon-secondary, .combo .ui-button-icons-only .combo .ui-button-icon-secondary { right: .5em; }
+.combo .ui-button-text-icons .ui-button-icon-secondary, .combo .ui-button-icons-only .ui-button-icon-secondary { right: .5em; }
+/*button sets*/
+.combo .ui-buttonset { margin-right: 7px; }
+.combo .ui-buttonset .ui-button { margin-left: 0; margin-right: -.3em; }
+
+/* workarounds */
+button.ui-button::-moz-focus-inner {
+border: 0;
+padding: 0;
+} /* reset extra padding in Firefox */
+.combo .ui-menu { list-style: none; padding: 2px; margin: 0; display: block; outline: none; }
+.combo .ui-menu .ui-menu { margin-top: -3px; position: absolute; }
+.combo .ui-menu .ui-menu-item { margin: 0; padding: 0; zoom: 1; width: 100%; }
+.combo .ui-menu .ui-menu-divider { margin: 5px -2px 5px -2px; height: 0; font-size: 0; line-height: 0; border-width: 1px 0 0 0; }
+.combo .ui-menu .ui-menu-item a { text-decoration: none; display: block; padding: 2px .4em; line-height: 1.5; zoom: 1; font-weight: normal; }
+.combo .ui-menu .ui-menu-item a.ui-state-focus,  .combo .ui-menu .ui-menu-item a.ui-state-active { font-weight: normal; margin: -1px; }
+.combo .ui-menu .ui-state-disabled { font-weight: normal; margin: .4em 0 .2em; line-height: 1.5; }
+.combo .ui-menu .ui-state-disabled a { cursor: default; }
+/* icon support */
+.combo .ui-menu-icons { position: relative; }
+.combo .ui-menu-icons .ui-menu-item a { position: relative; padding-left: 2em; }
+/* left-aligned */
+.combo .ui-menu .ui-icon { position: absolute; top: .2em; left: .2em; }
+/* right-aligned */
+.combo .ui-menu .ui-menu-icon { position: static; float: right; }
+.combo .ui-tooltip { padding: 8px; position: absolute; z-index: 9999; max-width: 300px; -webkit-box-shadow: 0 0 5px #aaa; box-shadow: 0 0 5px #aaa; }
+/* Fades and background-images don't work well together in IE6, drop the image */
+* html .combo .ui-tooltip { background-image: none; }
+body .combo .ui-tooltip { border-width: 2px; }
+/* Component containers
+----------------------------------*/
+.combo .ui-widget {font-size: 11px/*{fsDefault}*/; line-height: 23px; }
+.combo .ui-widget .ui-widget { font-size: 1em; }
+.combo .ui-widget input, .combo .ui-widget select, .combo .ui-widget textarea, .combo .ui-widget button {; font-size: 1em; }
+.combo .ui-widget-content { border: 1px solid #aaaaaa/*{borderColorContent}*/; background: #ffffff/*{bgColorContent}*/ url(adv-search/ui-bg_flat_75_ffffff_40x100.png)/*{bgImgUrlContent}*/ 50%/*{bgContentXPos}*/ 50%/*{bgContentYPos}*/ repeat-x/*{bgContentRepeat}*/; color: #222222/*{fcContent}*/; }
+.combo .ui-widget-content a { color: #222222/*{fcContent}*/; }
+.combo .ui-widget-header { border: 1px solid #aaaaaa/*{borderColorHeader}*/; }
+*/  .combo .ui-widget-header a {
+color: #222222/*{fcHeader}*/;
+}
+/* Interaction states
+----------------------------------*/
+.combo .ui-state-default, .combo .ui-widget-content .ui-state-default, .combo .ui-widget-header .ui-state-default { border: 0px solid #d3d3d3/*{borderColorDefault}*/; background: url(adv-search/combo_bg.jpg) repeat-x #fff; font-weight: normal/*{fwDefault}*/; color: #555555/*{fcDefault}*/; }
+.combo .ui-state-default a, .combo .ui-state-default a:link, .combo .ui-state-default a:visited { color: #555555/*{fcDefault}*/; text-decoration: none; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 0px solid #999999/*{borderColorHover}*/;/*{fwDefault}*/ color: #212121/*{fcHover}*/; }
+.ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited { color: #212121/*{fcHover}*/; text-decoration: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { background: #ffffff/*{bgColorActive}*/ url(adv-search/ui-bg_glass_65_ffffff_1x400.png)/*{bgImgUrlActive}*/ 50%/*{bgActiveXPos}*/ 50%/*{bgActiveYPos}*/ repeat-x/*{bgActiveRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #212121/*{fcActive}*/; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121/*{fcActive}*/; text-decoration: none; }
+/* Interaction Cues
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.ui-icon { width: 7px; height: 4px; background-image: url(adv-search/ico.jpg)/*{iconsContent}*/; }
+.ui-corner-all { background: #fff; font-size: 11px; }
+/* Misc visuals
+----------------------------------*/
+
+/* Corner radius */
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { -moz-border-radius-topleft: 6px/*{cornerRadius}*/; -webkit-border-top-left-radius: 6px/*{cornerRadius}*/; -khtml-border-top-left-radius: 6px/*{cornerRadius}*/; border-top-left-radius: 6px/*{cornerRadius}*/; }
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr { -moz-border-radius-topright: 6px/*{cornerRadius}*/; -webkit-border-top-right-radius: 6px/*{cornerRadius}*/; -khtml-border-top-right-radius: 6px/*{cornerRadius}*/; border-top-right-radius: 6px/*{cornerRadius}*/; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl { -moz-border-radius-bottomleft: 6px/*{cornerRadius}*/; -webkit-border-bottom-left-radius: 6px/*{cornerRadius}*/; -khtml-border-bottom-left-radius: 6px/*{cornerRadius}*/; border-bottom-left-radius: 6px/*{cornerRadius}*/; }
+.combo .ui-corner-all, .combo .ui-corner-bottom, .combo .ui-corner-right, .combo .ui-corner-br { -moz-border-radius-bottomright: 6px/*{cornerRadius}*/; -webkit-border-bottom-right-radius: 6px/*{cornerRadius}*/; -khtml-border-bottom-right-radius: 6px/*{cornerRadius}*/; border-bottom-right-radius: 6px/*{cornerRadius}*/; }

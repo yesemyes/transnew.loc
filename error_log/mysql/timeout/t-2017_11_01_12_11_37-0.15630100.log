@@ -1,0 +1,20 @@
+QUERY 
+SELECT `brandmodel`.`id`,`brandmodel`.`pid`,`brandmodel`.`label`,`brandmodel`.`position`,`brandmodel`.`alias`,`brandmodel`.`image`,`brandmodel`.`link1`,`brandmodel`.`link2`,`brandmodel`.`home`,`brandmodel`.`active`,`brandmodel`.`is_usssr`,`brandmodel`.`offers_count`,`brandmodel_ml`.`lng_id`,`brandmodel_ml`.`short`,`brandmodel_ml`.`full` FROM   `brandmodel` LEFT JOIN brandmodel_ml USING (`id`)  
+ WHERE lng_id=7 AND `active`  
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+3.105864048
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	259
+File => /home/transinf/public_html/template_c/%%76^76B^76B3CE7F%%main.tpl.html.php	 LINE 	45
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%A1^A1E^A1EED9F6%%addoffer.tpl.html.php	 LINE 	57
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%5E^5ED^5ED718EC%%index.tpl.html.php	 LINE 	127
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/index.php	 LINE 	23

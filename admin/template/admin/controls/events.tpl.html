@@ -1,0 +1,5 @@
+{assign var =events value=""}
+{foreach from=$_setting.events key=event item=function}
+{assign var=events value=$events|cat:" "|cat:$event|cat:"=\""|cat:$function|cat:'"'}
+{/foreach}
+{$events}

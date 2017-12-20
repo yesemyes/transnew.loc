@@ -1,0 +1,20 @@
+{strip}
+	{assign var=_info value=$this->currentPage.ads.$_place}
+    {foreach from=$_info item=inf}
+	<div class="banner{$_place}_{$inf.id}">
+	{*$inf.href*}
+    {if $inf.type == "img"}
+			{assign var=href value=$inf.href|@urlencode}
+			{Link page='goto' assign="adhref"}
+			
+			{if $_st}{assign var=marg value="5"}{/if}
+			
+			<a href="{$adhref}?link={$href}" target="_blank"><img  src="{$inf.file}" title="{$inf.title}" alt="{$inf.title}"  hspace="{$marg}" /></a>
+    {else}
+        
+        {$inf.description}
+    {/if}
+	</div>
+    {$seperator|default:''}
+    {$this->updateAdsViews($inf.id)}
+{/foreach}{/strip}

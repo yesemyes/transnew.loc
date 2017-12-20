@@ -1,0 +1,30 @@
+<ul id="options-tree-{$_pid}" class="UlNoStyle" style="{if $_level==0}width:596px;{/if} ">
+  {foreach from = $_options.$_pid item=item name="chk`$_pid`"}
+  
+  <li id="options-tree-node-{$item.id}" {if $_level == 0 && !$smarty.foreach.chk.first} style="padding-top:10px; clear:left;"{/if}>
+
+	{if $_level == 1}<div style="width:170px;float:left; text-align:left;">
+    {if $_level == 2}<div style="clear:left; text-align:left;">{/if}
+    {/if}
+	
+    {if $_level == 1}
+    <input type="checkbox" name="{$_name}" value="{$item.id}" id="subr{$item.id}" class="unlocker"  {if is_array($values) &&  in_array($item.id,$values) } checked="checked"{/if}/>
+    {elseif $_level == 2}
+    <input type="radio" name="{$_name}[{$item.pid}]" {if is_array($values) && in_array($item.id,$values) } checked="checked"{elseif $smarty.foreach.chk.first}checked="checked"{/if} value="{$item.id}" id="R{$item.id}" class="subr{$item.pid}" {if !$_pc}disabled="disabled"{/if} />
+    {/if}
+     <span class="{if $_level == 0}Level0{elseif $_level==1}Level1{else}Level2{/if}"><label for="{if $_level == 1}subr{$item.id}{else}R{$item.id}{/if}">{$item.label}</label></span>
+  
+   
+     {if $smarty.foreach.chk.iteration%3==0 && $_level == 1}<div class="cb"></div>{/if}
+    {if isset($_options[$item.id]) && !empty($_options[$item.id])}
+     {assign var=parentChecked value=0}
+     {if is_array($values) && in_array($item.id,$values) } {assign var=parentChecked value=1}{/if}
+    {include file=default/options_tree.tpl.html _options=$_options _pid=$item.id _level=$_level+1 _pc=$parentChecked _iter=$smarty.foreach.chk.last}
+    
+    {/if}
+     {if $_level == 1}  {if $_level == 2} </div>{/if}</div>{/if}
+     </li>
+     
+     {if $_level == 0 && !$smarty.foreach.chk0.last}<li class="cb" style="border-bottom:solid 1px #28333e; padding-bottom:10px;"></li>{/if}
+  {/foreach}
+</ul>

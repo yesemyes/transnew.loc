@@ -1,0 +1,17 @@
+QUERY 
+SELECT `text`.`id`,`text`.`pid`,`text`.`alias`,`text`.`menu`,`text`.`position`,`text`.`place`,`text_ml`.`lng_id`,`text_ml`.`title`,`text_ml`.`content` FROM   `text` LEFT JOIN text_ml USING (`id`)  
+ WHERE alias='registration_email_content' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.01438617706
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	163
+File => /home/transinf/public_html/cls/Content/feUsers.class.php	 LINE 	234
+File => /home/transinf/public_html/cls/Content/feUsers.class.php	 LINE 	63
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{strip}
+{include file=default/head.tpl.html}
+<body>
+<div id="headCont">
+		{include file=default/top.tpl.html}
+</div>
+	<div id="mainCont">
+		
+		<div   style="display:table; width:1003px; margin:0 auto;height: 100%;">
+		{if $this->currentPage.alias=='home'}
+			{include file="home/urgent.tpl.html"} 
+		{/if} 
+			{include file=$this->mainTpl}
+			<br class="cb" /> 
+	    </div>
+        
+	</div>
+	 {include file=default/footer.tpl.html} 
+	
+    
+</body>
+</html>
+{/strip}

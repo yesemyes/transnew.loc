@@ -1,0 +1,13 @@
+<div class="wleft">{$this->CurentBrand.label}</div>
+<div class="wright"></div>
+<div class="wleftContent black">
+   <img src="/img/brandmodel/image/{$this->CurentBrand.image}" align="left" class="imgmarg" />
+{$this->CurentBrand.full}
+<br />
+{if $this->CurentBrand.full}
+<a href="{link page='brand' brand=$this->CurentBrand.alias}" class="more black">
+{Trans tem='BACK'}</a><br />
+{/if}
+</div>
+<div class="wbot cb"></div>
+{include file=brand/thisbarndmodels.tpl}

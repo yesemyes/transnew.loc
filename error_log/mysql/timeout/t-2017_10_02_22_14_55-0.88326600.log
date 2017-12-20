@@ -1,0 +1,16 @@
+QUERY 
+SELECT images FROM   `news_images_rel`  
+ WHERE `id` = '2227' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+27.5753619671
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Content/feNews.class.php	 LINE 	102
+File => /home/transinf/public_html/cls/Content/feNews.class.php	 LINE 	66
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

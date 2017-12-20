@@ -1,0 +1,14 @@
+QUERY 
+SELECT count(`id`) AS qty FROM   `siteusers` LEFT JOIN siteusers_ml USING (`id`)  
+ WHERE `active`='1' AND `lng_id` ='7' 
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+Server shutdown in progress
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	69
+File => /home/transinf/public_html/index.php	 LINE 	10

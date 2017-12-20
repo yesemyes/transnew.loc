@@ -1,0 +1,17 @@
+QUERY 
+SELECT `services`.`id`,`services`.`active`,`services`.`last`,`services`.`alias`,`services`.`position`,`services`.`date`,`services`.`servicescategory`,`services`.`sub_servicescategory`,`services`.`image`,`services`.`logo`,`services`.`email`,`services`.`phone`,`services`.`phone1`,`services`.`url`,`services`.`person_phone`,`services`.`person_name`,`services`.`person_email`,`services`.`customer`,`services`.`latitude`,`services`.`longitude`,`services`.`map`,`services_ml`.`lng_id`,`services_ml`.`addres`,`services_ml`.`description`,`services_ml`.`title`,`services_ml`.`work_time` FROM   `services` LEFT JOIN services_ml USING (`id`)  
+ WHERE `active`='1' AND `lng_id`='7' AND (`servicescategory`='97' or `sub_servicescategory`='97') 
+ ORDER BY  `position` ASC 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+5.44841313362
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	77
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	206
+File => /home/transinf/public_html/cls/Content/feTransport.class.php	 LINE 	425
+File => /home/transinf/public_html/cls/Content/feTransport.class.php	 LINE 	50
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

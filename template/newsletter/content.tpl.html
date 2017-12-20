@@ -1,0 +1,9 @@
+{assign var=message value=$this->LoadText($this->path_params.2,0)}
+<div class="contentMiddle">
+  <div class="wleft">{$message.title}</div>
+  <div class="wright"></div>
+  <div class="wleftContent"> {$this->currentPage.content}<br />
+    <br />
+    <strong> {$message.content}</strong> </div>
+  <div class="wbot cb"></div>
+</div>

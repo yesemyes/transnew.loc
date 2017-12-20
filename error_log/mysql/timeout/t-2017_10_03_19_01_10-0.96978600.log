@@ -1,0 +1,14 @@
+QUERY 
+SELECT `color`.`id` as `key`,`value` as `value` FROM  `color` INNER JOIN color_ml ON (`color`.`id` = `color_ml`.`id` AND `color_ml`.`lng_id`=7) ;
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+7.17802476883
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	747
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

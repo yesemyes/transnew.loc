@@ -1,0 +1,21 @@
+QUERY 
+INSERT INTO `view_count` SET `id` = 24,`view_count` = 1 ON DUPLICATE KEY UPDATE `view_count` = `view_count` + 1,`type`='ads'
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.89291715622
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	267
+File => /home/transinf/public_html/template_c/%%1B^1BC^1BC8CBCA%%ads.tpl.html.php	 LINE 	7
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%2E^2EC^2ECCDCA2%%right.tpl.html.php	 LINE 	6
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%22^228^228114FA%%body.tpl.html.php	 LINE 	9
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%5E^5ED^5ED718EC%%index.tpl.html.php	 LINE 	127
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/index.php	 LINE 	23

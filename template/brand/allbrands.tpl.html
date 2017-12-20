@@ -1,0 +1,45 @@
+<div class="CarMainTbl">
+{if !empty($this->AllBrands.1)}
+<div class="titles2 cb shadowbg">{Trans term="usssr_vendors" default="Российские автомобили"}</div>
+{/if}
+{foreach from=$this->AllBrands.1 item = item key =key name=bb}
+<div class="brandView">
+    <div class="fl" style="width:27px">
+      <div class="distbl">
+        <div class="distblcell">
+          <div class="disinnertbl"> {if $item.image}<a href="{Link page='brand' brand=$item.alias}" class="barand"> 
+		  <img src="{FithImageToSize width=25 height=25 frame=true base="/img/brandmodel/big/" image=$item.image}"  style="max-width:25px;max-height:25px" class="margR5" alt="{$item.label}" title="{$item.label}" /> </a>{/if}</div>
+        </div>
+      </div>
+    </div>
+    <div style="float:left">
+    <a href="{Link page='brand' brand=$item.alias}" class="barand lh25 fl">{$item.label}</a>
+    </div>
+</div>
+  {if $smarty.foreach.bb.iteration%5==0}
+  <div class="cb"></div>
+  {/if}
+  {/foreach} 
+  {if !empty($this->AllBrands.1)}
+<div class="titles2 cb shadowbg">{Trans term="not_usssr_vendors" default="Иномарки"}</div>
+{/if}
+  {foreach from=$this->AllBrands.0 item = item key =key name=bb}
+  <div class="brandView">
+    <div class="fl" style="width:27px">
+      <div class="distbl">
+        <div class="distblcell">
+          <div class="disinnertbl"> {if $item.image}<a href="{Link page='brand' brand=$item.alias}" class="barand"> <img src="{FithImageToSize width=25 height=25 frame=true base="/img/brandmodel/big/" image=$item.image}"style="max-width:25px;max-height:25px"  class="margR5" alt="{$item.label}" title="{$item.label}" /> </a>{/if}</div>
+        </div>
+      </div>
+    </div>
+    <div style="float:left">
+    <a href="{Link page='brand' brand=$item.alias}" class="barand lh25 fl">{$item.label}</a>
+    </div>
+    
+
+    </div>
+  {if $smarty.foreach.bb.iteration%5==0}
+  <div class="cb"></div>
+  {/if}
+  {/foreach} 
+</div>

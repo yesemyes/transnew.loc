@@ -1,0 +1,63 @@
+{strip}<div class="wleft">{Trans param='car_search'}</div>
+  <div class="wright"></div>
+  <div class="wleftContent">
+     <form action="{Link page='advancedsearch'}" method="get" id="signupForm" style="padding-right:20px;" >
+      <div class="fl" style="width:300px;"> 
+        <span class="fl bold blue w60">
+        <label for="filed_car_brand">{Trans param='CAR_MAKE'}</label>
+        </span>
+        <select name="filed_car_brand[0]" id="filed_car_brand" onchange="fillMyModels(this.value,'filed_car_brand_model','{Link page='users'}')"  class="h20 sel margL10 w170">
+          <option value="">{Trans param='ALL_MAKES'}</option>
+            {if !$this->homeBrands}
+            {$this->getHomeBrands()}
+            {/if}
+            {foreach from = $this->dictonary.brand  item = item key=_id}
+                <option value="{$_id}" {if $smarty.get.filed_car_brand == $_id} selected="selected"{/if}>{if $item == 'other'}{Trans param='br_mo_other'}{else}{$item}{/if}</option>
+            {/foreach}
+        </select>
+        <br class="cb" />
+        <span class="fl bold blue w60">
+        <label for="filed_car_brand_model">{Trans param='CAR_MODEL'}</label>
+        </span>
+        <select name="filed_car_brand_model[0]" id="filed_car_brand_model" disabled="disabled" class="h20 sel margL10 w170">
+          <option value="">{Trans param='SELECT_MODEL'}</option>
+        </select>
+      </div>
+      <div class="fr"> <span class="fl bold blue w60">
+        <label for="filed_release_date_year_from">{Trans param='SELECT_YEAR_HOME'}</label>
+        </span>
+        <select name="filed_release_date_year[from]" id="filed_release_date_year_from" class="h20 sel margL10" style="width:78px;">
+          <option value="">{Trans param='FROM'}</option>
+          {assign var=cyear value=$smarty.now|date_format:"%Y"}
+           {assign var=years value=$cyear|range:1900}
+           {html_options options=$years  selected=$smarty.get.filed_release_date_year.from}
+        </select>
+        <select  name="filed_release_date_year[to]" id="filed_release_date_to" class="h20 sel margL10" style="width:79px;">
+          <option value="">{Trans param='TO'}</option>
+          
+           {html_options options=$years }
+        </select>
+        <br class="cb" />
+        <span class="fl bold blue w60">
+        <label for="filed_price_from">{Trans param='FILED_PRICE'}</label>
+        </span>
+        <select name="price[from]" id="filed_price_from"  class="h20 sel margL10" style="width:78px;">
+          <option value="">{Trans param='FROM'}</option>
+          {assign var=price value=$this->config.search_price_min|range_price:$this->config.search_price_max:$this->config.search_price_step}
+          {html_options options=$price selected=$smarty.get.price.from}
+        </select>
+        <select name="price[to]" id="filed_price_to" class="h20 sel margL10" style="width:79px;">
+          <option value="">{Trans param='TO'}</option>
+          {html_options options=$price selected=$smarty.get.price.from}
+        </select>
+      </div>
+      <div class="cb fl" style="margin-top:5px; width:300px;"><a href="{Link page='advancedsearch'}" class="bold inv">{Trans param='advanced_search'}</a></div>
+      <div class="fr">
+          <div class="yelbtn1 fl">
+            <input type="submit" value="{Trans param='search'}" name="search" class="defbtn cursor" />
+          </div>
+          <div class="yelbtn2 fl"></div>
+      </div>
+      </form>
+  </div>
+<div class="wbot cb"></div>{/strip}

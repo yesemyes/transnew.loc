@@ -1,0 +1,14 @@
+QUERY 
+SELECT `interchange`.`id` as `key`,`value` as `value` FROM  `interchange` INNER JOIN interchange_ml ON (`interchange`.`id` = `interchange_ml`.`id` AND `interchange_ml`.`lng_id`=7) ;
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+2.61482691765
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	750
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

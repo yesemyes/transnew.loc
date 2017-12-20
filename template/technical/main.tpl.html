@@ -1,0 +1,35 @@
+{strip}
+{*
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){ $('#hintShow').hover(function(){$('.hint').show()},function(){$('.hint').hide()})})
+   
+</script>
+{/literal}
+*}
+
+    <div style="padding: 0px 13px 17px 0px;">
+        <span class="blue">{Trans term = 'tech_center' default = 'Центры технического обслуживания'}</span>
+    </div>
+    {foreach from = $this->citys item = item}
+    <div class="city">
+        <span>{$item.value}</span>
+    </div>
+    
+    <div class="accordion">
+    {assign var = sub_region value = $item.sub_region}
+    {foreach from = $sub_region item = sub_region}
+        <div class="kvartal" id="{$sub_region.id}">
+        <span>{$sub_region.value}</span>
+      </div>
+		<div style="padding: 0!important;">
+			
+		</div>
+    {/foreach}
+    </div>
+    {/foreach}
+      
+
+    
+
+{/strip}

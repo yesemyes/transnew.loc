@@ -1,0 +1,14 @@
+QUERY 
+UPDATE siteusers SET lastactivity =NOW() WHERE id=4595 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+4.62908196449
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	186
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	98
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	15
+File => /home/transinf/public_html/index.php	 LINE 	10

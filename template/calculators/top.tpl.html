@@ -1,0 +1,13 @@
+{strip}
+    <div class="texTabs">
+        <ul class="texList">
+        {foreach from=$this->calculators item = item name = name}
+            <li class="{if $item.alias == $this->path_params.2}active{/if} grad{$smarty.foreach.name.index}">
+                <a href="{Link p1=calculators p2=$item.alias}">{$item.title}</a>
+            </li>
+        {/foreach}
+        </ul>
+        <br class="cb"/>
+    </div>
+    <br class="cb"/>
+{/strip}

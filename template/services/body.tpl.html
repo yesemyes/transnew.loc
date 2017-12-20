@@ -1,0 +1,72 @@
+<div  style="margin: 0 10px; width:750px; float:left"> {strip}
+  <div class="services_holder">
+    <div class="services_holder_left"> 
+	{foreach from=$this->dictonary.servicescategory item=servicescategory name=servicesIteration key=scid} 
+      {if ceil($smarty.foreach.servicesIteration.total/2) == $smarty.foreach.servicesIteration.index}</div>
+    <div class="services_holder_right"> {/if} <span><a href="{Link page='transport' category=$servicescategory.alias}">{$servicescategory.name}</a>({$servicescategory.qty|default:0})</span> {/foreach} </div>
+	
+	<br class="cb" />
+	<a href="{Link page="transport" action="add-service"}" class="add_btn_blue fr">{Trans term="add_serices" default="Добавить в каталог"}</a>
+  </div>
+  <div class="services_search">
+    <form action="{Link page='transport' action="search"}">
+      <label class="fl">{Trans term="SEARCH_IN_CATALOG"}</label>
+	  <br class="cb" />
+	  <br class="cb" />
+      <input type="text" class="search_in_catalog" value="{$this->query.term}" name="term" placeholder="{Trans term="search_in_catalog_example" default='Например, Wolksvagen' }"/>
+      <br class="cb" />
+<br class="cb" />
+
+      <button type="submit" class="btn_blue">{Trans term="SEARCH_IN_CAT" default="Искать"}</button>
+    </form>
+  </div>
+  <br class="cb"/>
+  
+  
+  {if isset( $this->selectidCategory.subs) && !empty( $this->selectidCategory.subs)}
+  <div class="subcat" style="height: 20px;width: 710px;padding: 20px;">
+  {foreach from=$this->selectidCategory.subs item=subCategory}
+       <a style="float: left; display: block;margin: 0 20px;" href="{Link page='transport' category=$subCategory.alias}">{$subCategory.name}</a>
+  {/foreach}
+  <br class="cb"/>
+  </div>
+  {/if}
+  <div class="cb" style="height: 35px;"></div>
+  <div class="services_catalog"> 
+  {assign var=_path  value="/img/services/thumb/"}
+  {foreach from=$this->catalog item=catalog}
+  
+    <div class="services_catalog_item"> 
+    
+  <div class="fl" style="margin-right: 50px;width: 80px;height: 80px;overflow: hidden;">
+  <a href="{Link page='transport' category=$this->dictonary.servicescategory[$catalog.servicescategory].alias action=$catalog.alias}">
+  {if $catalog.logo}
+        <img src="{$_path}{$catalog.logo}"/>
+        {else}
+        <img src="{$smarty.const.THEM_URL}css/images/logo_small.png"/>
+  {/if}
+  </a>
+  </div>
+  
+    <div class="catalog_info" style="width: 340px;word-wrap: break-word;">
+    <a style="text-decoration: none;" href="{Link page='transport' category=$this->dictonary.servicescategory[$catalog.servicescategory].alias action=$catalog.alias}">{$catalog.title}</a>
+    <a style="text-decoration: none;color: #fff;" href="{Link page='transport' category=$this->dictonary.servicescategory[$catalog.servicescategory].alias action=$catalog.alias}">{$catalog.description|strip_tags|mb_truncate:100}</a>
+    </div>
+    
+    <div class="catalog_addres"><a style="text-decoration: none;" href="{Link page='transport' category=$this->dictonary.servicescategory[$catalog.servicescategory].alias action=$catalog.alias}">{$catalog.addres|mb_truncate:30}<br class="cb"/>{if $catalog.phone}{$catalog.phone}<br class="cb"/>{/if}{*if $catalog.date}<span style="color: #0f9de7;">{$catalog.date|date_format:"%e %B %Y"}</span>{/if*}</a></div>
+    
+    
+    <br class="cb" />
+
+    </div>
+    {/foreach} 
+    <br class="cb" />
+    
+    
+    </div>
+     {BulidQuery query=$this->query assign=tail}
+    {include file="default/paging.tpl.html"  found_rows=$this->catalogFound limit=$this->catalogLimit page=$this->catalogPage tali=$tail}
+
+</div>
+{include file=default/right.tpl.html}
+{/strip} 

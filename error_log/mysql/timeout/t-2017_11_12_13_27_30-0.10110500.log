@@ -1,0 +1,16 @@
+QUERY 
+SELECT `pddticket`.`id`,`pddticket`.`alias`,`pddticket`.`position`,`pddticket`.`correct_answer`,`pddticket`.`image`,`pddticket`.`image_original`,`pddticket`.`image_answer_a`,`pddticket`.`image_answer_b`,`pddticket`.`image_answer_c`,`pddticket`.`image_answer_d`,`pddticket`.`image_answer_e`,`pddticket`.`active`,`pddticket`.`group`,`pddticket`.`label`,`pddticket_ml`.`lng_id`,`pddticket_ml`.`hint_for_correct_answer`,`pddticket_ml`.`question`,`pddticket_ml`.`answer_a`,`pddticket_ml`.`answer_b`,`pddticket_ml`.`answer_c`,`pddticket_ml`.`answer_d`,`pddticket_ml`.`answer_e` FROM   `pddticket` LEFT JOIN pddticket_ml USING (`id`)  
+ WHERE `id`='701'  AND `lng_id`='5' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+3.51733493805
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Content/fePdd.class.php	 LINE 	96
+File => /home/transinf/public_html/cls/Content/fePdd.class.php	 LINE 	29
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

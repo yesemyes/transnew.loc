@@ -1,0 +1,147 @@
+{strip}
+{strip}
+<div class="currentNews" style="width: 711px;min-height: 1100px;">
+<br class="cb"/>
+<div style="width: 711px;position: relative;">
+ {assign var = _news value= $this->CurrnetNews}
+{ImageExists frame=false base='/img/news/image/' image=$_news.image assign=isImageExists}
+{if $isImageExists}
+<div class="img-holder">
+<img src="{CatImageToSize width=169 height=106 frame=false base='/img/news/image/' image=$_news.image}"   class="fl imgmarg2" style="max-width:169px;"/>
+</div>
+{/if}
+<h2 class="fl" style="font-size:15px; padding-left:5px; width:535px; font-weight:normal;margin-top: -5px;color: #FFFACD;">{$_news.title}</h2>
+<div class="fr time">{$_news.date}</div>
+<br class="cb"/>
+</div>
+
+<br class="cb"/>
+<div style="width: 652px; float: left; padding-left: 59px;color: #FFFACD;">
+
+{$_news.content}
+<br class="cb"/>
+{if $_news.youtube}
+<div>
+                   <iframe width="650" height="366" src="//www.youtube-nocookie.com/embed/{$_news.youtube}?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
+{/if}
+
+
+
+{if $_news.images}
+<br class="cb"/>
+	<div class="showcase newsGal">
+		<!-- Each child div in #showcase with the class .showcase-slide represents a slide. -->
+        {foreach from = $_news.images item = nItem name = images}
+        
+		<div class="showcase-slide">
+			<!-- Put the slide content in a div with the class .showcase-content. -->
+			<div class="showcase-content" style="position: relative;">
+				<img src="/img/news/slide/{$nItem.images}" alt="01" />
+                <div class="like" >
+                    <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ftransinfo.one%2Fimg%2Fnews%2Fslide%{$nItem.images}&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true" send="false"></iframe>
+                </div>
+            </div>
+			<!-- Put the thumbnail content in a div with the class .showcase-thumbnail -->
+			<div class="showcase-thumbnail">
+				<img src="/img/news/slidethumb/{$nItem.images}" alt="01" width="158px" />
+			</div>
+			<!-- Put the caption content in a div with the class .showcase-caption -->
+        </div>
+        {/foreach}
+	</div>
+ {/if}    
+    
+{if $_news.href}
+<br class="cb"/>
+<span class="fl" style="margin-right: 10px;">{Trans term = 'source'} </span>
+<a class="fl" target="_blank" href="{$_news.href}">{$_news.href|regex_replace:"[^https?://]":""}</a>
+<br class="cb"/>
+{/if}
+
+{assign var=thisCat value =$this->NewsCategorys[$_news.newscategory] } <br class="cb" />
+<div style="padding: 5px;background: url('/css/images/tr_bg.png') repeat scroll 0 0;"> 
+
+<table style="width: 100%;">
+<tr>
+	<td>
+        <div style="margin-top: 5px;">
+            <span class='st_fblike_large' displayText='Facebook Like'></span>
+            <span class='st_fbrec_large' displayText='Facebook Recommend'></span>
+        </div>
+    </td>
+	<td>
+        <div style="width: 128px;">
+        {literal}
+        <a target="_blank" class="mrc__plugin_uber_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'nt' : '1', 'cm' : '1', 'sz' : '20', 'st' : '2', 'tp' : 'mm,ok'}"></a>
+        {/literal}
+        </div>
+    </td>
+	<td>
+        <div style="width: 75px;">
+            <div id="vk_like"></div>
+        </div>
+    </td>
+	<td>
+        <div class="fr" style="margin-left: 5px;">
+            <span class="fl" >{Trans term = 'view_count'}</span>
+            <span class="fl" style="margin: 0 5px;">{$_news.view_count}</span>
+            <span>{Trans term = 'times'}</span>
+            <br class="cb"/>
+        </div>
+    </td>
+	
+</tr>
+</table>
+
+
+{literal}
+<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?105"></script>
+<script type="text/javascript">
+  VK.init({apiId: 4080440, onlyWidgets: true});
+</script>
+<script type="text/javascript">
+VK.Widgets.Like("vk_like", {type: "mini", height: 20});
+</script>
+
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "867184d5-6a35-4d77-851e-427f78052964", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+
+
+{/literal}
+</div>
+
+
+<br class="cb"/>
+<div class="fb-comments" data-colorscheme="dark" data-href="http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}" data-width="652" data-num-posts="10"></div>
+</div>
+</div>
+
+
+
+
+  
+{/strip}
+
+
+
+
+
+
+
+
+{*<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c65377351a774d0"></script>*}
+{*<a onclick="history.back(0)" class="more2">{Trans param='BACK_TO_CATEGORY'}</a>*}
+{*<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_22x22_style">
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_odnoklassniki_ru"></a>
+</div>*}
+{*
+<span class='st_mail_ru_large' displayText='mail.ru'></span>
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_vkontakte_large' displayText='Vkontakte'></span>
+<span class='st_odnoklassniki_large' displayText='Odnoklassniki'></span>
+*}

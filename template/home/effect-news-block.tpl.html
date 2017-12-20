@@ -1,0 +1,8 @@
+{strip}
+<h3><a href="#">{$item.title}</a></h3>
+<div><span style="color:#ffea00">{$item.date}</span><br />
+  <a href="{Link page='news' Categoryalias=$this->CurrentCategory.alias alias=$item.alias)}">{$item.subtitle}</a>
+  <div><br class="cb" />{$item.small}</div>
+  <a href="{Link page='news'  catalias=$item.catalias alias=$item.alias)}" class="more2">{Trans param='MORE'}</a><br class="cb" />
+</div>
+{/strip}

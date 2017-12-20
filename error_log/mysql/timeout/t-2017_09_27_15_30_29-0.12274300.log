@@ -1,0 +1,16 @@
+QUERY 
+SELECT `services_images_rel`.`id`,`services_images_rel`.`images` FROM   `services_images_rel`  
+ WHERE `id` = '223' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.47632694244
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Content/feTransport.class.php	 LINE 	377
+File => /home/transinf/public_html/cls/Content/feTransport.class.php	 LINE 	50
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

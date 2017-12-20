@@ -1,0 +1,222 @@
+<table cellpadding="0" cellspacing="0" summary="" width="100%">
+  <tr>
+    <td style="vertical-align:top" width="55%">
+    <table cellpadding="0" cellspacing="0" summary="" width="100%">
+        <tr>
+          <td width="25%">{Trans term="offer_brand" default="Марка"}*</td>
+           <td style="padding-left: 10px;"><select style="margin-top: 3px;"  data-position="left top" name="main[filed_car_brand]" id="main[filed_car_brand]"  onchange="fillMyModelsGR(this.value,'filed_car_brand_model','{$this->path}')"  class="sel w170">
+              <option value="">{Trans param='select_car_brand'}</option>
+              
+      
+        {foreach from = $this->dictonary.brand item = item key=_id}
+            
+      
+              <option value="{$_id}" {if $offer.filed_car_brand == $_id} selected="selected"{/if}>{$item}</option>
+              
+      
+        {/foreach}
+  
+    
+            </select></td>
+        </tr>
+        <tr>
+          <td>{Trans term="offer_model" default="Серия"}*</td>
+          <td style="padding-left: 10px;"><div class="no_bg">
+              <select style="margin-top: 3px;" data-position="left top" name="main[filed_car_brand_model]" id="filed_car_brand_model" {if !$offer.filed_car_brand} disabled="disabled"{/if} class="sel w170" >
+                <option value="">{Trans param='select_car_model'}</option>
+                
+      
+  
+ {if $offer.filed_car_brand}
+  
+	{assign var=select_car_models value=$db->getTree('brandmodel','*',"lng_id=`$this->defLng.id` AND `active` ") }
+        
+  {foreach from=$select_car_models[$offer.filed_car_brand] item = item key = key}
+  
+  {if isset($select_car_models[$item.id])}
+  
+      
+                <option value="{$item.id}" {if $offer.filed_car_brand_model == $item.id} selected="selected"{/if}>{$item.label}</option>
+                {*
+  {foreach from=$select_car_models[$item.id] item = sitem }
+  
+      
+                <option value="{$sitem.id}" {if $offer.filed_car_brand_model == $sitem.id} selected="selected"{/if}>{$sitem.label}</option>
+                
+      
+  {/foreach}*}
+ 
+                
+      
+  {else}
+    
+      
+                <option value="{$item.id}" {if $offer.filed_car_brand_model == $item.id} selected="selected"{/if}>{$item.label}</option>
+                
+      
+  {/if}
+  {/foreach}
+  {/if}
+
+    
+              </select>
+            </div></td>
+        </tr>
+        <tr>
+          <td>{Trans term="offer_year" default="Год выпуска"}*</td>
+          <td style="padding-left: 10px;"> {assign var=cyear value=$smarty.now|date_format:"%Y"}
+            {assign var=years value=$cyear|yearRange:1900}
+            <select  data-position="left top" name="main[filed_release_date_year]" id="filed_release_date_year" class="sel" style="width:95px;margin-top: 3px;" >
+              <option value="">{Trans param='select_year'}</option>
+              
+        {html_options options=$years  selected=$offer.filed_release_date_year}
+
+            </select></td>
+        </tr>
+        
+        <tr>
+          <td>{Trans term="offer_milage" default="Пробег"}*</td>
+          <td style="padding-left: 10px;"><input maxlength="9" data-position="left top" style="width:120px;border: 1px solid #717171;margin-top: 3px; " type="text" name="main[filed_milage]" id="filed_milage" value="{$offer.filed_milage}" class="inp fl" {if $offer.isnew} disabled="disabled"{/if}/>
+            <select style="margin-top: 3px; padding-left: 3px; width: 56px;" name="main[filed_milage_kayficent]" class="sel fl" style="width: 65px;">
+         
+              
+{html_options options=$this->dictonary.milage_kayficent  selected=$offer.filed_milage_kayficent  }
+
+            </select></td>
+        </tr>
+        <tr>
+          <td >{Trans term="offer_gearbox" default="КПП"}*</td>
+          <td style="padding-left: 10px;"> {assign var=_gearboxoptions value=$db->getOptions('gearbox','id','value',$this->defLng.id,'active','','position') }
+            <select style="margin-top: 3px;" data-position="left top" name="main[filed_gearbox]" id="filed_gearbox" class="sel w170 fl"  style="width:171px">
+              <option value="">{Trans param='select_gearbox'}</option>
+              
+      
+        {html_options options=$_gearboxoptions selected=$offer.filed_gearbox}
+
+    
+            </select></td>
+        </tr>
+        
+        
+        <tr>
+          <td>{Trans term="offer_price" default="Цена"}*</td>
+          <td style="padding-left: 10px;"><input data-position="left top" maxlength="9" type="text" name="main[filed_price]" style="width:120px;height:18px; border: 1px solid #717171;margin-top: 3px; " id="filed_price" class="inp fl"   value="{$offer.filed_price}" {if $offer.contract} disabled="disabled"{/if} />
+            <select style="margin-top: 3px; padding-left: 0px; width: 56px;" name="main[filed_currency]" id="filed_currency" 
+        style="width:65px;  " class="sel fl"  {if $offer.contract} disabled="disabled"{/if} >
+              
+  
+        {html_options options = $currnecys selected=$offer.filed_currency}
+
+            </select></td>
+        </tr>
+        
+        
+        
+		<tr>
+		<td></td>
+		<td style="padding-left: 10px;"><label for="filed_contract" >{Trans param='filed_contract'}</label>
+        <input style="position: relative;top: 4px;" type="checkbox" name="main[filed_contract]" id="filed_contract" {if $offer.filed_contract} checked="checked"{/if} value="0" onclick="changeProceStatus(this)" class="chkMarg2 fl" /></td>
+
+		</tr>
+       	
+      </table></td>
+    <td style="vertical-align:top">
+    <table cellpadding="0" cellspacing="0" summary="" width="100%">
+        
+		 <tr>
+          <td width="30%"> {Trans term="offer_body" default="Кузов"}</td>
+          <td ><select style="margin-top: 3px;" data-position="right top" name="main[filed_body]" id="filed_body" class="sel w170 fl">
+              <option value="">{Trans param='select_body'}</option>
+              
+      
+        {html_options options=$_bodyoptions selected=$offer.filed_body}
+
+    
+            </select></td>
+        </tr>
+        <tr>
+          <td>{Trans term="offer_engine" default="Двигатель"}</td>
+          <td><input  data-position="right top" type="text" name="main[filed_engine]" id="filed_engine" class="inp " style="margin-top: 3px; width:80px;border: 1px solid #717171;margin-right: 2px!important;text-align: center;" placeholder="{Trans term = 'sm3'}" value="{$offer.filed_engine|default:''}"/>
+            
+            <input  data-position="right top"  type="text" name="main[filed_engine_power]" id="filed_engine_power" class="inp " style="margin-top: 3px; width:80px;border: 1px solid #717171;margin-right: 5px!important;text-align: center;" placeholder="{Trans term = 'MENSURATION_OF_POWER'}" value="{$offer.filed_engine_power|default:''}"/>
+            </td>
+        </tr>
+		<tr>
+          <td> {Trans term="offer_DRIVE"; default="Привод"}</td>
+			<td > {assign var=_driveoptions value=$db->getOptions('drive','id','value',$this->defLng.id,'active')}
+            <select data-position="right top" name="main[filed_drive]" id="filed_drive" class="sel w170 fl">
+              <option value="">{Trans param='select_drive'}</option>
+              
+      
+        {html_options options=$_driveoptions selected=$offer.filed_drive}
+
+    
+            </select></td>
+        </tr>
+       
+        <tr style="line-height: 35px;">
+          <td>{Trans term="offer_rudders" default="Руль"}</td>
+          <td > {assign var=_rudder value=$db->getOptions('rudder','id','value',$this->defLng.id,'active') }
+{html_radios name='main[filed_rudder]' id="filed_rudder" options=$_rudder selected=$offer.filed_rudder|default:1} </td>
+        </tr>
+		 <tr>
+          <td>{Trans term="offer_color" default="Цвет"}</td>
+          <td >
+          <select  data-position="right top" name="main[filed_color]" id="filed_color" class="sel  fl" style="margin-top: 3px; width:100px">
+              {*<option value="">{Trans param='select_color'}</option>*}
+              
+      			{foreach from=$clors item=color}
+                <option value="{$color.id}" hexcode="{$color.hexcode}"  {if $color.id ==$offer.filed_color} selected="selected" {/if}>{*$color.value*}</option>
+				{/foreach}
+    
+            </select>
+            &nbsp;
+            <label for="filed_metalic" style="position: relative;  top: 7px;">
+              <input style="position: relative;top: 2px;" type="checkbox" name="main[filed_metalic]"  {if $offer.filed_metalic} checked="checked"{/if}id="filed_metalic" value="1"/>
+              {Trans param='color_metalic'} </label></td>
+        </tr>
+        <tr style="line-height: 35px;">
+          <td>{Trans term="offer_customs_free" default="Растамжен"}</td>
+          <td  >{assign var=_customsoptions value=$db->getOptions('customs','id','value',$this->defLng.id,'active') }
+            
+            {html_radios name='main[filed_customs]' id="filed_customs"  options=$_customsoptions  selected=$offer.filed_customs|default:1  separator=''}</td>
+        </tr>
+
+        
+		<!-- փոխանակում և ապառիկ
+		 <tr>
+          <td >{Trans term="offer_interchange"}</td>
+          <td > {assign var=_interchangeoptions value=$db->getOptions('interchange','id','value',$this->defLng.id,'active','','position') }
+            <select style="margin-top: 3px;" name="main[filed_interchange]" id="filed_interchange" class="sel w170 fl"  style="width:171px">
+              <option value="">{Trans param='select_car_brand'}</option>
+              
+      
+        {html_options options=$_interchangeoptions selected=$offer.filed_interchange}
+
+    
+            </select></td>
+        </tr>
+         <tr>
+          <td >{Trans term="offer_credit"}</td>
+          <td > {assign var=_creditoptions value=$db->getOptions('credit','id','value',$this->defLng.id,'active','','position') }
+            <select style="margin-top: 3px;" name="main[filed_credit]" id="filed_credit" class="sel w170 fl"  style="width:171px">
+              <option value="">{Trans param='select_car_brand'}</option>
+              
+      
+        {html_options options=$_creditoptions selected=$offer.filed_credit}
+
+    
+            </select></td>
+        </tr>
+		-->
+      </table></td>
+  </tr>
+  <tr style="position: absolute; top: 304px;">
+   <td colspan="2">{Trans term="offer_description" default="Комментарий владельца"}</td>
+   </tr>
+   <tr>
+  <td colspan="2">
+  <textarea id="main[description]" name="main[description]" rows="0" cols="0" class="txtarea " style="width: 703px; height:100px;margin-left: 142px;">{$offer.description}</textarea>
+  </td>
+  </tr>
+</table>

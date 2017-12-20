@@ -1,0 +1,1 @@
+class='{if $_sTree}close_sub{else}open_sub{/if}' onclick="getSub('{$row.id}',{$_lavel+1},this,'{$this->request.path}','{$this->curModule.name}-{$row.id}')"

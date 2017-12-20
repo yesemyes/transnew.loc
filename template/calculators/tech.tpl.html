@@ -1,0 +1,53 @@
+{strip}
+
+{if $this->calculator.content}
+
+{/if}
+{literal}
+    <script type="text/javascript">
+    
+            $(document).ready(function(){
+        $("select.uni").uniform();})
+        function selectItem(a)
+        {
+           $(a).find('option').removeClass('active');
+           $(a).find('option:selected').addClass('active');
+           
+           
+          
+           
+           
+                 
+        }
+    </script>
+
+{/literal}
+<div style="margin: 20px 0;" class="tech_calc">
+<h2 class="calcTitle">{$this->calculator.title}</h2>
+    <table cellspacing="10" width="720" class="techTblBg">
+    {foreach from=$this->transType item=item name=name}
+        <tr>
+        	<td>
+                <span class="trans-type">{$item.title}</span>
+            </td>
+            <td>
+                <span class="techPrice">
+                    {$item.pay|nf} AMD
+                </span>
+            </td>
+        </tr>
+        {if !$smarty.foreach.name.last}
+        <tr>
+            <td colspan="3"><span class="border"></span></td>
+        </tr>
+        {/if}
+    {/foreach} 
+
+</table>
+<br class="cb"/>
+
+<div class="calcul_text">{$this->calculator.content}</div>
+<br class="cb"/>
+
+</div>
+{/strip}

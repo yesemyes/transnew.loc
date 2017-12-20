@@ -1,0 +1,239 @@
+{assign var=offer value=$this->_offers.found.0}
+{if $offer.filed_currency == 3}
+    {assign var=currency value= '$'}
+    {assign var = OTHER1 value=$offer.service_price} 
+    {GetPriceIn currency="EUR" price=$offer.service_price  config=$this->config assign=OTHER2}
+    {assign var=currency1 value= 'AMD'}
+    {assign var=currency2 value= '€'}
+    
+{elseif $offer.filed_currency == 4}
+    {assign var=currency value= '€'}
+    {assign var=currency1 value= 'AMD'}
+    {assign var=currency2 value= '$'}
+    {assign var = OTHER1 value=$offer.service_price}
+    {GetPriceIn currency="USD" price=$offer.service_price config=$this->config assign=OTHER2}
+{elseif $offer.filed_currency == 5}
+    {assign var=currency value= 'AMD'}
+    {GetPriceIn currency="USD" price=$offer.service_price config=$this->config assign=OTHER1}
+    {GetPriceIn currency="EUR" price=$offer.service_price  config=$this->config assign=OTHER2}
+    {assign var=currency1 value= '$'}
+    {assign var=currency2 value= '€'}
+{/if}
+
+<table class="car_params" border="0px"  cellpadding="0" cellspacing="0" style="margin: 0 auto;">
+
+
+   <tr class="first">
+    <td class="price">
+	{if $offer.filed_contract != 1}
+      <span class="size25">{$offer.filed_price|nf} {$currency}</span>
+      <br class="cb"/>
+      <div class=" size11">
+      
+      <span class="line">{$OTHER1|nf} {$currency1}</span>
+      <span>{$OTHER2|nf} {$currency2}</span>
+      </div>
+	 {else}
+	  <span class="size25">{Trans param='filed_contract'} </span>
+	{/if}	 
+    </td>
+    <td class="shadow"></td>
+    {*<td class="bg">
+      <span class="size11">
+      {Trans term="offer_state" default="Состояние"}</span> 
+      <br class="cb"/>
+      <span class="size13">{$this->dictonary.state[$offer.filed_state]}</span>
+    </td>*}
+    <td  class="bg">
+     <span class="size11">
+     {Trans term="offer_year" default="Год выпуска"}
+    </span>
+     <br class="cb"/>
+     <span class="size13">{$offer.filed_release_date_year}</span>
+     
+     </td>
+    <td >
+     <span class="size11">{Trans term="offer_milage" default="Пробег"}</span>
+     <br class="cb"/>
+     <span class="size13">{$offer.filed_milage} {$this->dictonary.milage_kayficent[$offer.filed_milage_kayficent]}</span>
+    </td>
+   
+  </tr>
+  <tr class="shadow2">
+  <td colspan="5" ></td>
+  </tr>
+   <tr class="cont">
+   <td colspan="5">
+   <div class=" fl left">
+     <div class="with_bg">{Trans term="offer_brand" default="Марка"}
+     <a>{$this->dictonary.brandmodel[$offer.filed_car_brand]}</a>
+     </div>
+     <div class="no_bg">{Trans term="offer_model" default="Серия"}
+     <a>{$this->dictonary.brandmodel[$offer.filed_car_brand_model]}</a>
+     </div>
+      
+      <div class="with_bg">
+      {Trans term="offer_body" default="Кузов"}
+      
+     <span class="fr icon">{*<img src="css/images/car_icon.png" alt=""/>*}{if $this->dictonary.body[$offer.filed_body]}{$this->dictonary.body[$offer.filed_body]}{else}-{/if}</span>
+     </div>
+     <div class="no_bg">
+       {Trans term="offer_engine" default="Двигатель"}
+     <span class="fr">{if $offer.filed_engine && $offer.filed_engine != 0}{$offer.filed_engine} {Trans term = 'SM3'}{else}-{/if}  ,  {if $offer.filed_engine_power || $offer.filed_engine_power !=0}{$offer.filed_engine_power} {Trans term = 'MENSURATION_OF_POWER'}{else}-{/if}</span>
+     </div>
+      <div class="with_bg">{Trans term="offer_color" default="Цвет"}
+      
+     <span class="fr">
+     <div class="fl"  style="display:inline-block; width:16px; height:16px;background:{$this->dictonary.color_adv[$offer.filed_color].hexcode}!important"></div>{if $offer.filed_metalic == 1}<span class="fr" style="display: block;margin-left: 10px;">{Trans term = 'metalic'}</span>{/if}
+     <br class="cb"/>
+     {*$this->dictonary.color_adv[$offer.filed_color]}{$offer.filed_color*}
+     </span>
+     </div>
+     <div class="no_bg">{Trans term="offer_rudders" default="Руль"}
+     <span class="fr">{if $this->dictonary.rudder[$offer.filed_rudder]}{$this->dictonary.rudder[$offer.filed_rudder]}{else}-{/if}</span>
+     </div>
+      <div class="with_bg">
+      {Trans term="offer_DRIVE" default="Привод"}
+      
+     <span class="fr">{if $this->dictonary.drive[$offer.filed_drive]}{$this->dictonary.drive[$offer.filed_drive]}{else}-{/if}</span>
+     </div>
+      <div class="no_bg">{Trans term="offer_gearbox" default="КПП"}
+     <span class="fr">{$this->dictonary.gearbox[$offer.filed_gearbox]}</span>
+     </div>
+      
+     
+       {* <div class="with_bg">{Trans term="offer_fuel" default="Топливо"}
+     <span class="fr">{$this->dictonary.fuel[$offer.filed_fuel]}</span>
+     </div>
+     *}
+     
+     <div class="with_bg">{Trans term="offer_city" default="город"}
+     <a>{if $offer.filed_city}{$this->statesList[$offer.filed_city].value}{elseif $offer.filed_other_city}{$offer.filed_other_city}{else}-{/if}</a>
+     </div>
+     <div class="no_bg">{Trans term="customs"}
+     <a>{if $offer.filed_customs}{Trans term = 'nocustom'}{else}{Trans term = 'hascustom'}{/if}</a>
+     </div>
+     {*
+       <div class="no_bg">{Trans term="offer_waranty" default="Гарантия до"}
+     <span class="fr">{$this->dictonary.warranty[$offer.filed_warranty]}</span>
+     </div>
+     *}
+     {include file="cars/user.offer.options.tpl.html" offer=$offer}
+     
+   </div>
+   <div class=" fl right" style="margin: 0 0 0 15px;width: 400px;">
+   
+   <div style="min-height: 290px;" id="user_offer_images">
+   {include file="cars/user.offer.images.tpl"}
+   </div>
+   
+   {if !empty($offer.phone1) || empty($offer.phone2)}
+  <span class="title">
+  {Trans term="offer_contact_info" default=" Контактные данные"}</span>
+  <div class="contacts">
+  {if $offer.contact_name}
+  <a style="float: left;">{$offer.contact_name}</a>
+	<!--
+	<button class="btn fl" style="margin-left: 117px;"><span class="fl"></span></a>Այլ առաջարկներ</button>
+	-->
+  <br class="cb"/>
+  {/if}
+  <div class="fl" style="margin-right: 10px;padding-top: 5px;">
+  {Trans term="offer_phone" default="Телефон"}
+  </div>
+  
+  <div class="fl" style="padding-top: 5px;">
+   {$offer.phone1}{if !empty($offer.phone2)},&nbsp; {$offer.phone2}{/if}
+   </div>
+   <br class="cb"/>
+   {/if}
+   <!--
+   <div>
+   <br class="cb"/>
+    <table>
+        <tr>
+            {if $offer.filed_interchange}
+            <td><div class="change">{if $offer.filed_interchange == 1}{Trans term = 'change_yes'}{else}{Trans term = 'change_no'}{/if}</div></td>
+            {/if}
+            {if $offer.filed_credit}
+            <td><div class="credit">{if $offer.filed_credit == 1}{Trans term = 'credit_yes'}{else}{Trans term = 'credit_no'}{/if}</div></td>
+            {/if}
+        </tr>
+    </table>
+   </div>
+   -->
+    {if !empty($offer.description)}
+  <div style="margin: 10px 0;">
+  
+  <span class="title" style="font-size: 15px;text-decoration: underline;">{Trans term="offer_description" default="Комментарий владельца"}</span>
+    <br class="cb"/>
+    <span class="fl text">
+  {$offer.description|nl2br}  
+  </span>
+  
+  <br class="cb"/>
+  </div>
+  {/if}
+  </div>
+  </div>
+   <br class="cb"/>
+   <div class="fr"> 
+
+<table>
+<tr>
+	<td>
+        <div style="margin-top: 5px;">
+            <span class='st_fblike_large' displayText='Facebook Like'></span>
+            <span class='st_fbrec_large' displayText='Facebook Recommend'></span>
+        </div>
+    </td>
+	<td>
+        <div style="width: 128px;">
+        {literal}
+        <a target="_blank" class="mrc__plugin_uber_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'nt' : '1', 'cm' : '1', 'sz' : '20', 'st' : '2', 'tp' : 'mm,ok'}"></a>
+        {/literal}
+        </div>
+    </td>
+	<!--
+	<td>
+        <div>
+            <div id="vk_like"></div>
+        </div>
+    </td>-->
+
+</tr>
+</table>
+
+
+{literal}
+<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?105"></script>
+<script type="text/javascript">
+  VK.init({apiId: 4080440, onlyWidgets: true});
+</script>
+<script type="text/javascript">
+VK.Widgets.Like("vk_like", {type: "mini", height: 20, verb: 1});
+</script>
+
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "867184d5-6a35-4d77-851e-427f78052964", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+
+
+{/literal}
+</div>
+   <br class="cb"/>
+   </td>
+   </tr>
+    <tr>
+   <td colspan="5">
+   <div class="bottom">
+   <span class="num">{Trans term = 'ads_number' default = 'Номер объявления'}: <font>{$offer.id|zerofill}</font></span>
+   <span class="num">{Trans term="offer_published" default="Опубликовано"}: <font>{$offer.filed_srtat_date|date_format:'%d.%m.%Y'}</font></span>
+   <span class="num">{Trans term = 'viewed' default = 'Просмотров'}: <font>{$offer.view_count}</font></span>
+   </div>
+   </td>
+   </tr>
+  
+
+</table>

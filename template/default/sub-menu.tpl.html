@@ -1,0 +1,28 @@
+{strip}
+
+{$this->newsAddCategorys()}
+<div class="fl" style="width:520px;">
+{foreach from=$this->menu.top.left.0 item=item key = key name=LeftTopMenu}
+
+
+{if array_key_exists($item.id,$this->menu.top.left)}
+<div id="sub-menu-{$item.id}" class="sub-menu-d" style="display:none; padding-left:38px;"> 
+{foreach from=$this->menu.top.left[$item.id] item=sub key = skey name=LeftTopMenu2level} 
+<a href="{Link page=$item.alias sub=$sub.alias}" class="sub-menu hov lh21">{$sub.label|default:$sub.name}</a> {if !$smarty.foreach.LeftTopMenu2level.last} | {/if}
+  {/foreach} </div>
+{/if}
+{/foreach}
+</div>
+
+<div class="fl" style="width:465px; position:relative;"> <!--left:520px;-->
+{foreach from=$this->menu.top.rigth.0 item=item key = key name=LeftTopMenu}
+{if array_key_exists($item.id,$this->menu.top.rigth)}
+<div id="2sub-menu-{$item.id}" class="2sub-menu-d" style="display:none;"> {foreach from=$this->menu.top.rigth[$item.id] item=sub key = skey name=LeftTopMenu2level} 
+
+<a href="{Link page=$item.alias alias=$sub.alias}" class="sub-menu lh21">{$sub.label|default:$sub.name}</a>{if !$smarty.foreach.LeftTopMenu2level.last}|{/if}
+  {/foreach} </div>
+{/if}
+{/foreach} 
+</div>
+<span class="fr my_main_date">{$smarty.now|date_format:"%d.%m.%Y"}</span>
+{/strip}

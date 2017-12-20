@@ -1,0 +1,21 @@
+QUERY 
+ SELECT ads.*,ads_ml.title ,ads_ml.description 
+			           FROM ads 
+			           INNER JOIN ads_ml ON (ads.id =ads_ml.id )
+			           WHERE 
+			           `ads`.`group`=1
+                       AND `ads`.`active`
+			           AND (max_view_qty=0 OR max_view_qty > views_qty )
+			           AND ( NOW() BETWEEN srtat_date  AND   	end_date)
+			           AND ads_ml.lng_id = '7'
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.10904812813
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	234
+File => /home/transinf/public_html/index.php	 LINE 	17

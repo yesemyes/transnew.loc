@@ -1,0 +1,87 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="{$this->currentPage.description}" />
+<meta name="keywords" content="{$this->currentPage.keyword}" />
+{if !$this->currentPage.noindex}
+<meta name="ROBOTS" content="INDEX, FOLLOW"/>
+{else}
+<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>
+{/if}
+
+
+{if $this->module=="news" && $this->path_params|@count==4}
+<meta property="og:image" content="http://{$smarty.server.HTTP_HOST}/img/news/slide/{$this->current.image}">
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="http://{$smarty.server.HTTP_HOST}/{$this->path_params.0}/{$this->path_params.1}/{$this->path_params.2}/{$this->path_params.3}.html" />
+<meta property="og:site_name" content="{$smarty.server.HTTP_HOST}"/>   
+<meta property="og:title" content="{$this->current.title|htmlentities}"/>
+<meta property="fb:app_id" content="803753502984232" />
+{/if}
+{if $this->module=="cars"}
+<meta property="og:image" content="http://{$smarty.server.HTTP_HOST}/img/offers/middle/{$this->current.filed_main_image}">
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="http://{$smarty.server.HTTP_HOST}/{$this->path_params.0}/{$this->path_params.1}/{$this->path_params.2}/{$this->path_params.3}/{$this->path_params.4}/{$this->path_params.5}/{$this->path_params.6}.html" />
+<meta property="og:site_name" content="{$smarty.server.HTTP_HOST}"/>   
+<meta property="og:title" content="{$this->current.title|htmlentities}"/>
+<meta property="fb:app_id" content="803753502984232" />
+{/if}
+
+<meta name='yandex-verification' content='7871ee662cf032b6' />
+
+{*}<meta name="author" content="{$this->config.meta_autor}"/>{*}
+<meta name="author" content="Ruben Ordanyan" />
+<meta name="google-site-verification" content="{$this->config.google_site_verification}" />
+<title>{if $this->currentPage.title}{$this->currentPage.title}{else}{$this->currentPage.label}{/if} | {$this->config.defaultTitle}</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+{Minify type='css' minify=1 version = $this->config.css_version}
+{foreach from=$this->headStyleSheets item=cssFile}
+<link href="{$cssFile}" rel="stylesheet" type="text/css" />
+{/foreach}
+{/Minify}
+
+<script  type="text/javascript" language="javascript" >
+var _noneSelected ="{Trans term='noneSelected'}" ;
+var SELECT_ANSWER ="{Trans term='SELECT_ANSWER' defaulr='Выберите ответ'}" ;
+var Back_to_top ="{Trans term='Back_to_top' default='На Верх'}" ;
+var _selectAllText = "{Trans term='selectAllText'}";
+var _selectAllText = "{Trans term='selectAllText'}";
+var top_search_submit_label = "{$this->trans('top_search_submit')}";
+var top_search_reset_label = "{$this->trans('top_search_reset')}";
+var curLng = "{$this->defLng.code}";
+var downpay_min = {$this->config.downpay_min};
+var downpay_max = {$this->config.downpay_max|default:5000};
+var downpay_step = {$this->config.downpay_step|default:100};
+var rate_min = {$this->config.rate_min|default:500};
+var rate_max = {$this->config.rate_max|default:500};
+var rate_step = {$this->config.rate_step|default:500};
+var module = "{$this->currentPage.alias}";
+</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "13b980f4-e92e-457b-b374-7d013af72749", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+{Minify type='script' minify=0}
+{foreach from=$this->headScripts item=jsFile ket=fileName}
+	<script type="text/javascript" src="{$jsFile}{GetVersion file=$jsFile}" language="javascript"></script>
+{/foreach}
+{/Minify}
+
+<script type="text/javascript" src="/scripts/rt_share.js"></script> 
+
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6021018461660', {'value':'0.01','currency':'USD'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6021018461660&amp;cd[value]=0.01&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+
+</head>

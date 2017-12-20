@@ -1,0 +1,16 @@
+QUERY 
+SELECT `menu`.`id`,`menu`.`pid`,`menu`.`active`,`menu`.`topmenu`,`menu`.`bottommenu`,`menu`.`alias`,`menu`.`position`,`menu`.`private`,`menu`.`noindex`,`menu`.`href`,`menu_ml`.`lng_id`,`menu_ml`.`label`,`menu_ml`.`description`,`menu_ml`.`keyword`,`menu_ml`.`content`,`menu_ml`.`title` FROM   `menu` LEFT JOIN menu_ml USING (`id`)  
+ WHERE `alias`='shops' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+4.34138703346
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Content/feTransport.class.php	 LINE 	336
+File => /home/transinf/public_html/cls/Content/feTransport.class.php	 LINE 	50
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

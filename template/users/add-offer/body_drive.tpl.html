@@ -1,0 +1,20 @@
+<div class="fl" style="width:340px;">
+<span class="formtit w100 textR fl"> 
+
+<label for="filed_body" class="req_field">{Trans param='filed_body'}</label>
+</span>{assign var=_bodyoptions value=$db->getOptions('body','id','value',$this->defLng.id,'active') }
+<select name="main[filed_body]" id="filed_body" class="sel margL10 w170 fl">
+  <option value="">{Trans param='select_body'}</option>
+        {html_options options=$_bodyoptions selected=$offer.filed_body}
+</select>
+<br class="cb" />
+<span class="formtit w100 textR fl"> 
+<label for="filed_drive" class="req_field">{Trans param='filed_drive'}</label>
+</span> {assign var=_driveoptions value=$db->getOptions('drive','id','value',$this->defLng.id,'active') }
+<select name="main[filed_drive]" id="filed_drive" class="sel margL10 w170 fl">
+  <option value="">{Trans param='select_drive'}</option>
+        {html_options options=$_driveoptions selected=$offer.filed_drive}
+</select>
+<br class="cb" />
+
+</div>

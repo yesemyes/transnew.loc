@@ -1,0 +1,15 @@
+<ul class="active">
+{foreach from=$tree.$pid item=item key = key name=LeftTopMenu} 
+{Link page=$item.alias extention='' assign='href'}
+<li {if $this->path_params.$level ==$item.alias } class="active current-back"{/if} $level={$level}  $level-alais={$this->path_params.$level}>
+{if $item.href}
+<a {if !empty($tree[$item.id])}class="parent"{/if}  href="{$item.href}" target="_blank"><span>{$item.label}</span></a>
+{else}
+<a {if !empty($tree[$item.id])}class="parent"{/if}  href="{$prefix}{$href}.html"><span>{$item.label}</span></a>
+{/if}
+{if !empty($tree[$item.id])}
+<div {if $item.alias == 'roadpolice'} class="second"{/if}>{include file="default/top-menu-item.tpl.html" pid=$item.id tree=$this->menu.top.left prefix="`$prefix``$href`" level=$level+1}</div>
+{/if}
+</li>
+{/foreach}
+</ul>

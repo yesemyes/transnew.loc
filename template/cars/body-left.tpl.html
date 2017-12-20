@@ -1,0 +1,49 @@
+{if isset($changeParrams)} 
+
+<div class="pdd" id="left-filter" style="width:200px; margin: 0 10px; float:left;">
+<div   class="cb fl exam_left ">
+<span class="fl title" style="width:200px;padding-left: 8px;">{Trans term="finded %s cars" count=$this->_offers.total}</span>
+<br class="cb" />
+<div style="width: 208px;background: url(/css/images/leftBg.png) repeat;">
+<ul class="UlNoStyle"  style="width:175px; margin: 0 auto;">
+
+{foreach from=$changeParrams item=obj name=obj}
+   {if isset($obj->subs) && ($obj->key != 'price' &&  $obj->key != 'filed_release_date_year' )}
+  <li id="cmm{$obj->key}" class="fItem" >
+   
+  {$obj->label}  
+ 
+    <ul id="cm{$obj->key}" class="fMenu">
+      {foreach from=$obj->subs item=sObj}
+      
+	  <li id="cm{$obj->key}{$sObj->dir}"> 
+	  
+	  <a href="{$this->path}?{$sObj->url}" class="fr closebtn">x</a>{if $sObj->dir}
+	  {Trans term="searchdir_`$sObj->dir`"}&nbsp;{/if}
+      <a href="{$this->path}?{$sObj->url}" class="search-filter">{$sObj->label}</a> </li>
+      
+      {/foreach}
+      
+      
+    </ul>
+    <br class="cb"/>
+   </li>
+   
+   {/if}
+  {/foreach }
+ 
+</ul>
+</div>
+
+<br class="cb" />
+<span class="fl title" style="width:200px;padding-left: 8px;">{Trans term='resul_filter' default='Фильтровать результат:'}</span>
+<div id="resul_filter"  data-location="{Link page='cars'}?action=filter&{BulidQuery query=$this->query}">
+
+</div>
+</div>
+<br class="cb" />
+</div>
+{/if}
+
+
+<div id="content" class="" style="">{include file=$this->contentTpl}</div> 

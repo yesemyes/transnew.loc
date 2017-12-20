@@ -1,0 +1,18 @@
+ @font-face {
+                font-family: dejavu-sans;
+                src: url(tahomaA/DejaVuSans.ttf);
+            }
+*
+{
+	font-family: dejavu-sans, Tahoma, "sylfaen"!important;
+}
+
+ @font-face {
+                font-family: 'AGENCYB';
+                src: url(tahomaA/Agency_FB.ttf);
+            }
+			
+.author, .author_main, .fott_phone, .fottmail, .dev_by, .studio, .supp_by, .master {
+	font-family: AGENCYB!important;
+    font-size: 16px;
+}

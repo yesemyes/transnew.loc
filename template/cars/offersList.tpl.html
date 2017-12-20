@@ -1,0 +1,34 @@
+{strip}
+<br class="cb"/>
+{assign var=condWhere value=$condWhere|@my_array_push:" `$_filret`  "}
+
+{assign var=_offers value=$this->getOffers($condWhere,$condOrder,$condLimit,$condPage)}
+
+{if !empty($_offers.found)}
+  
+  <div class="Tblsubtit bold topBord">{Trans param=$_catpion} ({Trans param='found'} : {$_offers.info.0.qty})</div>
+
+<!--START TITLE BLOCK-->
+<div class="w325 titblock">{Trans param="DESCRIPTION"}</div>
+<div class="w48 titblock">{Trans param="YEAR"}</div>
+<div class="w90 titblock">{Trans param="MILAGE"}</div>
+<div class="w111 titblockLast">{Trans param="PRICE"}</div>
+<!--END TITLE BLOCK-->
+
+{foreach from=$_offers.found item=_offer key=key name=offersEach}
+{assign var=images value=$this->getOfferImages($_offer.id)}
+
+{if $_offer.highlight}
+	{include file=cars/hlofferlist.atom.tpl.html item=$_offer _last = $smarty.foreach.offersEach.last}
+{else}
+	{include file=cars/offerlist.atom.tpl.html  item=$_offer _last = $smarty.foreach.offersEach.last}
+{/if}
+{foreachelse}
+{Trans param='NOOFFERSFOUND'}
+{/foreach}  
+{if $_catpion=='simpleoffers'}
+	{include file=default/paging.tpl.html  found_rows =$_offers.info.0.qty limit=$this->config.fe_paging_limit page =$_page tali=$this->query_str}
+{/if}
+{/if}
+
+{/strip}

@@ -1,0 +1,11 @@
+<div id="offer_photos_tpl_html">
+<div id="offer_main_photo">
+
+{if $offer.filed_main_image}
+{include file=users/imageblock-main.tpl.html  imagePath = $offer.filed_main_image}
+{/if}
+</div>
+<div id="ifContainer" class="fl">
+<iframe id="myIframe" src="{$this->path}?external=true&itpl=users/uploader.tpl.html&action=uploadFile&pl=offer_main_photo" frameborder="0" scrolling="no" style="height:50px; clear:left; width:300px;"> </iframe>
+</div>
+</div>

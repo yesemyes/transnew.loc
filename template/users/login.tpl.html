@@ -1,0 +1,70 @@
+<div class="protext">
+    {$this->currentPage.content}
+</div>
+<br class="cb"/>
+<div>
+    <div class="loginLeft fl">
+        <div id="uLogin2" data-ulogin="display=panel;fields=email,sex,photo,photo_big,first_name,last_name;providers=facebook,odnoklassniki;hidden=;redirect_uri=http%3A%2F%2F{$smarty.server.HTTP_HOST}/{$this->path_params.0}/users/login.html"></div>
+    </div>
+    <div class="loginRight fr">{*$this->currentPage.label*}
+    {if $this->_loginError}
+    <label class="error" style="font-weight: normal;">{Trans param='LOGIN_PASSWORD_ERROR'}</label>
+    <br class="cb"/>
+    {/if}
+    <form name="login" action="{Link page='users' action='login'}" method="post">
+    
+        <table>
+            <tr>
+            	<td>
+                    <span class="formtit textR fl" style="font-weight: normal;display: block;font-size: 1em;text-align: left;">
+                      <label for="user_login">{Trans param='user_login'}</label>
+                    </span>
+                </td>
+            	<td>
+                    <input type="text" name='user_login' class="margL10 sinp" />
+                </td>
+            </tr>
+            <tr>
+            	<td>
+                    <span class="formtit textR fl" style="font-weight: normal;display: block;font-size: 1em;text-align: left;">
+                      <label for="user_password">{Trans param='user_password'}</label>
+                    </span>
+                </td>
+            	<td>
+                    <input type="password"  name='user_password' class="margL10 sinp" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div style="text-align: center;margin-left: 10px;">
+                        <a href="{Link page='users' action='registration'}" class="hov">{Trans param='registration'}</a>&nbsp;|&nbsp;
+                        <a href="{Link page='users' action='forgot'}" class="hov">{Trans param='forgot'}</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span class="borderLine"></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="btnbord">
+    	               <div class="yelbtn1"><input style="width: 164px;" type="submit" value="{Trans param='user_submit'}" name="login-btn" class="pointer" /></div><span class="yelbtn2 fl"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+       
+        
+    	{* <div class="btnbord">
+    	<div class="yelbtn1 fl"><input type="reset" name="reset"  value="{Trans param='user_reset'}" class="pointer" /></div><span class="yelbtn2 fl margR5"></span>
+        <div class="yelbtn1"><input type="submit" value="{Trans param='user_submit'}" name="login-btn" class="pointer" /></div><span class="yelbtn2 fl"></span>
+        </div>   *}  
+      </form>
+    </div> 
+    <br class="cb"/> 
+</div>
+<br class="cb"/>

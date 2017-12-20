@@ -1,0 +1,14 @@
+QUERY 
+INSERT INTO  `siteusers` (`login`,`regdate`,`active`,`confirmed`,`email`,`network`,`name`,`identity`,`photo`,`photo_big`) values('soc59d369f5868198.14006076',NOW(),'1','1','mkrtichkhachatryan@gmail.com','facebook',concat('Mkrtich ', ' Khachatryan'),'https://www.facebook.com/app_scoped_user_id/1622467104648348/','http://graph.facebook.com/1622467104648348/picture?type=square','http://graph.facebook.com/1622467104648348/picture?type=large') ON DUPLICATE KEY UPDATE `lastactivity`=NOW(),`name`='Mkrtich Khachatryan',`photo`='http://graph.facebook.com/1622467104648348/picture?type=square',`photo_big`='http://graph.facebook.com/1622467104648348/picture?type=large',`network`='facebook',`identity`='https://www.facebook.com/app_scoped_user_id/1622467104648348/'
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+2.14694809914
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Content/feUsers.class.php	 LINE 	364
+File => /home/transinf/public_html/cls/Content/feUsers.class.php	 LINE 	63
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

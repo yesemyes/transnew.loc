@@ -1,0 +1,42 @@
+Array
+(
+    [0] => Array
+        (
+            [file] => D:\OpenServer\domains\transnew.loc\cls\Front\frontEnd.class.php
+            [line] => 94
+            [function] => errorPage
+            [class] => frontEnd
+            [type] => ->
+            [args] => Array
+                (
+                )
+
+        )
+
+    [1] => Array
+        (
+            [file] => D:\OpenServer\domains\transnew.loc\cls\Front\front.class.php
+            [line] => 15
+            [function] => __construct
+            [class] => frontEnd
+            [type] => ->
+            [args] => Array
+                (
+                )
+
+        )
+
+    [2] => Array
+        (
+            [file] => D:\OpenServer\domains\transnew.loc\index.php
+            [line] => 10
+            [function] => __construct
+            [class] => front
+            [type] => ->
+            [args] => Array
+                (
+                )
+
+        )
+
+)

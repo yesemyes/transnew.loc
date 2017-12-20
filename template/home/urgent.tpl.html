@@ -1,0 +1,121 @@
+{if !empty($this->topOffers)}
+
+<!-- // top search jamanakvor, estexic petq e <div class="search_blok"> amboxjutyamb jnjel, isk top-search.tpl -um display:none hanel // -->
+
+<div class="search_blok">
+<form method="get" action="{Link page='cars'}">
+
+<div class="fl left">
+<div class="advert_add">
+    <a href="{Link page = 'users' curr = 'addoffer'}" class="advert">
+        <span class="fl" style="margin: 0 20px;">+</span>
+        <span class="fl">{Trans term = 'add_advert'}</span>
+        <br class="cb"/>
+    </a>
+
+</div>
+<br class="cb"/>
+<div class="combo fl">
+    
+    <select name="filed_car_brand[]" id="filed_car_brand" class="uniform filed_car_brand" onchange="fillMyModelsMC(this.value,'search_filed_car_brand_model','/')" >
+        <option value="">{Trans term="Select_brand" defaul="Ընտրել մակնիշը"}</option>
+        {foreach from=$this->dictonary.brand_icons item=brand}
+        <option value="{$brand.id}" data-image="{FithImageToSize width=25 height=25 frame=true base="/img/brandmodel/big/" image=$brand.image}">{$brand.label}</option>
+        {/foreach}
+
+    </select>
+    
+     <select name="filed_car_brand_model[]" id="search_filed_car_brand_model"  class="uniform filed_car_brand_model">
+        <option value="">{Trans term="Select_model" defaul="Ընտրել մոդելը"}</option>
+        
+
+    </select>
+</div>
+<br class="cb" />
+
+</div>
+<div class="fl right">
+<div class="text">
+
+<span>{Trans term = "price" default = "Գինը"} ($):</span>
+<span class="date">{Trans term = "year" default = "Տարեթիվը"}:</span>
+
+</div>
+
+<div class="form fl" style="margin-right:20px;">
+
+<div class="price">
+<input type="text" name="price[from]" class="inp rc6" value="{$this->query.price.from|default:0}" placeholder="0" id="amount2" />
+<span class="line fl"></span>
+<input type="text"  name="price[to]" class="inp rc6"  value="{$this->query.price.to|default:100000}" placeholder="100000"  id="amount3"/>
+<br class="cb"/>
+</div>
+<div class="sl">
+
+<div id="slider-range"></div>
+<div class="range_num" style="text-align:center">
+    <label for="amount" class="fl" >0</label>
+    <span type="text" id="amount"  ></span>
+    <label  class="fr">> 100 000</label>
+ </div>   
+</div>
+</div>
+<div class="form fl" style="margin-right:23px;">
+    <div class="year">
+    <input type="text" name="filed_release_date_year[from]" class="inp rc6" value="{if $this->query.filed_release_date_year|is_array}{$this->query.filed_release_date_year.from|default:1990}{else}{$this->query.filed_release_date_year|default:1990}{/if}" id="year1" />
+    <span class="line fl"></span>
+    {assign var="cyear" value=$smarty.now|date_format:'%Y'}
+    <input type="text" name="filed_release_date_year[to]" class="inp rc6" value="{if $this->query.filed_release_date_year|is_array}{$this->query.filed_release_date_year.to|default:$cyear}{else}{$this->query.filed_release_date_year|default:$cyear}{/if}" id="year2" />
+    <br class="cb"/>
+    </div>
+    <div class="search">
+    <button class="btn fl"><span class="fl"><img src="/css/images/loop.png" alt=""/></span>{Trans term = "search" default = "Որոնում"}</button>
+    
+    <br class="cb"/>
+    </div>
+    
+</div>
+
+<div class="form fl" style="width: 127px;margin-right:7px;">
+    <a href="{Link page='advancedsearch'}{if !empty($this->query)}?{BulidQuery query=$this->query unset='search'}{/if}" class="bodys adv"></a>
+    <a href="{Link page='advancedsearch'}{if !empty($this->query)}?{BulidQuery query=$this->query unset='search'}{/if}" class="adv" style="width: 108px;display: block;">{Trans term="adv_search_body" default="Որոնում ըստ թափքի տեսակի"}</a>
+</div>
+<div class="form fl">
+    <a href="{Link page = 'calculators'}" class="calculator"></a>
+</div>
+
+
+
+ 
+
+</div>
+<input type="hidden" name="search" value="search"/>
+</form>
+</div>
+
+
+<!-- // top search end // -->
+
+
+<div class="urgentSaleBlock" style="margin-bottom: 5px;">
+<div class="urgentHead"> <span class="urgentTit">{Trans param='lastet_added' default="Վերջին ավելացվածներ"}</span> 
+  {*<a href="#" class="bluelink">{Trans param='some_degree'}</a> <a href="#" class="whitelink">{Trans param='For_News'}</a>*} 
+</div>
+	
+
+  <div id="jCarouselLiteDemoUrgent" class="cEnd">
+    <div class="carousel default"> <a class="sprites prev" href="#"></a>
+      <div class="jCarouselLite">
+        <ul>
+          {foreach from = $this->topOffers item = offer }
+          {assign var=_images value=$this->getOfferImages($offer.id)}
+          <li> {include file="default/rigth.atom.tpl.html" _offer=$offer images=$_images} </li>
+          {/foreach}
+        </ul>
+      </div>
+      <a class="sprites next" href="#"></a> </div>
+  </div>
+</div>
+{/if}
+
+

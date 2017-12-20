@@ -1,0 +1,15 @@
+{assign var=pool value=$this->getPool()}
+<h2>{$pool.title}</h2>
+<div class="pool_questions">
+{foreach from=$pool.questions item=question}
+<div class="pool-relult">
+{PoolReslult votes=$question.votes total=$pool.totalVotes assign=pr}
+{$question.title}
+<div  id="pool_question_{$pool.id}_{$question.id}"  class="result-row" >{$pr}%<span> / </span><span>{$question.votes}</span></div>
+<br class="cb"/>
+</div>
+
+{/foreach}
+</div>
+
+{*style="width:{$pr}%" *}

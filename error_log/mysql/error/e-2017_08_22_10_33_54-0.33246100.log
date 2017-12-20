@@ -1,0 +1,25 @@
+QUERY 
+ 		SELECT 	 
+							count(offers.id) as `qty`
+				                  
+				        FROM offers
+				                  inner JOIN brandmodel    as brand   ON          (`brand`.`id` = `offers`.`filed_car_brand` )
+				                  LEFT JOIN brandmodel    as model   ON          (`model`.`id` = `offers`.`filed_car_brand_model` )
+				        		  LEFT JOIN siteusers       ON          (`siteusers`.`id` = `offers`.`siteuser` )
+				                  LEFT JOIN siteusers_ml    ON          (`siteusers`.`id` = `siteusers_ml`.`id`  AND  `siteusers_ml`.`lng_id`=7)  
+				        		 
+		                   WHERE `service_price`  >=0 AND `service_price`  <=48662000 AND `filed_release_date_year` >='1990"'`--'  AND `filed_release_date_year` <='2017'  
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`--'  AND `filed_release_date_year` <='2017'' at line 10
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	390
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	181
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	337
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	44
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

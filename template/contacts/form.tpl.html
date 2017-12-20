@@ -1,0 +1,78 @@
+<script type="text/javascript" language="javascript" src="/scripts/jquery.validate.js" ></script>
+<script type="text/javascript" language="javascript" src="/scripts/registration.tpl.js" ></script>
+{*<div>
+  <div style="width:590px" id="signupFormLaoder"><img src="/images/ajax-loader.gif"/></div>
+</div>*}
+ <br class="cb" />
+<form id="contactsForm" name="contactsform" action="{$this->path}" method="post">
+<div class="errors" id="errors"></div>
+  <br class="cb" />
+  <br class="cb" />
+<table cellspacing='5'>
+<tr>
+	<td><label for="contacts_name" >{Trans param=name}</label></td>
+	<td style="height:35px;"><input type="text" name="contacts[name]" id="contacts_name" class="inp margL10"/></td>
+</tr>
+<tr>
+	<td><label for="contacts_mail">{Trans param=USER_EMAIL}</label></td>
+	<td style="height:35px;"><input type="text" name="contacts[mail]" id="contacts_mail" class="fl inp margL10"/></td>
+    <tr>
+	<td><label for="contacts_subject" >{Trans param=subject}</label></td>
+    <td style="height:35px;"><input type="text" name="contacts[subject]" id="contacts_subject" class="inp margL10"/></td>
+    </tr>
+    
+</tr>
+<tr>
+	<td><label for="contacts_message" >{Trans param=message}</label></td>
+	<td colspan="3"><textarea name="contacts[message]" id="contacts_message" class="txtarea margL10"></textarea></td>
+</tr>
+<tr>
+    <td></td>
+	<td>{assign var=ssName= value=""|@session_name}
+  {assign var=ssId= value=""|@session_id} <img  src="/kcaptcha/index.php" id="captImage" class="margL10 fl"/><input type="text" name="captcha" id="captcha"   class="margL10 code fl"  />
+   <input type="button" name="reload" value="reload" onclick="reloadCaptcha()" class="login-btn fl" /></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td></td>
+  <!--<td colspan="2" style="text-align: center;"><input type="text" name="captcha" id="captcha"   class="margL10 code fl"  />
+   <input type="button" name="reload" value="reload" onclick="reloadCaptcha()" class="login-btn fl" /></td>-->
+    
+</tr>
+</table>
+
+  
+  <br class="cb" />
+  <br class="cb" />
+  <div class="btnbord">
+        {*<div class="yelbtn1 fl"><input type="reset" name="reset"  value="{Trans param='user_reset'}" class="pointer" /></div>*}
+        <span class="yelbtn2 fl margR5"></span>
+    <div class="yelbtn1"><input type="submit" value="{Trans param='user_submit'}" class="pointer" /></div>
+    <span class="yelbtn2 fl"></span>
+
+  </div>
+</form>
+{literal}
+<script language="javascript" type="text/javascript" >
+
+var rules= {};
+rules["contacts[name]"]                   ={required:true};
+rules["contacts[mail]"]                   ={required:true,email:true};
+rules["contacts[subject]"]                ={required:true};
+rules["contacts[message]"]                ={required:true};
+rules["captcha"]                          ={required: true,remote: {'url':"{/literal}{$this->path}{literal}?action=ajax&method=checkCaptcha"}};
+messages={};
+
+
+messages["contacts[name]"]                   ="{/literal}{Trans param='err_name'}{literal}";
+messages["contacts[mail]"]                   ={required:"{/literal}{Trans param='err_email'}{literal}",email:"{/literal}{Trans param='err_email_exists'}{literal}"};
+messages["contacts[subject]"]                ="{/literal}{Trans param='err_subject'}{literal}";
+messages["contacts[message]"]                ="{/literal}<br/>&nbsp;&nbsp;&nbsp;&nbsp;{Trans param='err_message'}{literal}";
+messages["captcha"]                          ="{/literal}{Trans param='err_captcha'}{literal}";
+$(document).ready(function() {	
+   try{
+   $("#contactsForm").validate({rules:rules,messages:messages});
+   }catch(e){alert(e.message)}
+   });
+</script>
+{/literal}

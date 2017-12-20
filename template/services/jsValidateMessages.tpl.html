@@ -1,0 +1,13 @@
+{strip}
+var _messages={ldelim} 
+"company[title]":{ldelim}required:"{Trans param='req_company_title'}"{rdelim},
+"company[addres]":{ldelim}required:"{Trans param='req_company_adress'}"{rdelim},
+"company[email]":{ldelim}required:"{Trans param='req_company_email'}",
+                         email:"{Trans term = 'valid_company_email'}"{rdelim},
+
+"company[phone]":{ldelim}
+													  required:"{Trans param='req_company_phone'}",
+ 													  digits: "{Trans param='dig_company_phone'}",
+													  {rdelim},
+{rdelim}                                                      
+{/strip}

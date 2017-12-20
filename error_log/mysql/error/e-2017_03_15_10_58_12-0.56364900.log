@@ -1,0 +1,15 @@
+QUERY 
+menu
+===========================
+
+ERROR NO 	000001
+ERROR MESSAGE / OR DURATION  
+menu not exist
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	334
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	238
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	133
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	94
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	15
+File => /home/transinf/public_html/index.php	 LINE 	10

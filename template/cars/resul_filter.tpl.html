@@ -1,0 +1,253 @@
+{literal}
+<script type="text/javascript">
+    $(document).ready(function()
+{
+    console.log($('span.show_all').length);
+    $('span.show_all').click(function()
+    {
+        $('li.show_all').slideDown(1000).show();
+        $('span.show_all').hide();
+        
+    })
+    
+})
+</script>
+{/literal}
+<div class="fl" style="background: url(/css/pdd_style/left_text_bg.png) repeat; width:208px">
+<br class="cb"/>
+<ul class="UlNoStyle"  style="width:175px; margin: 0 auto; ">
+
+
+{if ! empty($this->filters.filed_release_date_year)}
+  <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0"> 
+  {Trans term = 'offer_year'}:
+    <ul id="cm{$obj->key}" >
+     
+      <li >  
+          
+           {assign var = count value = $this->filters.filed_release_date_year|@count}
+           {foreach from=$this->filters.filed_release_date_year key=year item=qty name=year}
+           
+           {if $smarty.foreach.year.iteration == 7}
+          <span class="show_all">{Trans term = 'show_all'}</span>
+            </li>
+            <li style="display: none;" class="show_all">
+            
+            
+          {/if}
+          
+           
+           
+          <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_release_date_year' replaceWith=$year}" class="search-filter" >{$year}</a>({$qty})
+          <br class="cb"/>
+          
+          
+          {/foreach}
+          
+      </li>
+      
+      
+      
+    </ul>
+    <br class="cb"/>
+    </li>
+{/if}
+
+
+{if ! empty($this->filters.filed_price)}  	
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0"> {Trans term = 'offer_price'}:
+    <ul id="cm_filed_price" >
+     
+      <li >  
+      {foreach from=$this->filters.filed_price key=price item=qty}
+	  {if $qty > 0}
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='price' replaceWith=$price}" class="search-filter">{$price} </a>({$qty})
+      <br class="cb"/>
+	  {/if}
+      {/foreach}
+	 </li>
+      
+      
+      
+    </ul>
+   
+    <br class="cb"/>
+    </li>
+{/if}     
+{if ! empty($this->filters.filed_customs)}  
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0">  {Trans term = 'offer_custom'}:
+    <ul id="cm{$obj->key}" >
+     
+          <li >  
+{foreach from=$this->filters.filed_customs item=qty  key=customs}
+
+		{if $qty > 0}
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_customs' replaceWith=$customs}" class="search-filter">{$qty.name} </a>({$qty.qty})
+      <br class="cb"/>
+	  {/if}
+{/foreach}
+	 </li>
+      
+      
+      
+    </ul>
+
+    <br class="cb"/>
+    </li>
+{/if}    
+{if ! empty($this->filters.filed_milage)} 
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0">  {Trans term = 'offer_milage'}:
+    <ul id="cm_filed_milage" >
+     
+      <li >  
+{foreach from=$this->filters.filed_milage item=qty  key=milage}
+		{if $qty > 0}
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_milage' replaceWith=$milage}" class="search-filter">{$milage} </a>({$qty})
+      <br class="cb"/>
+	  {/if}
+{/foreach}
+	 </li>
+      
+      
+      
+    </ul>
+
+    <br class="cb"/>
+    </li>
+{/if} 
+
+{if ! empty($this->filters.filed_credit)} 
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0">  {Trans term = 'offer_credit'}:
+    <ul id="cm_filed_credit" >
+     
+      <li >  
+{foreach from=$this->filters.filed_credit item=qty  key=credit}
+		{if $qty > 0}
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_credit' replaceWith=$credit}" class="search-filter">{$qty.name} </a>({$qty.qty})
+      <br class="cb"/>
+	  {/if}
+{/foreach}
+	 </li>
+      
+      
+      
+    </ul>
+
+    <br class="cb"/>
+    </li>
+{/if} 
+
+{if ! empty($this->filters.filed_interchange)} 
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0">  {Trans term = 'offer_interchange'}:
+    <ul id="cm_filed_credit" >
+     
+      <li >  
+{foreach from=$this->filters.filed_interchange item=qty  key=interchange}
+		{if $qty > 0}
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_interchange' replaceWith=$interchange}" class="search-filter">{$qty.name} </a>({$qty.qty})
+      <br class="cb"/>
+	  {/if}
+{/foreach}
+	 </li>
+      
+      
+      
+    </ul>
+
+    <br class="cb"/>
+    </li>
+{/if} 
+
+
+{if ! empty($this->filters.filed_gearbox)}    
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0">  {Trans term = 'offer_gearbox'}:
+    <ul id="cm_filed_gearbox" >
+     
+      <li > 
+      {foreach from=$this->filters.filed_gearbox item=gearbox key=gearboxId} 
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_gearbox' replaceWith=$gearboxId}" class="search-filter">{$gearbox.name} </a>({$gearbox.qty})
+       <br class="cb"/>
+      {/foreach}
+	 </li>
+      
+      
+      
+    </ul>
+
+    <br class="cb"/>
+    </li>
+{/if}   
+{if ! empty($this->filters.filed_engine)}    
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0">  Engine volume:
+    <ul id="cm{$obj->key}" >
+     
+      <li >  
+      <a href="{$this->path}?{$sObj->url}" class="search-filter">3-3.9 </a>(5)
+	 </li>
+      
+      
+      
+    </ul>
+
+    <br class="cb"/>
+    </li>
+{/if}
+
+{if ! empty($this->filters.filed_rudder)}    
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0">  {Trans term = 'offer_rudders'}:
+    <ul id="cm_filed_rudder" >
+     
+      <li > 
+      {foreach from=$this->filters.filed_rudder item=rudder key=rudderId} 
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_rudder' replaceWith=$rudderId}" class="search-filter">{$rudder.name} </a>({$rudder.qty})
+       <br class="cb"/>
+      {/foreach}
+	 </li>
+      
+      
+      
+    </ul>
+
+    <br class="cb"/>
+    </li>
+{/if}
+
+{if ! empty($this->filters.filed_body)}    
+    <li id="{$obj->key}" class="" style=" border-bottom:1px solid #395f6f; margin:5px 0">  {Trans term = 'offer_body'}:
+    <ul id="cm_filed_body" >
+     
+      <li > 
+      {foreach from=$this->filters.filed_body item=body key=bodyId} 
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_body' replaceWith=$bodyId}" class="search-filter">{$body.name} </a>({$body.qty})
+       <br class="cb"/>
+      {/foreach}
+	 </li>
+      
+      
+      
+    </ul>
+
+    <br class="cb"/>
+    </li>
+{/if}    
+
+
+{*   
+{if ! empty($this->filters.filed_fuel)}  
+<li id="{$obj->key}" class="" style="margin:5px 0">  {Trans term="Fuel"}:
+<ul id="cm_filed_fuel" >
+     
+      <li >  
+      {foreach from=$this->filters.filed_fuel item=fuel key=fuelId}
+      <a href="{Link page = 'cars'}?{BulidQuery query=$this->query unset='action' replace='filed_fuel' replaceWith=$fuelId}" class="search-filter">{$fuel.name} </a>({$fuel.qty})
+      <br class="cb"/>
+      {/foreach}
+	 </li>
+</ul>
+
+    <br class="cb"/>
+    </li>
+{/if}    
+ *}
+</ul>
+</div>

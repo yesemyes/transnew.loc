@@ -1,0 +1,49 @@
+<div class="fl">
+
+<span class="formtit w100 textR fl">
+<label for="filed_color">{Trans param='filed_color'}</label>
+</span> {assign var=clors value=$db->getOptions('color','id','value',$this->defLng.id,'active') }
+
+<select name="main[filed_color]" id="filed_color" class="sel  fl" style="width:100px" >
+  <option value="">{Trans param='select_color'}</option>
+                {html_options options = $clors selected=$offer.filed_color}
+</select>&nbsp;
+<label for="filed_metalic">
+<input type="checkbox" name="main[filed_metalic]"  {if $offer.filed_metalic} checked="checked"{/if}id="filed_metalic" value="1"/>
+{Trans param='color_metalic'}
+</label>
+
+<br class="cb" />
+<span class="formtit w100 textR fl">
+<label for="filed_warranty">{Trans param='filed_warranty'}</label>
+</span> {assign var=_warrantyoptions value=$db->getOptions('warranty','id','value',$this->defLng.id,'active') }
+<select name="main[filed_warranty]" id="filed_warranty" class="sel margL10 w170 fl" >
+  <option value="">{Trans param='select_warranty'}</option>
+        {html_options options=$_warrantyoptions selected=$offer.filed_warranty}
+</select>
+<br class="cb" />
+
+
+<span class="formtit w100 textR fl"  >
+<label for="filed_price">{Trans param='filed_price'}</label>
+</span>
+<input type="text" name="main[filed_price]" style="width:80px" id="filed_price" class="inp margL10 fl"   value="{$offer.filed_price}" {if $offer.contract} disabled="disabled"{/if} />
+
+
+{assign var=currnecys value=$db->getOptions('currency','id','value',$this->defLng.id,'active')}
+<select name="main[filed_currency]" id="filed_currency" style="width:80px" class="sel margL10 fl"  {if $offer.contract} disabled="disabled"{/if} >
+  
+        {html_options options = $currnecys selected=$offer.filed_currency}
+</select>
+
+<br class="cb" />
+<div style="float:right; width:245px">
+<label for="filed_contract">
+<input type="checkbox" name="main[filed_contract]" id="filed_contract" {if $offer.filed_contract} checked="checked"{/if} value="1" onclick="changeProceStatus(this)" class="chkMarg2 fl" />
+{Trans param='filed_contract'}</label>
+</div>
+
+
+
+</div>
+

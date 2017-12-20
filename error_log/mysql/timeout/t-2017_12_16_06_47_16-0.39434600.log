@@ -1,0 +1,16 @@
+QUERY 
+SELECT `color`.`id`,`color`.`active`,`color`.`position`,`color`.`hexcode`,`color_ml`.`lng_id`,`color_ml`.`value` FROM   `color` LEFT JOIN color_ml USING (`id`)  
+ WHERE `lng_id`='7' 
+ ORDER BY  position 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.57546687126
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	748
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

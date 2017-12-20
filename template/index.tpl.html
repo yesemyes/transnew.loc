@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{strip}
+{include file=default/head.tpl.html}
+<body>
+
+{literal}<script>var currLang = "{/literal}{$this->path_params.0}{literal}"</script>{/literal}
+<div id="fb-root"></div>
+
+{literal}
+<div id="fb-root"></div>
+
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+if(currLang == 'am'){
+    js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=247281212096148";
+  }
+  else if(currLang == 'ru'){
+    js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=247281212096148";
+  }
+
+
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    
+<script>
+!function (d, id, did, st, title, description, image) {
+  var js = d.createElement("script");
+  js.src = "https://connect.ok.ru/connect.js";
+  js.onload = js.onreadystatechange = function () {
+  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+    if (!this.executed) {
+      this.executed = true;
+      setTimeout(function () {
+        OK.CONNECT.insertShareWidget(id,did,st, title, description, image);
+      }, 0);
+    }
+  }};
+  d.documentElement.appendChild(js);
+}(document,"ok_shareWidget",document.URL,'{"sz":20,"st":"rounded","ck":3}',"","","");
+</script>
+
+<script type='text/javascript'>
+jQuery(document).ready(function(){
+
+	function makingdifferent_ppopup()  {
+		var sec = 300
+
+		var timer = setInterval(function() {
+			$("#mdfooter span").text(sec--);
+			if (sec == 0) {
+				$("#makingdifferentpopup").fadeOut("slow");
+				clearInterval(timer);
+			}
+		}, 1000);
+
+	var mdwh = jQuery(window).height();
+	var mdpph = jQuery("#makingdifferentpopup").height();
+	var mdfromTop = jQuery(window).scrollTop()+30;
+	jQuery("#makingdifferentpopup").css({"top":mdfromTop});}
+	jQuery(window).fadeIn(makingdifferent_ppopup)
+	.resize(makingdifferent_ppopup)
+
+	var mdleftm = 0;
+	
+	jQuery("#mdclose").click(function() {
+		jQuery("#fbsocial").animate({opacity: "0", left: "-5000000"}, 1000).show();
+	});
+	
+	//-------------------------
+	
+	if( getCookie("visit")=="" ){
+		setCookie("visit", true, 4)
+		jQuery("#makingdifferentpopup").animate({opacity: "1", left: "0" , left:  mdleftm}, 0).show();	
+	};
+	
+});
+
+	function setCookie(cname, cvalue, exdays){
+		var d = new Date();
+		d.setTime(d.getTime()+(exdays*24*60*60*1000));
+		var expires = "expires="+d.toGMTString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;
+	}
+
+	function getCookie(cname){
+	var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++){
+		  var c = ca[i].trim();
+		  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+		}
+		return "";
+	}
+	
+</script>
+<div id="fbsocial" style="display: block;">
+    <div id="makingdifferentpopup">
+        <div class="social-bl-top"><img width="104" height="28" src="/css/images/fb-dialog.png" alt="facebook"></div>
+                <div class="htmlarea">
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fwww.butik.am&tabs&width=398&height=154&small_header=false&adapt_container_width=true&hide_cover=true&show_facepile=false&appId" width="398" height="154" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+            <div class="grabthis"></div>
+        </div>
+        <h1>Հավանենք էջը և աջակցենք նախագծին</h1>
+        <div id="mdfooter"><!--Խնդրում ենք սպասել <span>10</span> վարկյան--><a href="#" id="mdclose" onclick="return false;">Փակել</a></div>
+    </div>
+</div>
+<script src="//ulogin.ru/js/ulogin.js"></script>
+{/literal}
+
+<div style="position: relative;min-height: 100%;">
+<div id="headCont">
+		{include file=default/top.tpl.html}
+</div>
+	<div id="mainCont">
+		
+		<div   style="display:block; width:1003px; margin:0 auto;height: 100%;" class="blubg" id="blubgCarMainTbl">
+		
+        		{if $this->currentPage.alias=='home'}
+			{include file="home/urgent.tpl.html"} 
+		{/if} 
+        {include file=default/ads.tpl.html _place='under_urgent' assign=under_urgent_ads}
+  {if !empty($under_urgent_ads)}
+  <div class="inner">
+    <div style="padding:2px 0px 2px 0px">
+      <center>
+        {$under_urgent_ads}
+      </center>
+    </div>
+</div>  
+  {/if}
+        
+        
+		{BuildeNavigation currentPage=$this->currentPage.id  path=$this->path_params assign=return}
+	   {if $return}
+	   <br class="cb" />
+	   <div class="inner " >
+       <div style="width: 772px;">
+		   <div class="navi-holder fl">
+           
+		   {$return} {if $this->new_navig.label!=''}
+		   / {$this->new_navig.label}
+		   {/if}
+		   </div>
+           {if $this->currentPage.alias == 'cars' && !$this->get && !$this->path_params.2}
+            <a href="{Link page = 'users' curr = 'addoffer'}" class="add_car_btn fr">
+                {Trans term = 'add_car'}
+            </a>
+           {/if}
+           <br class="cb"/>
+		              </div>
+	   </div>
+	   
+	   <br class="cb" />
+	   
+	   
+	   {/if}
+   
+
+			{include file=$this->mainTpl}
+			<br class="cb" /> 
+	    </div>
+        
+	</div>
+</div>
+{include file=default/footer.tpl.html} 
+
+{include file=default/ads.tpl.html _place="ads_right_ear"  assign=ads_right_ear}	
+
+{include file=default/ads.tpl.html _place="ads_left_ear" assign=ads_left_ear}
+	
+	{if $ads_left_ear}
+		<div id="left-ear1">
+		{$ads_left_ear}
+		</div>
+	{/if}
+	
+	{if $ads_right_ear}
+		<div id="right-ear1">
+		{$ads_right_ear}
+		</div>
+	{/if}
+    
+    {literal}
+    <script>
+    
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41130371-1', 'transinfo.am');
+  ga('send', 'pageview');
+    </script>
+    
+    {/literal}
+    
+</body>
+</html>
+{/strip}

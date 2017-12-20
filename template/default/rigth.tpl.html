@@ -1,0 +1,30 @@
+<script src="/scripts/jcarousellite_1.0.1c4.js" type="text/javascript"></script>
+
+{strip}
+<div class="contentRight">
+  <div class="sideDiv">{$this->trans('Urgent_Sale')} </div>
+  <div style="background:#fff; width:174px; padding:10px 2px 10px 0;">
+    <center>
+    {include file=default/ads.tpl.html _place='ads_right'}
+    </center>
+    <br />
+    <div style="padding:10px;" id="newsticker-demo">
+    
+    
+    {assign var=inRigth value=$this->getRigthOffers()}
+    <div class="newsticker-jcarousellite">
+		<ul class="UlNoStyle">{foreach from = $inRigth item = offer }
+            {assign var=_images value=$this->getOfferImages($offer.id)}
+           <li>{include file=default/rigth.atom.tpl.html _offer=$offer images=$_images}
+           <div class="cb"></div>
+           </li>
+    {/foreach}
+    </ul></div>
+    </div>
+    <br />
+     <center>
+    {include file=default/ads.tpl.html _place='ads_right_bot'}
+    </center>
+  </div>
+</div>
+{/strip}

@@ -1,0 +1,15 @@
+<div style="width:300px">
+<label for="filed_options">{Trans param='filed_main_photos'}</label>
+ 
+<div class="margL10 fl" >{include file=users/offer_main_photo.tpl.html offer=$offer}</div>
+<br class="cb" />
+<div class="formtit w100 textR fl">
+  <label for="filed_options">{Trans param='filed_photos'}</label>
+</div>
+<div class="margL10 fl" >{include file=users/offer_photos.tpl.html}</div>
+<br class="cb" />
+
+</div>
+{if $offer.id}
+<input type="hidden" value="{$offer.id}" name="offer_id" />
+{/if}

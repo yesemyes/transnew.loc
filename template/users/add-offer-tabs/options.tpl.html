@@ -1,0 +1,9 @@
+{*<div class="wleft w100 textR fl">
+
+     {Trans param='filed_options'} 
+</div>
+<br class="cb" />*}
+{assign var=_options value=$db->getTree('options','*',"active AND lng_id=`$this->defLng.id`",'',"position") }
+    <div class="fl margL10" style="margin-bottom:8px;">
+    {include file="default/options_tree.tpl.html" _options=$_options values=$offer_options _pid=0 _level=0 _name="rel[filed_options][]"}</div>
+<br class="cb" />

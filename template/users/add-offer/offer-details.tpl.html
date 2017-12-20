@@ -1,0 +1,17 @@
+<div class="btnbord cb"></div>
+<span class="formtit w100 textR fl"> 
+<label for="filed_duration" class="req_field">{Trans param='filed_duration'}</label>
+</span> 
+{assign var=_durationoptions value=$db->getOptions('duration','id','label',$this->defLng.id,'active','','position')}
+<select name="main[filed_duration]" id="filed_duration" class="sel margL10 w170 fl" >
+  <option value="">{Trans param='select_duration'}</option>
+        {html_options options=$_durationoptions  selected=$offer.filed_duration}
+</select>
+
+<br class="cb" />
+
+
+
+
+<br class="cb" />
+<div class="btnbord cb"></div>

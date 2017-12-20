@@ -1,0 +1,25 @@
+{strip}
+{if isset($this->get.imagepath)}
+   {assign var=imagePath value=$this->get.imagepath}
+{else}
+{assign var=imagePath value='img/services/thumb/`$imagePath`}
+{/if}
+{assign var=imagePathExist value=$imagePath|@file_exists}
+
+{if $imagePathExist }
+ 
+<div style="float:left; width:160px; height:160px;" class="uupladeimage">
+  <div style="margin:2px; padding:2px; border:solid 1px #28333e; width:120px; height:120px;">
+    <div style="text-align:right; color:#ffee00; cursor:pointer;" onclick="removeMe(this)"><strong>x</strong></div>
+    
+    <center>
+      <img src="/{$imagePath}" style="max-height:110px; max-width:80px;" alt="" title="" />
+    <br class="cb"/>
+    <input type="hidden" name="main[logo]" value="{$imagePath|replace:'small-':''}"/>
+    </center>
+    
+  </div>
+</div>
+
+{/if}
+{/strip}

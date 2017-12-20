@@ -1,0 +1,41 @@
+<div id="footer">
+    <div class="fotter_top">
+        <div class="fotter_top_center_main">
+            <div class="fotter_top_left">
+                <p class="fott_phone">+374 (77) 44-06-44</p>
+                <p class="fott_mail"><a href="mailto:info@transinfo.am" style="color: #5ac6f1;" class="fottmail">info@transinfo.am</a></p>
+            </div>
+            <div class="inity"></div>
+            <div class="fotter_top_center"> 
+               <p class="author" style="font-size: 19px;">{Trans param='author'}:<a href="https://www.facebook.com/ruben.ordanyan" title="Ruben Ordanyan" target="_blank" class="author_main" style="font-size: 19px;"> Ruben Ordanyan</a></div>
+            <div class="inity"></div>
+    
+            <div class="fotter_top_right">
+                <p class="dev_by">{Trans param='developed'}:<a href="http://www.studio-one.am" target="_blank" class="studio"> Studio-One</a></p>
+                <p class="supp_by" style="margin-left: -12px;">{Trans param='support'}:<a href="http://masterweb.am" target="_blank" class="master"> Master Web</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="fotter_bottom">
+        <div class="fotter_bottom_center">
+             <div class="coltwo_bottom">
+                <div style="float:left; margin-left: 15px;">
+                    <a href="{#}">
+                    <span class="fl" style="margin-top: 3px;">
+                    <img src="/images/copy1.png" title="" alt=""/>
+                    </span>
+                    <div class="fl" style="margin-left: 5px; margin-top: 3px;">
+                    <span  style="color: #00a7e3;">&copy; {$smarty.now|date_format:"%Y"} BigTechLine</span>
+                    <br class="cb"/>
+                    <span style="color: #fff;">All rights reserved</span>
+                    </div></a>
+                </div>
+              </div>
+            <div class="colone">
+                <ul class="colone_menu">
+                    <li class="colone_menu_1">{foreach from=$this->menu.bottom.0 item=item key = key name=RigthTopMenu}<a href="{Link page=$item.alias}" class="hov botmenu {if $this->currentPage.alias==$item.alias }under{/if}">{$item.label}</a>{/foreach}</li>
+                </ul>
+            </div>	 
+	   </div>
+    </div>
+  </div>

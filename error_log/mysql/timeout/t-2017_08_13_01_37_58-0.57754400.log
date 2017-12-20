@@ -1,0 +1,16 @@
+QUERY 
+ SELECT `adsgroup`.* 
+		           FROM adsgroup 
+		           WHERE `adsgroup`.active = 1
+		         
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.06097602844
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	217
+File => /home/transinf/public_html/index.php	 LINE 	17

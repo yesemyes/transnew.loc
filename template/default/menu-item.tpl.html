@@ -1,0 +1,5 @@
+<div class="menuTab{if $this->currentPage.alias==$_item.alias} active{/if}">
+  <div class="leftCorner{if $_first}-f{/if}{if $this->currentPage.alias==$_item.alias}-active{/if}"></div>
+  <div class="middleCorner{if $this->currentPage.alias==$_item.alias }-active{/if}" ><a class="menu-item" rel="{$_item.id}" href="{$this->_mklink($_item.alias)}">{$_item.label}</a></div>
+  <div class="rigthCorner{if $this->currentPage.alias==$_item.alias }-active{/if}"></div>
+</div>

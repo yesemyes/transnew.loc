@@ -1,0 +1,64 @@
+{strip}
+<!--START FIRST CATEGORY LAST BLOCK-->
+{assign var=TCID value=$item.id|@IdMaker}
+{assign var=imgAltTitle  value="`$this->dictonary.brandmodel[$item.filed_car_brand]` `$this->dictonary.brandmodel[$item.filed_car_brand_model]` `$item.filed_release_date_year` "}
+<div class="cb titblock h100 w325 textL {if $_last}botBord{/if}" title="{$fitem.filed_srtat_date}">
+<div class="fl" style="width:85px; margin-right:5px;">
+
+{assign var=images value=$this->getOfferImages($item.id)}
+
+{if $item.filed_main_image}
+	{assign var=ImagePath value="img/offers/thumb/`$item.filed_main_image`"}
+{elseif is_array($images) && !empty($images)}
+	{assign var=ImagePath value="img/offers/thumb/`$images.0.image`"}
+{else}
+	{assign var=ImagePath  value="img/brandmodel/image/"|cat:$images}
+{/if}
+{assign var=_exist value=$ImagePath|@file_exists}
+{if $_exist}
+<a href="{Link page='cars' action='user' login=$item.login  brandalias=$item.brandalias modelalias=$item.modelalias tcid=$TCID}">
+<img align="left" src="/{$ImagePath}"   alt="{$imgAltTitle}" title="{$imgAltTitle}"  class="margLR5" width="75"/>
+</a>
+{else}
+<a href="{Link page='cars' action='user' login=$item.login  brandalias=$item.brandalias modelalias=$item.modelalias tcid=$TCID}" class="npf">
+{Trans param='no_photo_found'}
+</a>
+
+{/if}
+</div>
+<div class="fl" style="width:230px;">
+<span class="bold black">
+<a href="{Link page='cars' action='user' login=$item.login  brandalias=$item.brandalias modelalias=$item.modelalias tcid=$TCID}" class="inv">
+{$this->dictonary.brandmodel[$item.filed_car_brand]}&nbsp;{$this->dictonary.brandmodel[$item.filed_car_brand_model]}&nbsp;{$item.filed_modification}</a></span><br />
+{$this->dictonary.body[$item.filed_body]}&nbsp;{$this->dictonary.color[$item.filed_color]}{if $item.filed_metalic}&nbsp;{Trans param='filed_metalic'}{/if}<br />	
+{$item.filed_engine|@round:2}&nbsp;{Trans param='mensuration_of_volume'}
+{if $item.filed_engine_power > 0},
+ {$item.filed_engine_power} {Trans param='mensuration_of_power'} ({math equation="ceil(x*0.735)" x=$item.filed_engine_power} {Trans param='ad_mensuration_of_power'} )
+{/if}	<br />
+{$item.drive}
+{$this->dictonary.drive[$item.filed_drive]}
+ <br />
+{$this->dictonary.gearbox[$item.filed_gearbox]}</div>
+</div>
+<div class="titblock h50 padT50 w48 {if $_last}botBord{/if}">{if $item.filed_release_date_month} {$item.filed_release_date_month}/{/if}{$item.filed_release_date_year}</div>
+<div class="titblock h50 padT50 w90 {if $_last}botBord{/if}">{$item.filed_milage|@number_format:0:'':','}  &nbsp; 
+{$this->dictonary.milage_kayficent[$item.filed_milage_kayficent]}{*$this->dictonary.milage_kayficent-$item.filed_milage_kayficent*}</div>
+<div class="titblockLast h50 padT50 w111 {if $_last}botBord{/if}" style="position:relative;">
+{if $item.filed_contract}
+      {Trans param='by_contract'}
+      {else}
+      
+      <span id="{$item.id}" class="cPriceBlockItem">{$item.filed_price|@number_format:0:'.':','}&nbsp;{ $this->dictonary.currency[$item.filed_currency]}<img src="/img/black_arr.gif" alt="" title="" hspace="5" />
+
+ <ul class="UlNoStyle cPriceBlock">
+ {assign var=allCurencys value=$this->getPrices($item.filed_price,$this->dictonary.currency[$item.filed_currency],$item.service_price)}
+         {foreach from=$allCurencys item=pr key=crrency name=pp}
+       {if !$smarty.foreach.pp.first}
+      <li>  {$pr|@number_format:0:'.':','}&nbsp;{$crrency}&nbsp;</li>
+      {/if}
+      {/foreach}
+ </ul></span>
+	 {/if}
+ </div>
+<!--END FIRST CATEGORY LAST BLOCK-->
+{/strip}

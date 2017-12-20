@@ -1,0 +1,16 @@
+QUERY 
+Array
+===========================
+
+ERROR NO 	000001
+ERROR MESSAGE / OR DURATION  
+Array not exist
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	334
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	220
+File => /home/transinf/public_html/cls/Admin/form.class.php	 LINE 	993
+File => /home/transinf/public_html/cls/Admin/form.class.php	 LINE 	982
+File => /home/transinf/public_html/cls/Admin/form.class.php	 LINE 	90
+File => /home/transinf/public_html/cls/Admin/admin.class.php	 LINE 	58
+File => /home/transinf/public_html/admin/index2.php	 LINE 	10

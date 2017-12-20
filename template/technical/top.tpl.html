@@ -1,0 +1,19 @@
+{strip}
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){ $('#hintShow').hover(function(){$('.hint').show()},function(){$('.hint').hide()})})
+   
+</script>
+{/literal}
+    <div style="padding: 0 13px; display: none;"> 
+        <span class="blue">{Trans term = 'technical_insp' default = 'Технический осмотр транспортных средств'}</span>
+        <div class="texDesc">
+        <div class="hint" style="display: none; height: 50px; width: 150px; background: red; position: absolute;"></div>
+        {StaticText alias = 'technical' lng_id = $this->defLng.id assign = 'technical' }
+        {$technical}
+        
+        </div>
+    </div>
+
+    <br class="cb"/>
+{/strip}

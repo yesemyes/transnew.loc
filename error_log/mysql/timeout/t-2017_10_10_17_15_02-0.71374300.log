@@ -1,0 +1,14 @@
+QUERY 
+SELECT `fuel`.`id` as `key`,`value` as `value` FROM  `fuel` INNER JOIN fuel_ml ON (`fuel`.`id` = `fuel_ml`.`id` AND `fuel_ml`.`lng_id`=5)  WHERE active  ORDER BY  position ;
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.27949380875
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	755
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

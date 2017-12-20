@@ -1,0 +1,85 @@
+<div style="width:770px;   padding:10px 0 10px 10px">
+{if $this->post.mode == 'exam'}
+    <div class="resul-header-wraper {*blubg*}">
+    <div class="resul-header "> 
+        
+        
+            <div class="exam-time fl">
+            <span class="exam_result_iconset icon_time"></span>
+            {Trans term="exam_duration" default="Время  прохождения экзамена: %s минут" min=$this->post.duration|seondsToTime}</div>
+           {if $this->count_values.wrong} <div class="exam-wrongs fl">
+            <span class="exam_result_iconset icon_wrong_qty"></span>
+            {Trans term="exam_error_qty" default="Кол-во ошибок: %s" wrong=$this->count_values.wrong}
+            </div>
+           {/if} 
+            <div class="exam-total fl">
+            {Trans term="exam_answers_qty" default="Вы ответили на %s вопроса" wrong=$this->count_values.wrong+$this->count_values.true}
+            </div>
+        <br class="cb"/>
+       
+        
+        
+            
+         
+     	</div>
+        
+
+<div class="ghhj">
+    <a class="pdd_btn_blue" href="{Link page="pdd" action="to-pass-the-exam"}?test={$this->post.testId}">
+    {Trans term="exam_retake" default="Пересдать экзамен"}</a>&nbsp;
+    <a class="pdd_btn_blue" href="{Link page="pdd" action="to-pass-the-exam"}">{Trans term="Buy_Tickets" default="Выбрать билет"}</a>&nbsp;
+    <a class="pdd_btn_blue" href="{Link page="pdd" action="tickets-on-the-topics"}">{Trans term="choose_a_theme" default="Выбрать тему"}</a>&nbsp;
+    <a class="pdd_btn_blue" href="{Link page="pdd" action="marathon"}">{Trans term="pdd_marathon" default="Учеба"}</a>&nbsp;
+    <br class="cb"/>
+</div>
+    {if $this->count_values.true < 9}
+        	<h2 style="color:red;text-align:left;margin-top: 20px;">
+            {Trans term="congratulations_you_pass_exam" default="Если бы вы реально сдавали экзамен по правилам дорожного движения в ГИБДД и в
+реальных условиях, вы бы его не сдали"}</h2>
+        {else}
+            <h2 style="color:#3ADF00; text-align:left; margin-top: 20px;">
+            {Trans term="you_dont_pass_exam" default="Если бы вы реально сдавали экзамен по правилам дорожного движения в ГИБДД и в
+реальных условиях, вы бы его сдали"}</h2>
+        {/if}
+{else}
+<div style="height:32px; float:right;">
+<button class="pdd_btn2t dl" onclick="saveResult()"><span class="save"></span>{Trans term="save_result" default="Сохранить результат"}</button>&nbsp;
+<button class="pdd_btn2t dl" onclick="continueExam()">{Trans term="continue_marathone" default="Продолжить обучения"}</button>&nbsp;
+</div>
+
+{/if}
+
+<br class="cb"/>
+
+
+ 
+<br class="cb"/>
+{foreach from=$this->questions item=question name=results_iterator}
+
+<div class="q-wiew">
+<div class="q-wiew-thumb">
+<a title="{Trans term="question_number" default="Вопрос № %s" question_number=$smarty.foreach.results_iterator.iteration}" href="{Link page='pdd' action='view-notice'}?id={$question.id}&status={$question.status}&client_answer={$question.client_answer}&imageType={$this->imageType}&mode={$this->post.mode}&testId={$this->post.testId}" class='fancy-hint'>
+{include file="pdd/showResultThumb.tpl.html" width=133 height=104 image_original=$question.image_original image_default=$question.image imageType=$this->imageType}
+</a>
+</div>
+
+
+<div class="q-view-thumb {$question.status}">
+<img src="/images/{$question.status}-dot.png" width="10" height="10" alt=""/>
+{Trans term="question_number" default="Вопрос № %s" question_number=$smarty.foreach.results_iterator.iteration}</div>
+</div>
+
+{/foreach}
+<br class="cb"/><br class="cb"/>
+
+<div class="fb-comments" data-colorscheme="dark" data-href="http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}" data-width="765" data-num-posts="10"></div>
+<br class="cb"/>
+<br class="cb"/>
+
+</div>
+<br class="cb"/>
+
+
+
+</div>
+<br class="cb"/>

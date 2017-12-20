@@ -1,0 +1,98 @@
+<div class="fl pop_up rc5">
+  
+  <div class="fl blok">
+   <span class="fl">Состояние авто:</span>
+   <form>
+    <div id="radio">
+        <input type="radio" id="radio2" name="radio" checked="checked" /><label for="radio2" class="l_round"/>Новый</label>
+        <input type="radio" id="radio3" name="radio" /><label for="radio3" class="r_round">С пробегом</label>
+    </div>
+</form>
+
+   
+  
+  </div>
+   <div class="fl blok">
+   <div id="tabs">
+   <span class="fl sub">Марка:</span>
+    <ul >
+        <li><a href="#tabs-1">Логотипами</a></li>
+        <li><a href="#tabs-2">Списком</a></li>
+        <li><a href="#tabs-3">В алфавитном порядке</a></li>
+    </ul>
+    <div id="tabs-1">
+    <p>{foreach from=$this->dictonary.brand_icons item=brand}
+     <span class="fl icon_blok">
+     <a href="#" class="icon rc5"><center><img src="/img/brandmodel/small/{$brand.image}"   style="max-height:22px; max-width:22px;" alt="{$brand.label}"/></center></a>
+     </span>
+    {/foreach}</p>
+    </div>
+    <div id="tabs-2">
+        <p>
+        <div class="brand-bntset">
+        {foreach from=$this->dictonary.brand_icons item=brand}
+        <label for="brand-{$brand.id}">{$brand.label}</label>
+        <input type="checkbox" name="filed_car_brand[]" value="{$brand.id}"/>
+        {/foreach}
+        </div>
+        </p>
+    </div>
+    <div id="tabs-3">
+        <p>
+        <div>
+        {foreach from=$this->dictonary.brand_icons item=brand}
+        <label for="brand-{$brand.id}">{$brand.label}</label>
+        <input type="checkbox" name="filed_car_brand[]" value="{$brand.id}"/>
+        <br class="cb">
+        {/foreach}
+        </div>
+        </p>
+    
+    </div>
+</div>
+   </div>
+   <div class="fl blok">
+    <span class="fl sub">Тип кузова:</span>
+    <br class="cb"/><br/>
+    {foreach from=$this->dictonary.body_all item=body}
+        <span class="fl icon_car">
+          <a href="#" class="fl cartype rc5">
+          <center>
+          <img src="css2/images/car_type1.jpg" alt=""/>
+          </center></a>
+          <br class="cb"/>
+          <span class="type">{$body.value}</span>
+        </span>
+    {/foreach}
+    
+    
+    
+  
+   </div>
+   <div class="fl blok">
+   <span class="fl sub">Цена($):</span><span class="fl sub2">Год выпуска:</span>
+   <br class="cb"/>
+   <input type="text" class="inp rc6" value="20 000" onblur="if ('' == this.value) this.value = this.defaultValue;" onfocus="if (this.defaultValue == this.value) this.value='';" id="amount2"/>
+   <span class="line fl"></span>
+<input type="text" class="inp rc6"  value="75 000" onblur="if ('' == this.value) this.value = this.defaultValue;" onfocus="if (this.defaultValue == this.value) this.value='';" id="amount3"/>
+<span class="year">
+	<input type="text" class="inp rc6" value="2000" onblur="if ('' == this.value) this.value = this.defaultValue;" onfocus="if (this.defaultValue == this.value) this.value='';"/>
+<span class="line fl"></span>
+<input type="text" class="inp rc6" value="2010" onblur="if ('' == this.value) this.value = this.defaultValue;" onfocus="if (this.defaultValue == this.value) this.value='';"/>
+</span>
+<div class="sl fl">
+  <div id="slider-range"></div>
+  <div class="range_num">
+      <label for="amount" >0</label>
+      <input type="text" id="amount"  />
+      <label >> 100 000</label>
+   </div>   
+</div>
+</div>
+
+
+<div class="fr button_blok">
+<button class="fl btn"><span class="fl"><img src="css2/images/loop.png" alt=""/></span>Найти</button>
+<a class="fl clear" href="#">Очистить</a>
+</div>
+</div>

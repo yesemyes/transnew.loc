@@ -1,0 +1,10 @@
+<div class="AddcontentMiddle">
+
+      {if !$this->contentTpl}
+      		{$this->currentPage.content}
+            {$this->path_params|@print_r}
+      {else}
+     
+      		{include file=$this->contentTpl}
+      {/if}
+</div>

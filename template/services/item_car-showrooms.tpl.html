@@ -1,0 +1,109 @@
+{literal}
+
+<script>
+latitude={/literal}{$this->catalog.latitude}{literal}
+longitude={/literal}{$this->catalog.longitude}{literal}
+</script>
+{/literal}
+
+<div  id="content" class="advanced_c2" style="background: url(/css/bggg.png) repeat;">
+    <div class="comp"><span style="padding-top: 9px; padding-left: 20px; display: block; font-size: 14px;">{Trans term = 'aboutcomp' default = 'О компании'}</span></div>
+  <table cellpadding="0" cellspacing="4" width="762" align="center" style="margin:0 auto; ">
+    <tr>
+      <td width="331" valign="top">
+      <div class="specialProjectTit" style="font-weight: normal;">{$this->catalog.title}</div>
+      <table cellpadding="10" cellspacing="0" width="100%" class="transBg" style="min-height:0">
+      
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_address" default="Адрес:"}</td>
+            <td  style="color:#ffffff; font-size:13px">{$this->catalog.addres}</td>
+          </tr>
+          {if $this->catalog.phone}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_phone" default="Тел.:"}</td>
+            <td  style="color:#ffffff; font-size:13px">{$this->catalog.phone} , {if $this->catalog.phone1}{$this->catalog.phone1}{/if}</td>
+            
+          </tr>
+          {/if}
+          {if $this->catalog.url}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_url" default="Сайты:"}</td>
+            <td style="color:#ffffff; font-size:13px"><a target="_blank" href="http://{$this->catalog.url}">http://{$this->catalog.url}</a></td>
+          </tr>
+          {/if}
+           {if $this->catalog.email}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_e_mail" default="E-mail:"}</td>
+            <td style="color:#ffffff; font-size:13px"><a href="mailto:{$this->catalog.email}">{$this->catalog.email}</a></td>
+          </tr>
+         
+          {/if}
+        </table>
+         
+         
+          
+        
+        
+        
+        {if !empty($this->catalog.longitude) && !empty($this->catalog.latitude)} 
+        <div id="map_main_canvas" style="width: 362px; height: 198px;margin-top: 20px;"></div>
+        {/if}
+        
+        </td>
+      <td  valign="top">
+      {*
+      {FithImageToSize width=395 height=298 frame=true base='img/services/big/' image=$this->catalog.image assign=srcImage}
+      <img src="{$srcImage}" width="395"/>
+      *}
+      {include file="services/user.offer.images.tpl"}
+      </td>
+    </tr>
+    
+	{if ! empty($this->catalog.brands)}
+	<!--<tr>
+    <td >{Trans term="sale_off_brands" default="Продажа:"}</td>
+    <td>&nbsp;</td>
+	</tr>
+	<tr>
+    <td >
+	<ul class="sale_off_brands">
+	{foreach from=$this->catalog.brands item=offerBrand}
+		<li> 
+			<a class="sale_off_brands_icon" href="{Link page='cars' user='user' Brand=$offerBrand.alias}">
+			<img src="{FithImageToSize width=45 height=35 frame=true base="/img/brandmodel/big/" image=$offerBrand.image}"    alt="{$offerBrand.label}" title="{$offerBrand.label}" />
+			</a>
+			<a class="sale_off_brands_label" href="{Link page='cars' user='user' Brand=$offerBrand.alias}">{$offerBrand.label}</a>
+		</li>
+	{/foreach}
+	</ul>
+	</td>
+     <td>&nbsp;</td>
+    </tr>-->
+    <tr>
+     <td colspan="2">&nbsp;</td>
+    </tr>
+	{/if}
+    <tr><td colspan="2"><div style="padding: 10px;word-wrap: break-word;color: #FFFACD;">{$this->catalog.description}</div></td></tr>
+    
+    {if ! empty($this->catalog.brands)}
+    <tr><td  colspan="2">
+	<div class ="filter-holder topmenu ">
+	<a class="user-offer-filter-by-brand all-user-offer act " href="{Link page='cars' user='user' login=$this->catalog.siteuser.login}" style="padding-left:20px;">{Trans term="customer_car_brands" default="Марки автомобилей"} | </a>
+
+    {foreach from=$this->catalog.brands item=offerBrand}
+<a style="height: auto!important;" class="user-offer-filter-by-brand filter_brnd_icon" href="{Link page='cars' user='user' login=$this->catalog.siteuser.login Brand=$offerBrand.alias}">
+			<img src="{FithImageToSize width=45 height=35 frame=true base="/img/brandmodel/big/" image=$offerBrand.image}"    alt="{$offerBrand.label}" title="{$offerBrand.label}" />
+	</a>
+	<!--<a class="sale_off_brands_label">{$offerBrand.label}</a>-->
+    {/foreach}
+	</div>
+    </td>
+    </tr>
+    
+    <tr>
+    <td  colspan="2" data-href="{Link page='cars' user='user' login=$this->catalog.siteuser.login}?" id="user-list">{Trans term="Loaing_list" default="Загрузка ...."}</td>
+    </tr>
+    {/if}
+  </table>
+</div>
+{include file=default/right.tpl.html}

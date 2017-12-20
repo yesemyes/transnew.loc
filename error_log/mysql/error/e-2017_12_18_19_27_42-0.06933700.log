@@ -1,0 +1,16 @@
+QUERY 
+SELECT id,value,image FROM   `body` LEFT JOIN body_ml USING (`id`)  
+ WHERE `lng_id`='7' AND `active` 
+ GROUP BY  position ASC 
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'transnew.body.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+===========================
+
+File => D:\OpenServer\domains\transnew.loc\cls\Core\db.class.php	 LINE 	67
+File => D:\OpenServer\domains\transnew.loc\cls\Core\db.class.php	 LINE 	223
+File => D:\OpenServer\domains\transnew.loc\cls\Front\front.class.php	 LINE 	739
+File => D:\OpenServer\domains\transnew.loc\cls\Front\front.class.php	 LINE 	62
+File => D:\OpenServer\domains\transnew.loc\index.php	 LINE 	10

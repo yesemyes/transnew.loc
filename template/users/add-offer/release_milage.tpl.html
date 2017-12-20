@@ -1,0 +1,31 @@
+<div class="fl">
+<span class="formtit w100 textR fl"> 
+
+<label for="filed_release_date_year" class="req_field">{Trans param='filed_release_date_year'}</label>
+</span>{assign var=cyear value=$smarty.now|date_format:"%Y"}
+    {assign var=years value=$cyear|yearRange:1900}{$offer.filed_release_date_year}
+<select name="main[filed_release_date_year]" id="filed_release_date_year" class="sel margL10 w170 fl" >
+  <option value="">{Trans param='select_year'}</option>
+        {html_options options=$years  selected=$offer.filed_release_date_year}
+</select>
+<br class="cb" />
+<span class="formtit w100 textR fl">
+<label for="filed_release_date_month" class="">{Trans param='filed_release_date_month'}</label>
+</span> {assign var=months value=1|range:12}
+<select name="main[filed_release_date_month]" id="filed_release_date_month" class="sel margL10 w170 fl" >
+  <option value="">{Trans param='select_month'}</option>
+        {html_options options=$months selected=$offer.filed_release_date_month}
+</select>
+<br class="cb" />
+
+<span class="formtit w100 textR fl">
+<label for="filed_milage" class="req_field">{Trans param='filed_milage'}</label>
+</span>
+<input style="width:80px" type="text" name="main[filed_milage]" id="filed_milage" value="{$offer.filed_milage}" class="inp margL10 fl" {if $offer.isnew} disabled="disabled"{/if}/>
+
+<select name="main[filed_milage_kayficent]" class="sel margL10 fl" style="width: 80px;">
+{html_options options=$this->dictonary.milage_kayficent  selected=$offer.filed_milage_kayficent  }
+</select>
+<br class="cb" />
+
+</div>

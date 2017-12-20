@@ -1,0 +1,17 @@
+QUERY 
+SELECT `k_cent`.`id`,`k_cent`.`alias`,`k_cent`.`position`,`k_cent`.`k_cent`,`k_cent`.`calculator`,`k_cent_ml`.`lng_id`,`k_cent_ml`.`title` FROM   `k_cent` LEFT JOIN k_cent_ml USING (`id`)  
+ WHERE `lng_id` = 7 AND `calculator` = '15' 
+ ORDER BY  position 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+11.4266149998
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Content/feCalculators.class.php	 LINE 	61
+File => /home/transinf/public_html/cls/Content/feCalculators.class.php	 LINE 	29
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

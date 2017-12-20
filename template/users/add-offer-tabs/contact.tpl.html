@@ -1,0 +1,125 @@
+<div class="fl" >
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 130px;font-size: 1.2em;color: #000;">{Trans term = 'contact_person' default = 'Контактное лицо'}:</label>
+<input type="text" {if $offer.contact_name}value="{$offer.contact_name}"{/if} class="inp margL10 fl" style="width:198px;margin-top: 3px;" name="main[contact_name]" id="contact_name"/>
+</span>
+<br class="cb"/>
+
+
+
+
+
+
+
+
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 130px; font-size: 1.2em;color: #000;">{Trans term = 'country' default = 'Страна'}:</label>
+<select style="width: 200px;margin-top: 3px;" class="inp" name="main[filed_country]" id="filed_state" onchange="fillMyStates(this.value,'filed_city','{$this->path}')">
+    <option value="">{Trans term = 'select_state' default = 'Ընտրել երկիրը'}</option>
+    {foreach from=$this->states.0 item=state key=_id}
+    <option value="{$_id}" value="{$_id}" {if $offer.filed_country == $_id} selected="selected"{/if}>{$state.value}</option>
+    
+    {/foreach}
+    
+</select>
+</span>
+<br class="cb"/>
+
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 130px;font-size: 1.2em;color: #000;">{Trans term = 'city' default = 'Город'}:</label>
+
+
+
+
+<select style="width: 200px;margin-top: 3px;" class="inp"  name="main[filed_city]" id="filed_city" {if !$offer.filed_country} disabled="disabled"{/if} >
+<option value="">{Trans param='select_city'}</option>
+{if $offer.filed_country}
+
+	{assign var=select_city value=$db->getTree('states','*',"lng_id=`$this->defLng.id` AND `active`",'','position') }
+    
+    {foreach from=$select_city[$offer.filed_country] item = item key = key}
+    
+      {if isset($select_city[$item.id])}
+  
+      
+                <option  label="{$item.label}">{$item.label}</option>
+ 
+ 
+                
+      
+  {else}
+    
+      
+                <option value="{$item.id}" {if $offer.filed_city == $item.id} selected="selected"{/if}>{$item.value}</option>
+                
+      
+  {/if}
+  {/foreach}
+  {/if}
+    
+
+
+ </select>   
+
+</span>
+
+<span class="formtit  fr" style="margin-bottom: 10px;"> 
+<label class="textR fl" style="width: 130px;font-size: 1.2em;color: #000;">{Trans term = 'other_city' default = 'или другой город'}:</label>
+<input type="text" class="inp margL10 fl" style="width:200px;margin-top: 3px;" {if $offer.filed_other_city}value="{$offer.filed_other_city}"{/if}  name="main[filed_other_city]" id="filed_other_city"/>
+</span>
+<br class="cb"/>
+
+{*
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 130px;font-size: 1.2em;color: #000;">{Trans term = 'email' default = 'E-mail'}:</label>
+<input type="text" class="inp margL10 fl" style="width:200px;margin-top: 3px;"/>
+</span>
+<br class="cb"/>
+*}
+
+
+
+<span class="formtit  fl" style="margin-bottom: 3px;">
+<label  for="user_phone1" class="req_field textR fl" style="width: 130px;font-size: 1.2em;color: #000;">{Trans param='user_phone1'}:*</label>
+{assign var = phone1 value=$offer.phone1}
+
+<input {if $phone1} value="{$phone1}"{/if} size="12" maxlength="12" type="text" name="user_phone1" id="user_phone1" class="phone inp margL10 fl" style="width:70px;margin-top: 3px;" />
+</span>
+<br class="cb"/>
+<span class="formtit  fl" style="margin-bottom: 3px;padding-left: 144px;">
+{assign var = phone2 value=$offer.phone2}
+<input {if $phone2} value="{$phone2}"{/if} size="12	" maxlength="12" type="text" name="user_phone2" id="user_phone2" class="phone inp margL10 fl" style="width:70px;margin-top: 3px;" />
+</span>
+<br class="cb"/>
+
+
+
+{*<label for="user_phone1" class="req_field textR fl" style="width: 130px;">{Trans param='user_phone1'}:*</label>*}
+{*
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 130px;">{Trans term = 'offer_deadline' default = 'Срок показа объявления'}:</label>
+
+<select style="width: 95px;" class="fl inp">
+    {foreach from=$this->viewtime item=item}
+		<option>{$item} {Trans term="days"}</option>
+	{/foreach}
+</select>
+
+</span>
+
+
+{*
+<span class="formtit w100 textR fl" style="width: 130px;margin-bottom: 10px;">
+{ProcessPhoneNumber assign=phone2 phone=$smarty.session.siteusers.phone2}
+
+{ProcessPhoneNumber assign=phone1 phone=$smarty.session.siteusers.phone1}
+<label style="font-size: 1.2em;" for="user_phone1" class="req_field">{Trans param='user_phone1'}:*</label>
+</span><input size="6" maxlength="6" type="text" name="user_phone1" id="user_phone1"  value="{$phone1.1}"   class="inp margL10 fl" style="width:112px;margin-top: 3px;" />
+
+<br class="cb"/>
+<span class="formtit w100 textR fl"> 
+<label style="font-size: 1.2em;" for="user_phone2" class="req_field">{Trans param='user_phone2'}</label>
+</span><input type="text" name="user_phone2" id="user_phone2" size="6" maxlength="6"  value="{$phone2.1}"  class="inp margL10 fl" style="width:112px;margin-top: 3px;" />
+*}
+</div>
+

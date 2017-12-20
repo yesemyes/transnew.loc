@@ -1,0 +1,60 @@
+{foreach from = $this->technical item = technical}
+<div  class="rob" style="padding: 12px!important;padding-top: 0!important;">
+
+
+  <table cellpadding="0" cellspacing="0" width="" align="center" >
+  <span style="border-top:1px solid #04435c; display:block;margin-bottom: 10px;"></span>
+    <tr>
+      <td width="331" valign="top" style="padding-right: 12px;">
+      <div class="specialProjectTit" style="width: 313px;font-weight: normal;">{$technical.title}</div>
+      <table cellpadding="10" cellspacing="0" width="100%" class="tbbg">
+            
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_address" default="Адрес:"}</td>
+            <td  style="color:#ffffff; font-size:13px">{$technical.address}</td>
+          </tr>
+          {if $technical.phone}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_phone" default="Тел.:"}</td>
+            <td  style="color:#ffffff; font-size:13px">{$technical.phone}</td>
+          </tr>
+          {/if}
+          {if $technical.url}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_url" default="Сайты:"}</td>
+            <td style="color:#ffffff; font-size:13px"><a href="http://{$technical.url}" target="_blank">{$technical.url}</a></td>
+          </tr>
+          {/if}
+          {*}
+           {if $technical.email}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_e_mail" default="E-mail:"}</td>
+            <td style="color:#ffffff; font-size:13px"><a href="mailto:{$technical.email}"></a>{$technical.email}</td>
+          </tr>
+          {/if}
+          {*}
+          {if $technical.work_time}
+          <tr>
+            <td style="color:#8ea5b0; font-size:13px">{Trans term="company_work_time" default="Время:"}</td>
+            <td style="color:#ffffff; font-size:13px">{$technical.work_time}</td>
+          </tr>
+          {/if}
+        </table>
+            
+            <div id="map_main_canvas_{$technical.id}" style="width: 331px; height: 215px;margin-top: 20px;"></div>
+        </td>
+      <td  valign="top">
+      {*
+      {FithImageToSize width=395 height=298 frame=true base='img/services/big/' image=$this->technical.image assign=srcImage}
+      <img src="{$srcImage}" width="395"/>
+      *}
+	  
+      {include file="technical/user.offer.images.tpl" technical=$technical}
+      </td>
+    </tr>
+    <tr><td colspan="2">{$technical.description}</td></tr>
+
+  </table>
+  
+</div>
+{/foreach}

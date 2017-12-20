@@ -1,0 +1,14 @@
+QUERY 
+SELECT `milage_kayficent`.`kayficent` as `key`,`value` as `value` FROM  `milage_kayficent` INNER JOIN milage_kayficent_ml ON (`milage_kayficent`.`id` = `milage_kayficent_ml`.`id` AND `milage_kayficent_ml`.`lng_id`=7)  WHERE active  ORDER BY  position ;
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.34475898743
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	756
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

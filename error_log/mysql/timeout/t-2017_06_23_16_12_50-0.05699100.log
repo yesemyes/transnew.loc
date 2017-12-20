@@ -1,0 +1,14 @@
+QUERY 
+SELECT `brandmodel`.`id` as `key`,`label` as `value` FROM  `brandmodel` INNER JOIN brandmodel_ml ON (`brandmodel`.`id` = `brandmodel_ml`.`id` AND `brandmodel_ml`.`lng_id`=7)  WHERE active ;
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.27933502197
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	720
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

@@ -1,0 +1,19 @@
+{FithImageToSize width=133 height=104 frame=false base='/images/' image="logo_`$this->defLng.code`.png" assign=srcImage}
+{if $image_original && $image_default}
+	{if $imageType == 'image_default'}
+    	{CatImageToSize width=$width height=$height frame=false base='/img/pddticket/test/' image=$image_default  assign=srcImage}
+    {/if}
+    {if $imageType != 'image_default'}
+    	{CatImageToSize width=$width height=$height frame=false base='/img/pddticket/test/' image=$image_original  assign=srcImage}
+    {/if}
+
+{/if}
+{if $image_original}
+{CatImageToSize width=$width height=$height frame=false base='/img/pddticket/test/' image=$image_original  assign=srcImage}
+{/if}
+
+{if $image_default}
+{CatImageToSize width=$width height=$height frame=false base='/img/pddticket/test/' image=$image_default  assign=srcImage}
+{/if}
+<img src="{$srcImage}"  alt=""  width={$width} /> 
+<br class="cb"/>

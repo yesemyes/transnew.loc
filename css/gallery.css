@@ -1,0 +1,141 @@
+/* gallery.css */
+
+.gallery-thumbnails{ width:400px; margin-top:5px;}
+.gallery-thumbnails span{ padding:0px 3px;}
+.gallery-thumbnails img {
+	cursor: pointer;
+}
+
+.gallery-no-scroll {
+	overflow: hidden;
+}
+
+.gallery-overlay,
+.gallery-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.gallery-overlay {
+	opacity: .9;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	filter: alpha(opacity=90);
+	z-index: 10;
+	background: #000;
+}
+
+.gallery-wrapper {
+	z-index: 11;
+	overflow: auto;
+}
+
+.gallery-close {
+	width: 146px;
+	height: 44px;
+	background: url(images/gallery/close.png) no-repeat;
+	cursor: pointer;
+	position: absolute;
+	top: 16px;
+	right: 16px;
+}
+
+.gallery-monitor {
+	margin: 126px 0 20px 0;
+	position: relative;
+}
+
+.gallery-center {
+	position: relative;
+	margin: 0 auto;
+}
+
+.gallery-center img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.gallery-left,
+.gallery-right {
+	position: absolute;
+	top: 0;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.gallery-left {
+	left: 0;
+}
+
+.gallery-right {
+	right: 0;
+}
+
+.gallery-left img,
+.gallery-right img {
+	position: absolute;
+	display: none;
+	-ms-interpolation-mode: bicubic;
+}
+
+.gallery-prev,
+.gallery-next {
+	opacity: .7;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+	filter: alpha(opacity=70);
+	height: 100%;
+	cursor: pointer;
+	position: relative;
+	z-index: 12;
+}
+
+.gallery-prev {
+	background: url(images/gallery/arrow-left.png) no-repeat left center;
+}
+
+.gallery-next {
+	background: url(images/gallery/arrow-right.png) no-repeat right center;
+}
+
+.gallery-prev:hover,
+.gallery-next:hover {
+	opacity: 1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+	filter: alpha(opacity=10);
+}
+
+.gallery-selector {
+	text-align: center;
+	padding: 42px;
+}
+
+.gallery-selector span {
+	/*padding: 5px;*/
+	margin: 0 18px 18px 0;
+	display: inline-block;
+	/*width: 137px;
+	height: 79px;*/
+	cursor: pointer;
+	opacity: .8;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	border: 4px solid transparent;
+}
+
+.gallery-selector span:hover {
+	opacity: 1;
+	/*-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+	filter: alpha(opacity=10);*/
+}
+
+.gallery-selector span.active {
+	/*background: url(images/gallery/frame.png) no-repeat;*/
+	border: 4px solid #3676b5;
+}
+

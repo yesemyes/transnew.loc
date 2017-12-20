@@ -1,0 +1,17 @@
+QUERY 
+SELECT `active`, `confirmed`, `dealer`, `login`, `name`, `regdate`, `id` FROM   `siteusers` LEFT JOIN siteusers_ml USING (`id`)  
+ WHERE (`lng_id`='7') 
+ ORDER BY  regdate DESC 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+0.52830696106
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	77
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	206
+File => /home/transinf/public_html/cls/Admin/form.class.php	 LINE 	362
+File => /home/transinf/public_html/cls/Admin/form.class.php	 LINE 	139
+File => /home/transinf/public_html/cls/Admin/admin.class.php	 LINE 	58
+File => /home/transinf/public_html/admin/index2.php	 LINE 	10

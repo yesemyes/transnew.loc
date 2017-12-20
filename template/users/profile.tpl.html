@@ -1,0 +1,78 @@
+<div class="user-page">
+    <h2>{Trans term = 'profile' default = 'Профиль'}</h2>
+    <div class="user_top">
+        <div class="user_left fl">
+            <div class="user_left_top" style="width: 488px;">
+                <span class="fl" style="font-size: 1.167em!important;color: #fff;font-weight: normal;margin-top: 10px;">{Trans term = 'user_info' default = 'Информация'}</span>
+                {*
+                <div class="overlay fr">
+                <a href="{Link page='users'  action='changeprofildata'}" style="color: #06b2f3;">
+                <span style="display: block;float: left;margin-right: 10px;">
+                <img src="../css/change.png"/>
+                </span>
+                <span class="fr">
+                {Trans term = 'edit_profile' default = 'изменить'}
+                </span>
+                <br class="cb"/>
+                </a>
+                </div>
+                *}
+                
+                <br class="cb"/>
+            </div>
+            <table cellpadding="5" cellspacing="4" width="100%" class="tbbg">
+                <tr>
+                    <td style="color:#8ea5b0;">{Trans term = 'name' default = 'Имя'}</td>
+                    <td  style="color:#ffffff;">{$smarty.session.siteusers.name}<span class="fr" style="font-size: 0.917em!important;important;color: #fff;">{Trans term = 'WITH_US' default = 'С нами уже'} {date_diff date1=$smarty.session.siteusers.regdate date2=$smarty.now interval="days"} {Trans term = 'DAYS' default = 'дней'}!</span></td>
+                </tr>
+                {*
+                <tr>
+                    <td colspan="3">
+                        <div class="pic"></div>
+                    </td>
+                </tr>
+                <tr>
+                <td style="color:#8ea5b0; ">{Trans term = 'city' default = 'Откуда'}:</td>
+                <td  style="color:#ffffff; ">Армения, Ереван{$smarty.session.siteusers.country}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="pic"></div>
+                    </td>
+                </tr>
+                <tr>
+                <td style="color:#8ea5b0; ">{Trans term = 'E_mail' default = 'Эл-почта'}:</td>
+                <td style="color:#ffffff; "><a href="{$smarty.session.siteusers.email}" target="_blank" style="color:#00b9ff ;">{$smarty.session.siteusers.email}</a></td>
+                </tr>*}
+                <tr>
+                    <td colspan="3">
+                        <div class="pic"></div>
+                    </td>
+                </tr>
+                {if  $smarty.session.siteusers.data_currentcar_brand}
+                <tr >
+                <td style="color:#8ea5b0; ">{Trans term = 'my_car' default = 'Автомобиль'}:</td>
+                <td style="color:#ffffff; ">{$smarty.session.siteusers.data_currentcar_brand.label} {$smarty.session.siteusers.data_currentcar_brand_model.label}</td>
+                </tr>
+                {/if}
+            </table>
+            
+        </div>
+        
+        <div class="user_right fr">
+        {if empty($smarty.session.siteusers.photo)}
+            <img src="/css/usepick.jpg"/>
+        {else}
+        <img class="fr" src="{$smarty.session.siteusers.photo_big}" width="200">
+        {/if}
+        </div>
+        <br class="cb"/>
+    </div>   
+</div>
+{include file = users/mycars.tpl.html}
+
+{*
+<div style="padding:2px 10px;"  ><a href="{Link page='users'  action='changeprofildata'}" class="hov">{Trans param='chanegdata'}</a></div>
+<div style="padding:2px 10px;"><a href="{Link page='users'  action='mycars'}" class="hov">{Trans param='mycars'}</a></div>
+<div style="padding:2px 10px;"><a href="{Link page='users'  action='addoffer'}" class="hov">{Trans param='add_offer'}</a></div>
+*}

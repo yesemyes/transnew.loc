@@ -1,0 +1,70 @@
+{strip}
+<div id="header">{include file=default/ads.tpl.html _place='ads_top' assign=topAd}
+  {if $topAd !=''}
+  <div class="inner">
+    <div style="padding:2px 0px 2px 0px">
+      <center>
+        {$topAd}
+      </center>
+    </div>
+  </div>
+  {/if}
+  <div class="top-menu-bg">
+    <div class="inner">
+      <div class="topmenu"> {foreach from=$this->menu.top.rigth.0 item=item key = key name=RigthTopMenu} <a href="{Link page=$item.alias}" class="{if $this->currentPage.alias==$item.alias }act{/if}">{$item.label}</a> {/foreach} </div>
+      <div class="topRight">
+        <div class="lngBlock"> {foreach from=$this->languages item=lng} <a href="{LngLink code=$lng.code}"><img src="/img/{$lng.code}.jpg" alt="{$lng.name}" title="{$lng.name}" /></a> {/foreach} </div>
+        <!--<div class="icons"> <a href="{$this->config.link_facebook}" target="_blank" class="sprites facebook"></a>{* <a href="{$this->config.link_youtube}" target="_blank" class="sprites youtube"></a>*} <a href="{$this->config.link_odno}" target="_blank" class="sprites odno"></a> </div>-->
+      </div>
+    </div>
+    <br class="cb" />
+  </div>
+</div>
+<div id="headerBot"   style="position: relative; z-index: 2;display:table-row;">
+  <div class="blubg2">
+
+    <div class="inner"> 
+    
+        <a href="{Link page='home'}" class="logo"><img src="/images/logo_{$this->defLng.code}.png" alt="" title="" /></a> 
+	    {*if isset($smarty.session.siteusers)}
+       <div class="user_counts">
+		
+		{Trans term="user_count"} - {$this->all_users.qty}
+		
+	  </div>
+      {/if*}
+	{if !isset($smarty.session.siteusers)}
+    <div class="loginBlock fr">
+
+        <form name="login" action="{Link page='users' action='login'}" method="post">
+          <!--<div class="left_blok">
+            <input tabindex="1" type="text" name='user_login' placeholder="{Trans param='user_login'}" id='user_login' class="sinp" />
+            <br class="cb"/>
+            <input tabindex="2" type="password"  name='user_password'  id='user_password'  placeholder="{Trans param='user_password'}"  class="sinp" />
+            <br class="cb"/>
+            <a href="{Link page='users' action='registration'}" style="font-size: 13px; color: #000;">{Trans param='registration'}</a> <br class="cb"/>
+            <a href="{Link page='users' action='forgot'}" style="font-size: 13px; color: #000;">{Trans param='forgot'}</a> </div>-->
+          <div class="right_blok">
+            <input type="submit" tabindex="3" name="login-btn" class="sbtn marg5 fr" value="{Trans param='FE_ENTER'}"/>
+          </div>
+        </form>
+		 </div>
+<!--<div class="soc fr">
+      <span>{Trans term = 'ACCOUNT_LOGIN'}</span>
+	  
+<div id="uLogin" data-ulogin="display=panel;fields=email,sex,photo,photo_big,first_name,last_name;providers=facebook,odnoklassniki,vkontakte,mailru;hidden=;redirect_uri=http%3A%2F%2F{$smarty.server.HTTP_HOST}/{$this->path_params.0}/users/login.html"></div>
+
+		</div>-->
+      
+      
+      {else}
+      <div class="loginBlock" > {include file="default/user-profile-header.tpl.html"} </div>
+      {/if} <br  class="cb"/>
+    </div>
+    <div class="inner" style="z-index:4">
+      <div class="topmenu2"> {include file="default/top-menu.tpl.html"} </div>
+    </div>
+  </div>
+ <div class="inner" style="z-index:3"> {include file="home/top-search.tpl.html"} </div>
+</div>
+{/strip} 

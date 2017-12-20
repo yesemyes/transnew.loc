@@ -1,0 +1,246 @@
+
+  <div class="btnbord cb"></div>
+  <br class="cb" />
+  <span class="formtit w100 textR fl"> &nbsp; </span> <span class="margL10 fl fs10">{Trans param='from'}</span> <br class="cb" />
+  <div class="fl" style="width:300px;"> <span class="formtit w100 textR fl">
+    <label for="filed_release_date_year">{Trans param='filed_release_date_year'}</label>
+    </span> {assign var=cyear value=$smarty.now|date_format:"%Y"}
+    {assign var=years value=$cyear|yearRange:1900}
+    <select name="filed_release_date_year[from]" id="filed_release_date_year" class="sel margL10 fl w170">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+        {html_options options=$years  selected=$smarty.get.filed_release_date_year.from}
+
+    
+    </select>
+    <br class="cb" />
+    <span class="formtit w100 textR fl">
+    <label for="filed_milage">{Trans param='filed_milage'}</label>
+    </span>
+    <select name="filed_milage[from]" id="filed_milage_from" value="{$smarty.get.filed_milage.from}" class="sel margL10 fl w170" {if $smarty.get.isnew} disabled="disabled"{/if}>
+      
+      
+
+{assign var=milage value=0|yearRange:$this->config.search_milage_max:$this->config.search_milage_step}
+  
+      
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+ {html_options options=$milage selected=$smarty.get.filed_milage.from}
+ 
+
+    
+    </select>
+    <br class="cb" />
+    <span class="formtit w100 textR fl">
+    <label for="filed_price">{Trans param='filed_price'}</label>
+    </span> {assign var=price value=$this->config.search_price_min|range_price:$this->config.search_price_max:$this->config.search_price_step}
+    <select name="price[from]" id="filed_price_from" class="sel margL10 fl w170" value="{$smarty.get.filed_price.from}" {if $smarty.get.contract} disabled="disabled"{/if} >
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+ {html_options options=$price selected=$smarty.get.price.from}
+
+    
+    </select>
+        <br class="cb" />
+    <span class="formtit w100 textR fl">
+    <label for="filed_engine_power">{Trans param='filed_engine_power'}</label>
+    </span>
+    <select name="filed_engine_power[from]"  class="sel margL10 fl w170" >
+      
+      
+ {assign var=engine value=$this->config.search_engine_power_min|yearRange:$this->config.search_engine_power_max:$this->config.search_engine_power_step}
+  
+      
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+  
+  
+ {*html_options options=$engine selected=$smarty.get.filed_engine_power.from*}
+ {foreach from=$engine item = item  key=key}
+ 
+      
+      <option value="{$key}" {if $key == $smarty.get.filed_engine_power.from} selected="selected"{/if}>{$item} {Trans param='mensuration_of_power'}({math equation="x * y" x=$key y=0.7456} {Trans param='mensuration_of_power_kw'})</option>
+      
+      
+ {/foreach}
+
+    
+    </select>
+
+    <br class="cb" />
+    <span class="formtit w100 textR fl"> {*filed_gearbox*}
+    <label for="filed_gearbox">{Trans param='filed_gearbox'}</label>
+    </span> {assign var=_gearboxoptions value=$this->dictonary.gearbox}
+    <select name="filed_gearbox" id="filed_gearbox"   class="sel fl" style="width:147px;" multiple="multiple">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+  {html_options options=$_gearboxoptions selected=$smarty.get.filed_gearbox}
+
+    
+    </select>
+     </div>
+  <div class="fl"> <span class="formtit fl textR w48">{Trans param='until'}</span>
+    <select name="filed_release_date_year[to]" id="filed_release_date_year" class="sel margL10 fl w170">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+        {html_options options=$years  selected=$smarty.get.filed_release_date_year.to}
+
+    
+    </select>
+    <br class="cb" />
+    <span class="formtit fl textR w48">{Trans param='until'}</span>
+    <select name="filed_milage[to]" id="filed_milage_to" value="{$smarty.get.filed_milage.to}" class="sel margL10 fl w170" {if $smarty.get.isnew} disabled="disabled"{/if}>
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+ {html_options options=$milage selected=$smarty.get.filed_milage.to}
+
+    
+    </select>
+    <select name="kayficent" class="sel margL10 fl" style="width: 60px;">
+{html_options options=$this->dictonary.milage_kayficent  selected=$offer.filed_milage_kayficent  }
+</select>
+    <br class="cb" />
+    <span class="formtit fl textR w48">{Trans param='until'}</span>
+    <select name="price[to]" id="filed_price_to" class="sel margL10 fl w170" value="{$smarty.get.filed_price.to}" {if $smarty.get.contract} disabled="disabled"{/if} >
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+ {html_options options=$price selected=$smarty.get.price.from}
+
+    
+    </select>
+    <br class="cb" />
+     <span class="formtit fl textR w48">{Trans param='until'}</span>
+    <select name="filed_engine_power[to]"    class="sel margL10 fl w170" >
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+ 
+ {foreach from=$engine item = item  key=key}
+ 
+      
+      <option value="{$key}" {if $key == $smarty.get.filed_engine_power.to} selected="selected"{/if}>{$item} {Trans param='mensuration_of_power'}({math equation="x * y" x=$key y=0.7456} {Trans param='mensuration_of_power_kw'})</option>
+      
+      
+ {/foreach}
+
+    
+    </select>
+    <br class="cb" />
+    <span class="formtit fl textR w48">
+    <label for="filed_color">{Trans param='filed_color'}</label>
+    </span> {assign var=clors value=$this->dictonary.color}
+    <select name="filed_color" id="filed_color" class="sel fl"  style="width:147px;" multiple="multiple">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+                {html_options options = $clors selected=$smarty.get.filed_color}
+
+    
+    </select>
+     
+  </div>
+  <br class="cb" />
+  <div class="btnbord cb"></div>
+  <br class="cb" />
+  <div class="fl" style="width:340px;"> <span class="formtit w100 textR fl">  
+    
+    <label for="filed_state">{Trans param='filed_state'}</label>
+    </span>{assign var=_filed_stateoptions value=$this->dictonary.state}
+    <select name="filed_state" id="filed_state" {if $smarty.get.isnew} disabled="disabled"{/if}  multiple="multiple" class="sel fl w170">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+        {html_options options=$_filed_stateoptions selected=$smarty.get.filed_state}
+
+    
+    </select>
+    <br class="cb" />
+	<span class="formtit w100 textR fl"> 
+    <label for="filed_drive">{Trans param='filed_drive'}</label>
+    </span> {assign var=_driveoptions value=$this->dictonary.drive}
+    <select name="filed_drive" id="filed_drive"  class="sel fl w170"  multiple="multiple">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+  
+      
+        {html_options options=$_driveoptions selected=$smarty.get.filed_drive}
+      
+    
+
+    
+    </select>
+    <br class="cb" />
+    <span class="formtit w100 textR fl"> 
+    <label for="filed_rudder">{Trans param='filed_rudder'}</label>
+    </span> {assign var=_rudderoptions value=$this->dictonary.drive}
+    <select name="filed_rudder" id="filed_rudder" class="sel fl w170" multiple="multiple">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+  
+      
+        {html_options options=$_rudderoptions selected=$smarty.get.filed_rudder}
+      
+    
+
+    
+    </select>
+  </div>
+  <div class="fl"> <span class="formtit w100 textR fl">
+    <label for="filed_warranty">{Trans param='filed_warranty'}</label>
+    </span> {assign var=_warrantyoptions value=$this->dictonary.warranty}
+    <select name="filed_warranty" id="filed_warranty"   class="sel fl w170" multiple="multiple">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+  
+      
+        {html_options options=$_warrantyoptions selected=$smarty.get.filed_warranty}
+      
+    
+
+    
+    </select>
+    <br class="cb" />
+    <span class="formtit w100 textR fl"> 
+    <label for="filed_customs">{Trans param='filed_customs'}</label>
+    </span> {assign var=_customsoptions value=$this->dictonary.customs}
+    <select name="filed_customs" id="filed_customs"   class="sel fl w170"  multiple="multiple">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+        {html_options options=$_customsoptions selected=$smarty.get.filed_customs }
+    
+
+    
+    </select>
+    <br class="cb" />
+
+    <span class="formtit w100 textR fl"> 
+    <label for="filed_fuel">{Trans param='filed_fuel'}</label>
+    </span>{assign var=cyear value=$smarty.now|date_format:"%Y"}
+    {assign var=fuel value=$this->dictonary.fuel}
+    <select name="filed_fuel" id="filed_fuel"   class="sel fl w170" multiple="multiple">
+      <option value="">{Trans param='select_any'}</option>
+      
+      
+        {html_options options=$fuel selected=$smarty.get.filed_bargaining}
+
+    
+    </select>
+   
+    </div>
+  {if $smarty.get.id}
+  <input type="hidden" value="{$smarty.get.id}" name="offer_id" />
+  {/if}
+  <br class="cb" />

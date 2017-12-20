@@ -1,0 +1,40 @@
+.time
+.news_item{
+display: block;
+padding: 5px 5px 5px 5px;
+margin: 5px 0 5px 0; 
+}
+/*.atom_odd{ background:url('images/pop_texture.png') repeat top left; }
+.atom_even{background:url('images/pop_texture.png') repeat top left;}*/
+.img-holder{
+float: left;
+position: relative;
+width: 170px;
+height: 100px;
+overflow: hidden;
+padding-left: 6px;
+}
+
+.pseudo-h3
+{
+margin: 0 0 0 6px;
+
+}
+.time
+{
+color: #000;
+padding: 0 0 0 2px;
+position: absolute;
+bottom: 0;
+right: 0;
+font-size: 13px;
+}
+.news_item .text
+{
+margin: 0 0 0 6px;
+}
+.like
+{
+    position: absolute;top: 15px;left: 15px;width: 80px;padding: 10px;background: url(images/like.png) repeat-x;
+}
+.advanced_c2{width: 757px!important;}

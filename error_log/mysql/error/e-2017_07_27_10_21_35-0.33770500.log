@@ -1,0 +1,13 @@
+QUERY 
+SELECT count(id) as `qty` FROM `siteusers` WHERE `active` = '1'
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+MySQL server has gone away
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	390
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	72
+File => /home/transinf/public_html/index.php	 LINE 	10

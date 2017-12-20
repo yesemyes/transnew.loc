@@ -1,0 +1,10 @@
+<div  style="color:#636363; padding:10px; text-transform:uppercase;">
+{assign var=_rates value=$this->getCurrencyRates()}
+{foreach from=$_rates item=_crate}
+{assign var=imgPath value="/img/currency/image/`$_crate.image`"}
+ <img src="{$imgPath}" hspace=10 alt="" title="" />
+{$_crate.iso} - <strong>{$_crate.value}</strong> amd
+<br class="cb" />
+<br class="cb" />
+{/foreach}
+</div>

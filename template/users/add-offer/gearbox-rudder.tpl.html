@@ -1,0 +1,18 @@
+<div class="fl">
+<span class="formtit w100 textR fl"> {*filed_rudder*}
+<label for="filed_gearbox" class="req_field">{Trans param='filed_gearbox'}</label>
+</span> {assign var=_gearboxoptions value=$db->getOptions('gearbox','id','value',$this->defLng.id,'active','','position') }
+<select name="main[filed_gearbox]" id="filed_gearbox" class="sel margL10 w170 fl" >
+  <option value="">{Trans param='select_gearbox'}</option>
+        {html_options options=$_gearboxoptions selected=$offer.filed_gearbox}
+</select>
+<br class="cb" />
+<span class="formtit w100 textR fl"> 
+  
+<label for="filed_rudder" class="">{Trans param='filed_rudder'}</label>
+</span> {assign var=_rudderoptions value=$db->getOptions('rudder','id','value',$this->defLng.id,'active','','position') }
+<select name="main[filed_rudder]" id="filed_rudder" class="sel margL10 w170 fl">
+  <option value="">{Trans param='select_rudder'}</option>
+        {html_options options=$_rudderoptions selected=$offer.filed_rudder}
+</select>
+</div>

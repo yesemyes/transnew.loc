@@ -1,0 +1,44 @@
+#deny from all
+allow from all
+
+
+RewriteEngine on
+RewriteBase /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^.]+)\.html\ HTTP
+RewriteRule ^([^.]+)\.html$ http://transnew.loc/$1 [R=301,L]
+RewriteCond %{REQUEST_URI} !(\.[^./]+)$
+RewriteCond %{REQUEST_fileNAME} !-d
+RewriteCond %{REQUEST_fileNAME} !-f
+RewriteRule (.*) /$1.html [L]
+RewriteCond %{THE_REQUEST} /home [NC]
+RewriteRule ^ / [L,R=302]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+Options -Indexes
+RewriteEngine on
+RewriteBase   /
+
+
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*) index.php [L]
+#
+RewriteCond %{REQUEST_URI} !\.(htm|html|txt|js|ico|gif|jpg|png|css|jpeg|swf|flv|zip|gzip|htc|HTM|HTML|JS|ICO|GIF|JPG|PNG|CSS|JPEG|SWF|FLV|ZIP|GZIP|HTC|doc|docx|xls|pdf|woff|ttf)$
+RewriteCond %{REQUEST_URI} !^\/PIE-1.0.0\/PIE\.php$
+RewriteCond %{REQUEST_URI} !^\/kcaptcha\/index\.php$
+RewriteCond %{REQUEST_URI} !pom
+#
+RewriteRule (.*) index.php
+
+#RewriteEngine On
+## If the hostname is NOT www.transinfo.dev
+#RewriteCond %{HTTP_HOST} !^transnew\.loc$
+## 301 redirect to the same resource on transnew.loc
+#RewriteRule (.*) http://transnew.loc/$1 [L,R=301]

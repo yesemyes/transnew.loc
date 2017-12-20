@@ -1,0 +1,80 @@
+<div class="fl" >
+<form action="" method="">
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 120px;">Контактное лицо:</label>
+<input type="text" class="inp margL10 fl" style="width:200px;"/>
+</span>
+<br class="cb"/>
+
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 120px;">Страна:</label>
+<select style="width: 200px;" class="inp">
+    <option>Россия</option>
+</select>
+</span>
+<br class="cb"/>
+
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 120px;">Город:</label>
+<select style="width: 200px;" class="inp">
+    <option>Москва</option>
+</select>
+</span>
+
+<span class="formtit  fr" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 120px;">или другой город:</label>
+<input type="text" class="inp margL10 fl" style="width:200px;"/>
+</span>
+<br class="cb"/>
+
+
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 120px;">E-mail:</label>
+<input type="text" class="inp margL10 fl" style="width:200px;"/>
+</span>
+<br class="cb"/>
+
+<span class="formtit  fl" style="margin-bottom: 10px;margin-bottom: 50px;">
+{ProcessPhoneNumber assign=phone1 phone=$smarty.session.siteusers.phone1} 
+<label for="user_phone1" class="req_field textR fl" style="width: 120px;">{Trans param='user_phone1'}:*</label>
+<input size="10" maxlength="10" type="text" name="user_phone1" id="user_phone1"  value="{$phone1.1}"   class="inp margL10 fl" style="width:95px;" />
+</span>
+<span class="formtit  fl" style="margin-bottom: 10px;margin-bottom: 50px;">
+{ProcessPhoneNumber assign=phone2 phone=$smarty.session.siteusers.phone2} 
+{*<label for="user_phone1" class="req_field textR fl" style="width: 120px;">{Trans param='user_phone1'}:*</label>*}
+<input size="10	" maxlength="10" type="text" name="user_phone1" id="user_phone2"  value="{$phone2.1}"   class="inp margL10 fl" style="width:95px;" />
+</span>
+<br class="cb"/>
+
+<span class="formtit  fl" style="margin-bottom: 10px;"> 
+<label class="req_field textR fl" style="width: 120px;">Срок показа объявления:</label>
+<select style="width: 95px;" class="fl inp">
+    {foreach from=$this->viewtime item=item}
+		<option>{$item} {Trans term="days"}</option>
+	{/foreach}
+</select>
+
+</span>
+
+
+{*
+<span class="formtit w100 textR fl" style="width: 120px;margin-bottom: 10px;">
+{ProcessPhoneNumber assign=phone2 phone=$smarty.session.siteusers.phone2}
+
+{ProcessPhoneNumber assign=phone1 phone=$smarty.session.siteusers.phone1}
+<label for="user_phone1" class="req_field">{Trans param='user_phone1'}:*</label>
+</span><input size="6" maxlength="6" type="text" name="user_phone1" id="user_phone1"  value="{$phone1.1}"   class="inp margL10 fl" style="width:112px;" />
+
+<br class="cb"/>
+<span class="formtit w100 textR fl"> 
+<label for="user_phone2" class="req_field">{Trans param='user_phone2'}</label>
+</span><input type="text" name="user_phone2" id="user_phone2" size="6" maxlength="6"  value="{$phone2.1}"  class="inp margL10 fl" style="width:112px;" />
+*}
+
+
+
+
+
+</form>
+</div>
+

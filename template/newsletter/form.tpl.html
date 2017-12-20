@@ -1,0 +1,54 @@
+<script type="text/javascript" language="javascript" src="/scripts/jquery.validate.js" ></script>
+<script type="text/javascript" language="javascript" src="/scripts/registration.tpl.js" ></script>
+
+<div style="height:36px">
+  <div style="width:590px" id="signupFormLaoder"><img src="/images/ajax-loader.gif"/></div>
+</div>
+<form id="contactsForm" name="contactsform" action="{$this->path}" method="post">
+<div class="errors" id="errors"></div>
+<br class="cb" />
+  <span class="formtit">
+  <label for="contacts_name" >{Trans param=name}</label>
+  </span><br />
+  <input type="text" name="contacts[name]" id="contacts_name" class="inp"/>
+  <br class="cb" />
+ 
+    <span class="formtit">
+    <label for="contacts_mail" >{Trans param=mail}</label>
+    </span><br />
+    <input type="text" name="contacts[email]" id="contacts_email" class="inp"/>
+    
+ 
+  <br class="cb" />
+ 
+ {assign var=ssName= value=""|@session_name}
+  {assign var=ssId= value=""|@session_id} <img  src="/kcaptcha/index.php" id="captImage" class="fl"/>
+  <input type="text" name="captcha" id="captcha"   class="code fl margL10"  />
+  <input type="button" name="reload" value="reload" onclick="reloadCaptcha()" class="login-btn fl" />
+  <br class="cb" />
+  <br class="cb" />
+  <div class="btnbord">
+       <div class="yelbtn1 fl"><input type="reset" name="reset"  value="{Trans param='user_reset'}" class="pointer" /></div><span class="yelbtn2 fl margR5"></span>
+    <div class="yelbtn1 fl"><input type="submit" value="{Trans param='user_submit'}" class="pointer" /></div><span class="yelbtn2 fl"></span>
+
+  </div>
+</form>
+{literal}
+<script language="javascript" type="text/javascript">
+
+var rules= {};
+rules["contacts[name]"]                   ={required:true};
+rules["contacts[email]"]                   ={required:true,email:true};
+rules["captcha"]                          ={required: true,remote: {'url':"{/literal}{$this->path}{literal}?action=ajax&method=checkCaptcha"}};
+messages={};
+messages["contacts[name]"]                   ="{/literal}{Trans param='err_name'}{literal}";
+messages["contacts[mail]"]                   ={required:"{/literal}{Trans param='err_email'}{literal}",
+                                               email:"{/literal}{Trans param='err_email_invalid'}{literal}"};
+messages["captcha"]                          ="{/literal}{Trans param='err_captcha'}{literal}";
+$(document).ready(function() {	
+   try{
+   $("#contactsForm").validate({rules:rules,messages:messages, errorLabelContainer: $("#contactsForm div.errors")});
+   }catch(e){alert(e.message)}
+   });
+</script>
+{/literal}

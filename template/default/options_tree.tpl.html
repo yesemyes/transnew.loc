@@ -1,0 +1,43 @@
+
+<ul class="top_ul_left">
+  {foreach from = $_options.0 item=item name="chk`$_pid`"}
+  
+  <li valign="top" class="fl"><span class="Level0">{$item.label}</span>
+  
+  {if isset($_options[$item.id]) && !empty($_options[$item.id])}
+  
+  
+  <ul  class="sub_ul">
+  
+  {assign var=eachName value="chk`$item.id`"}
+    {foreach from = $_options[$item.id] item=sitem name="chk`$item.id`"}
+    <li   valign="top" nowrap="nowrap" style="float: left; width: 225px;"  >
+     <input type="checkbox" name="{$_name}" value="{$sitem.id}" id="subr{$sitem.id}" class="unlocker"  {if is_array($values) &&  in_array($sitem.id,$values) } checked="checked"{/if}/>
+     <span class="Level1"><label for="subr{$sitem.id}" style="position: relative;top: -2px;color: #000;font-size: 13px;">{$sitem.label}</label></span>
+       <br class="cb" />
+      {if isset($_options[$sitem.id]) && !empty($_options[$sitem.id])}
+      {assign var=_pc value=0}
+      {if is_array($values) && in_array($sitem.id,$values) } {assign var=_pc value=1}{/if}
+      
+     <ul class="sub_ul_sub">
+      {foreach from=$_options[$sitem.id] item=ssitem}
+       <li><input type="radio" name="{$_name}[{$sitem.id}]" {if is_array($values) && in_array($ssitem.id,$values) } checked="checked" {/if} value="{$ssitem.id}" id="R{$ssitem.id}" class="subr{$ssitem.pid}" {if !$_pc}disabled="disabled"{/if} />
+       <span class="Level2"style="position: relative;top: -3px;color: #000;font-size: 13px;"><label for="R{$ssitem.id}">{$ssitem.label}</label></span>
+       <br class="cb" />
+</li>
+      {/foreach}
+     </ul>
+      {/if}
+     
+     </li>
+     <br class="cb"/>
+    
+    {/foreach}
+  </li> 
+  
+  
+  </ul>
+  {/if}
+  
+  {/foreach}
+</ul>

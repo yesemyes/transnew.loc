@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+#carusel {width:312px; float:left; background:#444d55; border:solid 1px #0d0d0d; height:203px; position:relative; top:-2px;}
+#carusel li {  padding-left:20px; float:left; width:292px; height:25px; line-height:25px; background:url(/img/dot.gif) no-repeat 12px 10px; border-bottom:solid 1px #5a6269; font-weight:bold; font-size:13px; text-align:left;} 
+#carusel li a{  font-weight:bold; font-size:13px; text-align:left; text-decoration:none;} 
+
+.imagecontiner{ width:281px; height:154px; float:left; overflow:hidden;position:relative; }
+#slidescontiner { float:left;position:relative;}
+#slidescontiner img { border:0; margin:0;  position:relative; }
+.Ncurrent {background:#e6e6e6!important;}
+.Ncurrent a, .Ncurrent a:hover, .Ncurrent a:active, .Ncurrent a:visited, .Ncurrent a:link{color:#101010;}
+#npointer{ position:absolute; top:-100px; z-index:500;}
+
+.MyDescDiv{background:#fde300 url(/img/homeMainNewsbg.png) repeat-x bottom left; height:37px; border-top:solid 1px #182028;border-bottom:solid 1px #182028; color:#000; display:none; line-height:15px; overflow:hidden; text-align:center; padding:5px; font-size:13px;width:271px; position:relative; top:-51px;}

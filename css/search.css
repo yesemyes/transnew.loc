@@ -1,0 +1,74 @@
+@charset "utf-8";
+/* CSS Document */
+* { margin: 0px; }
+.fl { float: left; }
+.cb { clear: both; }
+img { border: 0px }
+.rc6 { -moz-border-radius: 6px; -webkit-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; behavior: url(/PIE.php); }
+.search_blok { width: 990px; background: url(images/linen_rub.jpg) repeat; height: 120px; padding: 0 0px 0px 13px;}
+.search_blockam{background-position: 0 0px;}
+.search_blockru{background-position: 0 -176px;}
+.search_blok .text { color: #000; font-size: 13px;}
+.search_blok .text span { margin-right: 80px; }
+.search_blok .text .date { margin-left: 72px; }
+/*.form .year { margin-left: 38px; }*/
+.form .price .inp {margin: 9px 0px 0px 0px;
+float: left;
+height: 12px;
+width: 80px;
+padding-bottom: 6px;
+padding-top: 6px;
+font-size: 13px;
+text-align: center;
+background: #f0f0f0;
+border: 1px solid #999;
+-webkit-box-shadow: inset 2px 2px 2px #e0e0e0;
+-moz-box-shadow: inset 2px 2px 2px #e0e0e0;
+box-shadow: inset 2px 2px 2px #e0e0e0;
+-webkit-border-radius: 1px;
+-moz-border-radius: 1px;
+border-radius: 1px;
+color: black;}
+.form .line {width: 12px;
+height: 1px;
+background: #646464;
+margin: 23px 8px 8px 8px; }
+.form .year .inp { margin: 9px 0px 0px 0px;
+float: left;
+height: 12px;
+width: 80px;
+padding-bottom: 6px;
+padding-top: 6px;
+font-size: 13px;
+text-align: center;
+background: #f0f0f0;
+border: 1px solid #999;
+-webkit-box-shadow: inset 2px 2px 2px #e0e0e0;
+-moz-box-shadow: inset 2px 2px 2px #e0e0e0;
+box-shadow: inset 2px 2px 2px #e0e0e0;
+-webkit-border-radius: 1px;
+-moz-border-radius: 1px;
+border-radius: 1px;
+color: black; }
+.sl { margin: 20px 0px 0px 0px; }
+.search {/* width: 220px; background: url(images/search_border.png) no-repeat top center; min-height: 64px;*/ margin: 5px 30px 0px 30px; }
+.search .btn {width: auto;
+line-height: 24px;
+font-size: 14px;
+padding-left: 14px;
+color: #fff;
+text-decoration: none;
+margin-top: 17px;
+padding-right: 15px;
+border: 0px;
+cursor: pointer;
+width: 123px;
+/*border-radius: 3px;*/ }
+.search .btn span { margin: 6px 5px 0px 0px; }
+.search .adv { width: 100px; margin: 13px 0px 0px 8px; color: #feffff;text-decoration: none; }
+.combo { color: #3cc9fe; }
+.right { margin: 10px 0px 0px 11px; }
+.left { margin: 10px 8px 0px 0px; /*padding-top: 12px;*/ }
+.left .combo select { margin-top: 10px; }
+a.bodys{width: 127px;display: block;height: 28px;background: url(images/body.png)no-repeat;margin: 8px 0;}
+a.calculator{display: block;height: 67px;width: 102px;background: url(images/calculator.png) no-repeat;margin: 8px;}

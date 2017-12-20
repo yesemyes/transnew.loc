@@ -1,0 +1,27 @@
+QUERY 
+SELECT 
+							`street`.`id`,
+							`street_ml`.`value` 
+						FROM 
+							`street`
+							INNER JOIN `street_ml` ON (`street_ml`.`id` = `street`.`id`)
+							INNER JOIN `cameras` ON (`cameras`.`street` = `street`.`id`)
+						WHERE
+                            `cameras`.`active` = '1' AND  
+							`street_ml`.`lng_id` = 7
+						AND 1 AND `cameras`.`city`='27'
+						GROUP  BY `street`.`id`
+                        ORDER  BY  `street_ml`.`value` ASC
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+4.44442605972
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Content/feRoadpolice.class.php	 LINE 	157
+File => /home/transinf/public_html/cls/Content/feRoadpolice.class.php	 LINE 	20
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

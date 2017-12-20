@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+body /*{ background: url(images/tabel_bg.jpg) repeat; font-size: 75%;}*/
+.cb{ clear:both;}
+.fl{float:left;}
+.fr{float:right;}
+/*/////////car-params/////////*/
+.car_params{ width:760px; background: url(images/tb_bg.png) repeat;}
+.car_params .first { height: 56px; background:url(images/car_params_first_bg.png) repeat-x; color:#fff; text-align:center; }
+.car_params .first td{width: 300px;}
+.car_params .first .price{ background:url(images/car_params_first_bg.png) repeat-x; }
+.car_params .first .shadow { background:url(images/car_params_shadow.png) no-repeat; width:56px;}
+.car_params .first .size25{ font-size:2.08em;}
+.car_params .first .size11{ font-size:1em;}
+.car_params .first .size11 .line {background:url(images/price_line.png) no-repeat right; padding-right:10px; margin-right:8px;}
+
+
+.car_params .first .size13, .car_params .right .contacts .size13{ font-size:1.08em; color:#67d5ff;}
+.car_params .first .bg{ background:url(images/car_params_td_bg.png) right center no-repeat;}
+.car_params .shadow2{ background:url(images/shadow_tr.png) repeat-x; height:5px; margin-top:5px}
+.car_params .left{color: #FFFFFF;margin: 0;padding-top: 13px;width: 345px;}
+.car_params .left .with_bg{ background:url(images/left_row_bg.png) repeat-x; height:20px; width:320px; padding:8px 10px 0px 13px;}
+.car_params .left a{ color:#67d5ff; text-decoration:underline; float:right;}
+.car_params .left .no_bg{height:20px; width:320px; padding:8px 10px 0px 13px;}
+.car_params .left img {margin-right:5px; margin-top:-3px; float:left;}
+.car_params .left .des { margin-top:35px; padding-left:13px; min-height:290px;}
+.car_params .left .des .title, .car_params .right .title {color:#67d5ff; font-size:1.5em;}
+.car_params .left .des .text {margin-top:10px;  color:#fff; font-size:1.08em; width:210px;line-height: 20px;}
+.car_params .right{ padding-top:13px; margin-left:20px;}
+.car_params .right .photos{ margin:10px 0px 10px 0px;}
+.car_params .right .photos img {margin-right:5px;}
+.car_params .right .photos  a,.car_params .right .photos  a { text-decoration: none;}
+.car_params .right .contacts{line-height: 1.4em; background:url(images/right_bg.png) repeat; width:385px;margin:11px 0px 30px 4px; padding:5px 0px 1px 8px; font-size:1.09em; color:#fff;box-shadow: 0 0 7px 0 #FCFCFC;border-radius: 3px;}
+.car_params .right .contacts a{ color:#67d5ff; font-size:1.09em;}
+.car_params .right .text{ width:380px; color:#fff; margin-top:5px;}
+
+.car_params .bottom
+{
+	height:27px; background:url(images/right_bg.png) repeat-x; padding:13px 0px 0px 12px;}
+
+.car_params .num{ font-size:1.09em; color:#fff; margin-right:71px;}
+.car_params .num font{color:#67d5ff;}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #3cc9fe!important; text-decoration: none; }
+
+.ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited { color: #fff!important/*{fcHover}*/; text-decoration: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { background:url(pdd_style/accord_active_bg.png) repeat-x; color: #fff;/*{fcActive}*/; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #fff!important/*{fcActive}*/; text-decoration: none; }
+#blubgCarMainTbl .ui-widget-content { border:none!important; background: url(/css/images/bg_body.png) repeat;/*background: url(images/pop_texture.png) repeat;*/}

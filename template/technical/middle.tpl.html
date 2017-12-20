@@ -1,0 +1,12 @@
+
+ {if !$this->contentTpl}
+      		{$this->currentPage.content}
+      {else}
+	  
+      		{include file=$this->contentTpl}
+      {/if}
+      
+      
+      {*
+      <div class="fb-comments" data-colorscheme="dark" data-href="http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}" data-width="740" data-num-posts="10"></div>
+   *}

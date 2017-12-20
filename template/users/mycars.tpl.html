@@ -1,0 +1,64 @@
+
+    <script>var CONFIRM = "{Trans term = 'CONFIRM'}"</script>
+
+<a href="{Link page='users' action='addoffer'}" class="add_car fl" style="color: #06b2f3; text-decoration: none;">
+<span class="fl" style="display: block; margin-right: 10px;margin-top: 3px;"><img src="/css/car.png"/></span>
+{Trans param='add_offer'}
+</a>
+
+{*<div class="btnbord cb"></div>*}
+<table class="offerList_offerList" border="0px"  cellpadding="0" cellspacing="0">
+  <tr class="offerList_fisrt">
+    <td class="offerList_first_title"><span class="offerList_bg"><a href="{Link page='users' action='mycars'}?order_by=brandmodel&direction=asc" class="offerList_title2">{Trans term="offer_model" default="Модель"}</a></span></td>
+    <td class="offerList_first_shadow"></td>
+    <td class="offerList_first_title"><a href="{Link page='users' action='mycars'}?order_by=price&direction=asc" class="offerList_title">{Trans term="offer_price" default="Цена"}</a></td>
+    <td class="offerList_first_shadow"></td>
+    <td class="offerList_first_title">{Trans term="offer_photo" default="Фото"}</td>
+    <td class="offerList_first_shadow"></td>
+    <td class="offerList_first_title"><a href="{Link page='users' action='mycars'}?order_by=year&direction=asc" class="offerList_title">{Trans term="offer_year" default="Год"}</a></td>
+    <td class="offerList_first_shadow"></td>
+    <td class="offerList_first_title"><a href="{Link page='users' action='mycars'}?order_by=engine&direction=asc" class="offerList_title">{Trans term="offer_engine" default="Двигатель"}</a></td>
+    <td class="offerList_first_shadow"></td>
+    <td class="offerList_first_title"><a href="{Link page='users' action='mycars'}?order_by=milage&direction=asc" class="offerList_title">{Trans term="offer_milage" default="Пробег"}</a></td>
+    <td class="offerList_first_shadow"></td>
+    <td class="offerList_first_title"> {Trans term="offer_actions" default="Пок./ред./Удал."} </td>
+  </tr>
+  {if ! empty($this->userOffers.found)}
+  {foreach from=$this->userOffers.found item=offer}
+  <tr class="offerList_last">
+   <td class="offerList_first_title"><a href="{Link page='cars' action='user' brand=$offer.brandalias model=$offer.modelalias name=$offer.name}" class="offerList_simple">{$offer.brandmodel}</a> </td>
+    <td class="offerList_shadow"></td>
+  
+    <td class="offerList_just">{if $offer.contract != 1}{if $offer.currency_id == 3}{$offer.filed_price|nf}{else}{$offer.price/$this->config.USD_RATE|ceil|nf} ${/if}{else}{Trans term = 'filed_contract'}{/if}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">{if $offer.image}<img src="/img/offers/thumb/{$offer.image}" alt="{$offer.brandmodel}" title="{$offer.brandmodel}"/>{else}-{/if}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">{$offer.year}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">{if $offer.engine && $offer.engine != 0}{$offer.engine} {Trans term = 'liter' default = 'л'}{else}-{/if}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">{$offer.milage*$offer.milagek|nf}&nbsp;{Trans term="offer_milage_km" default="км"}</td>
+    <td class="offerList_shadow"></td>
+    <td class="offerList_just">
+    <a href="{Link page='cars' action='user' brand=$offer.brandalias model=$offer.modelalias name=$offer.name}" class="user_action view"></a> 
+    <a href="{Link page='users' action='editoffer'	name=$offer.name}" class="user_action edit"></a> 
+    <a href="{Link page='users' action='deleteoffer'}" class="user_action delete" data-offer-id="{$offer.id}"></a></td>
+  </tr>
+  {/foreach}
+  <tr class="offerList_lines" >
+    <td colspan="13"><div class="offerList_line"></div></td>
+  </tr>
+  {else}
+  <tr class="offerList_lines" >
+    <td colspan="13"><div class="offerList_line"></div></td>
+  </tr>
+  {/if}
+</table>
+{BulidQuery query=$this->query assign=queryTail}
+    
+    {include file="default/paging.tpl.html" className="offerListPaginator" found_rows=$this->userOffers.total limit=$this->userOffers.limit page=$this->userOffers.page tail=$queryTail}
+<br />
+<div class="btnbord cb"></div>
+{*
+<a href="{Link page='users' action='addoffer'}" class="login-btn fl">{Trans param='add_offer'}</a>
+*}

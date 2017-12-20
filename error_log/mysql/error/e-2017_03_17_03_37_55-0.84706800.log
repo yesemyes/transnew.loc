@@ -1,0 +1,16 @@
+QUERY 
+SELECT `menu`.`id`,`menu`.`pid`,`menu`.`active`,`menu`.`topmenu`,`menu`.`bottommenu`,`menu`.`alias`,`menu`.`position`,`menu`.`private`,`menu`.`noindex`,`menu`.`href`,`menu_ml`.`lng_id`,`menu_ml`.`label`,`menu_ml`.`description`,`menu_ml`.`keyword`,`menu_ml`.`content`,`menu_ml`.`title` FROM   `menu` LEFT JOIN menu_ml USING (`id`)  
+ WHERE lng_id =  AND `alias`='404' 
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND `alias`='404'' at line 2
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	133
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	94
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	15
+File => /home/transinf/public_html/index.php	 LINE 	10

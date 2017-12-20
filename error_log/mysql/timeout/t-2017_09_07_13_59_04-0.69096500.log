@@ -1,0 +1,26 @@
+QUERY 
+ SELECT    brandmodel.* ,brandmodel_ml.`short` ,brandmodel_ml.`full`,COUNT(offers.id) as offerscount
+		FROM brandmodel LEFT JOIN brandmodel_ml ON(brandmodel_ml.id=brandmodel.id)
+		LEFT JOIN offers ON ( brandmodel.id=filed_car_brand_model )
+		WHERE  brandmodel.active
+		AND
+		brandmodel_ml.lng_id = 5 AND pid=6
+	
+		 AND home 
+	
+		GROUP BY brandmodel.id
+		ORDER BY `position`  
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+20.2816531658
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	205
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	291
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	40
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

@@ -1,0 +1,22 @@
+QUERY 
+SELECT `street`.`id` as `key`,`value` as `value` FROM  `street` INNER JOIN street_ml ON (`street`.`id` = `street_ml`.`id` AND `street_ml`.`lng_id`=7)  WHERE city= ;
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/admin/template_c/%%33^33C^33C6A9AF%%select.tpl.php	 LINE 	30
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/admin/template_c/%%36^36E^36E4D55A%%form_element.tpl.php	 LINE 	121
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/admin/template_c/%%51^513^513E196B%%form.tpl.php	 LINE 	35
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/admin/template_c/%%C6^C68^C684436A%%formView.tpl.php	 LINE 	4
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/cls/Admin/admin.class.php	 LINE 	89
+File => /home/transinf/public_html/admin/index2.php	 LINE 	10

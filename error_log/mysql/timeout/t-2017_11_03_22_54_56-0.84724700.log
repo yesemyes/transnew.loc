@@ -1,0 +1,17 @@
+QUERY 
+SELECT value FROM   `body` LEFT JOIN body_ml USING (`id`)  
+ WHERE `lng_id`= '7' AND `id`='1' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+9.92060518265
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	573
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	313
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	44
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

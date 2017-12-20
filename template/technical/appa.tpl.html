@@ -1,0 +1,157 @@
+{strip}
+{literal}
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+    
+  
+    pox = ' {/literal}{Trans term = 'amd'}{literal}'
+    $("select.uni").uniform();
+    })
+</script>
+{/literal}
+
+
+
+{assign var=truckCategories  value=2|@getCarTypeDriverCategories}
+{assign var=busCategories    value=2|@getCarTypeDriverCategories}
+{assign var=motoCategories   value=4|@getCarTypeDriverCategories}
+{assign var=otherCategories  value=5|@getCarTypeDriverCategories}
+
+
+
+
+{insert name=getAllCoeficentByDuration assign=coefficientsByDuration }
+
+
+  <div class="accordion">
+  {foreach from = $this->transType item = item name = name}
+  {if $smarty.foreach.name.iteration == 1}
+    {assign var = type   value = 'PASSENGER'}
+  {elseif $smarty.foreach.name.iteration == 2}
+    {assign var = type   value = 'TRUCK'}
+  {elseif $smarty.foreach.name.iteration == 3}
+    {assign var = type   value  = 'BUS'}
+  {elseif $smarty.foreach.name.iteration == 4}
+    {assign var = type   value  = 'MOTO'}
+  {elseif $smarty.foreach.name.iteration == 5}
+    {assign var = type   value  = 'OTHER'}
+  {/if}
+
+  <div class="kvartal"><span>{$item.title}</span></div>
+    <div class='appa'>      
+    <table cellspacing="10" width="100%">
+        <tbody >
+        {if $type != 'TRUCK' && $type != 'BUS'}
+          <tr>
+            <td><label class="appa_title">{Trans term = 'OBJECTIVE'}</label></td>
+            <td><select class="uni selc" id="type_of_use_{$smarty.foreach.name.iteration}" style="width: 311px;">
+                
+                {if $type == 'MOTO'}
+                
+                    {foreach  from=$motoCategories item=useCat }
+        			
+                        <option value='{$useCat.id}' >{$useCat.title}</option>
+                        
+        			{/foreach}
+                {elseif $type == 'OTHER'}
+                    {foreach  from=$otherCategories item=useCat1 }
+        			
+                        <option value='{$useCat1.id}' >{$useCat1.title}</option>
+                        
+        			{/foreach}
+                {else}
+				{insert name=CategoriesTitles}
+			     {/if}
+                
+              
+              </select></td>
+          </tr>
+          <tr>
+    <td colspan="2"><span class="border"></span></td>
+</tr>
+          {/if}
+          
+          <tr>
+            <td><label class="appa_title">{Trans term = 'DRIVER_AGE_DRIVING_EXPERIENCE'}</label></td>
+            <td><select class="uni selc"  id='driver_age_experience_{$smarty.foreach.name.iteration}' style="width: 311px;">
+                
+                
+                
+		{insert name=countCategoriesTitles}
+		
+              
+              
+              </select></td>
+          </tr>
+          <tr>
+    <td colspan="2"><span class="border"></span></td>
+</tr>
+          
+          {if $type != 'BUS' && $type != 'MOTO' && $type != 'OTHER'}          
+          <tr>
+            <td><label class="appa_title">{Trans term = 'TM_TYPE_MOTOR_POWER_HORSEPOWER'}</label></td>
+            <td><select  class="uni selc"  id='motor_power_{$smarty.foreach.name.iteration}' style="width: 311px;">
+            {if $type == 'TRUCK'}    
+                
+            {insert name=truckpowerCategoriesTitles}
+            {else}
+            {insert name=powerCategoriesTitles}
+            {/if}
+              
+            
+              </select></td>
+          </tr>
+          <tr>
+    <td colspan="2"><span class="border"></span></td>
+</tr>
+          {/if}          
+		  <tr>
+			<td><label class="appa_title">{Trans term  = 'INSUREANCE_DURATION'}</label></td>
+			<td>
+				<select class="uni selc"   id="coefficents_{$smarty.foreach.name.iteration}" style="width: 311px;"> 
+					{$coefficientsByDuration}
+				</select> 
+			</td>
+		  </tr>
+          <tr>
+    <td colspan="2"><span class="border"></span></td>
+</tr>
+		  {if $type != 'BUS' && $type != 'MOTO'}
+		  <tr>
+			<td><label class="appa_title">{Trans term = 'HAS_TRAILER'}</label></td>
+			<td>
+                <table cellpadding='5'>
+                    <tr>
+                    	<td><input style="height: 18px;" class="trailer_{$smarty.foreach.name.iteration}" type="radio" id="{$smarty.foreach.name.iteration}r_1" name="trailer_{$smarty.foreach.name.iteration}" value="1" checked="checked"/></td>
+                    	<td><label style="color: #fff;" for="{$smarty.foreach.name.iteration}r_1">{Trans term = 'no_trailer'}</label></td>
+                    	<td><input style="height: 18px;" class="trailer_{$smarty.foreach.name.iteration}" type="radio" id="{$smarty.foreach.name.iteration}r_2" name="trailer_{$smarty.foreach.name.iteration}" value="2"/></td>
+                    	<td><label style="color: #fff;" for="{$smarty.foreach.name.iteration}r_2">{Trans term = 'with_trailer'}</label></td>
+                    </tr>
+                </table>
+                
+                
+			</td>
+		  </tr>
+          <tr>
+    <td colspan="2"><span class="border"></span></td>
+</tr>
+		  {/if}
+
+        </tbody>
+      </table>
+<div class="result" >
+            <label class="fl" style="color: #fff;">{Trans term = 'result'}</label>
+            <span id="resultBlock_{$smarty.foreach.name.iteration}" class="fr resultat" ></span>
+</div>
+<br class="cb"/>
+<input type="button" class="calculate" value="{Trans term = 'calculate'}" onclick='{literal}calculateTotalSum( TRANSPORT_TYPES.{/literal}{$type}{literal}){/literal}'/>
+</div>
+
+
+  {/foreach}
+    
+  </div>
+
+
+{/strip}

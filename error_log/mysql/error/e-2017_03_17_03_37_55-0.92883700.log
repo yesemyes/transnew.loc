@@ -1,0 +1,14 @@
+QUERY 
+SELECT `credit`.`id` as `key`,`value` as `value` FROM  `credit` ;
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+Unknown column 'value' in 'field list'
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	751
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

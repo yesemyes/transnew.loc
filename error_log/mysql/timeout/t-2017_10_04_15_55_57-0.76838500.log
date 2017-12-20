@@ -1,0 +1,13 @@
+QUERY 
+SELECT count(id) as `qty` FROM `siteusers` WHERE `active` = '1'
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.73165607452
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	390
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	72
+File => /home/transinf/public_html/index.php	 LINE 	10

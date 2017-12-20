@@ -1,0 +1,16 @@
+QUERY 
+SELECT siteuser FROM   `offers`  
+ WHERE `active` = '1' AND `id` = '2150' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+2.04713821411
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	133
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	38
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+{literal}
+<style>
+form{padding:0px; margin:0px;}
+</style>
+{/literal}
+</head>
+<body>
+{if $this->upladError}
+<script language="javascript" >
+parent.alert("{Trans param=$this->upladError}");
+
+
+</script>
+{/if}
+{literal}
+<script language="javascript" >
+function testMe(t)
+{
+	
+	var uploadin = /jpg|png|jpeg|gif/i;
+	x = parent.checkCount("{/literal}{$this->config.user_upload_limit}{literal}","{/literal}{Trans param='limit_overflow'}{literal}");
+	
+	if(x)
+	{
+	  parent.uploadStart();
+	  fname = t.value ;
+	  fname = fname.split(".");
+	  ext =fname[fname.length-1];
+	  if(!uploadin.test(ext))
+	  {
+		  alert("{/literal}{$this->config.upload_wrong_file_formt}{literal}  "+ext);
+		  t.form.reset();
+		  parent.uploadEnd();
+		  return;
+		  
+	   }
+	  t.form.submit();
+	}
+	else
+	{
+		
+		t.form.reset();
+		
+	}
+}
+</script>
+{/literal}
+{if $this->uploadedFile}
+<script language="javascript" >
+
+	parent.uploadEnd();
+	parent.imageUploaded("{$this->uploadedFile}","{$this->path}",'{$this->get.pl}');
+</script>
+{/if}
+<form name="uploader" id="uploader" action="{$smarty.server.REQUEST_URI}" onsubmit="return " enctype="multipart/form-data" method="post" >
+<input type="file" onchange="testMe(this)" name="upload_file" value="{Trans param='UPLAD'}"/>
+</form>
+</body>
+</html>

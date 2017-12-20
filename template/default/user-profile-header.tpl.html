@@ -1,0 +1,31 @@
+{*<strong>{$smarty.session.siteusers.name}</strong> <a href="{Link page='users' action='changeprofildata'}">{Trans param='profile'}</a> 
+      <a href="{Link page='users' action='mycars'}">{Trans param='mycars'}</a> 
+            <a href="{Link page='users' action='addoffer'}">{Trans param='add_offer'}</a> 
+      <a href="{Link page='users' action='logout'}">{Trans param='logout'}</a> *}
+      
+<div class="profile_holder">
+{*<a href="{Link page='users' action='profile'}" class="profile my-profile fl">{Trans param='my_profile'}</a>*}
+<div class="fr" style="margin-left: 10px;margin-top: 30px;">
+<a href="{Link page='users' action='profile'}" class="profile welcome_message fl">
+{*Trans term='welcome_message' default='Welcome %s' user=$smarty.session.siteusers.name*}
+{Trans term='welcome'}
+<span style="color: #000;margin-left: 5px;">
+{$smarty.session.siteusers.name}
+</span>
+</a>
+<a href="{Link page='users' action='logout'}" class="profile log-out fr">{Trans param='logout'}</a>
+
+<br class="cb"/>
+</div>
+
+{if $smarty.session.siteusers.photo}
+
+<img class="fr" src="{$smarty.session.siteusers.photo}" width="50">
+{else}<img src="/css/images/user.png"/>
+
+{/if}
+
+
+<br class="cb"/>
+
+</div>      

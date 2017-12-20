@@ -1,0 +1,61 @@
+#BackToTop {
+	float: left;
+	display:none;
+
+    margin: 0 5px;
+    padding: 3px;
+    text-decoration: none;
+   
+    font: bold 14px Arial, Helvetica;
+	position:fixed;
+	bottom:40px;
+	right:12px;
+    z-index:9999;
+	
+	
+	/*********************/
+	/** CSS3 properties **/
+	/*********************/
+	/** Background gradient **/
+	background-color: #006b9c;
+   background-image: -moz-linear-gradient(#3ac9fe, #006b9c);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#3ac9fe), to(#006b9c));
+    background-image: -webkit-linear-gradient(#3ac9fe, #006b9c);
+    background-image: -o-linear-gradient(#3ac9fe, #006b9c);
+    background-image: -ms-linear-gradient(#3ac9fe, #006b9c);
+    background-image: linear-gradient(#3ac9fe, #006b9c);
+
+	/** box Radius **/
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	
+	/** Text Shadow **/
+
+	
+	/** Box shadow **/
+   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3), 0 3px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 0 rgba(0, 0, 0, 0.7), 0 2px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+#BackToTop span
+{
+  	background:url(../images/arrow_top2.png) right no-repeat;
+    display: block;
+    padding: 4px 15px;
+    cursor: pointer;
+	margin-right:5px;
+	
+	/*********************/
+	/** CSS3 properties **/
+	/*********************/
+	/** Background gradient **/
+   /* background-color: #3ac9fe;
+    background-image: -moz-linear-gradient(#0dace7, #0093cd);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#0dace7), to(#0093cd));
+    background-image: -webkit-linear-gradient(#0dace7, #0093cd);
+    background-image: -o-linear-gradient(#0dace7, #0093cd);
+    background-image: -ms-linear-gradient(#0dace7, #0093cd);
+    background-image: linear-gradient(#0dace7, #0093cd);*/
+}

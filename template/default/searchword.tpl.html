@@ -1,0 +1,9 @@
+<div class="searchword">
+	<form method="get" action="{Link page=search}">
+    	<span class="searchword_t">
+		<input type="text" name="term" value="{if $this->get.term}{$this->get.term|@htmlentities:3:"utf-8"}{else}{Trans term=SEARCH}{/if}" onblur="if(!this.value) this.value='{Trans term=SEARCH_VALUE}'" onfocus="if(this.value=='{Trans term=SEARCH_VALUE}') this.value=''" /></span>
+        <span class="searchword_b">
+		<input type="submit" value="" />
+        </span>
+    </form>
+</div>

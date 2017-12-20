@@ -1,0 +1,10 @@
+<div id="offer_photos_tpl_html" style="margin-top: 25px;">
+<div id="offer_photos">
+
+  {foreach from=$offer_images item=item}
+  {include file="services/imageblock.tpl.html"  imagePath = $item.image}
+  {/foreach}</div>
+<div id="ifContainer" class="fl">
+<iframe id="myIframe" src="{$this->path}?external=true&itpl=services/uploader.tpl.html&action=uploadFile" frameborder="0" scrolling="no" style="height:70px; clear:left; width:300px;"> </iframe>
+</div>
+</div>

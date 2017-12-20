@@ -1,0 +1,35 @@
+{literal}
+<style>
+    label.error{
+        top: auto;
+    }
+</style>
+{literal}
+
+<div  style="margin: 0 15px; width:750px; float:left">
+{*<div style="width:590px; margin:0 auto" id="signupFormLaoder">
+    <img src="/images/ajax-loader.gif"/>
+</div>
+*}
+<form action="{$this->path}" method="post" id="signupForm" autocomplete="off" >
+
+
+
+
+<div id="main-data">{include file="services/add-services-tabs/main.tpl.html"}<br  class="cb"/></div>
+
+  <div id="hide" style="display: none;">
+    <div id='view-port'>
+
+</div>
+<button type="button" name="btnPrev" value=""  id="btnPrev" onclick="prevTab()">{Trans term="btnPrevlabel" default="Назад"}</button>
+<button type="submit" name="btnSubmit" value="btnSubmit"  id="btnSubmit">{Trans term="btnSavee" default="Сохранить"}</button>
+</div>
+
+  </form>
+  <script type="text/javascript" language="javascript" >
+	{include file=services/jsValidateMessages.tpl.html}
+</script>
+
+</div>
+{include file=default/right.tpl.html}

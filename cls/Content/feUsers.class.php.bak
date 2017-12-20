@@ -1,0 +1,1016 @@
+<?
+class feUsers extends front {
+	public $contentTpl;
+	function __construct($init) {
+		
+		/*
+		 * ********************** ********************** Path Params Varibles
+		 * [0] lng [1] users [2] [action] [2] [ID] **********************
+		 * **********************
+		 */
+		$vars = get_object_vars ( $init );
+		foreach ( $vars as $key => $value ) {
+			$this->{$key} = $value;
+		}
+		$this->headStyleSheets [] = "/css/pdd_style.css";
+        $this->headStyleSheets [] = "/css/offers-list.css";        
+		$path_params = $this->path_params;
+		
+		if (count ( $path_params ) > 4) {
+			return $this->errorPage ();
+		}
+		$this->mainTpl = 'users/body.tpl.html';
+		
+		if (isset ( $this->get ['method'] )) {
+			$_method = $this->get ['method'];
+			$_method = ucfirst ( $_method );
+			$_method = "validate{$_method}";
+			
+			if (method_exists ( $this, $_method )) {
+				
+				$this->$_method ();
+			} else {
+				die ( $_method );
+			}
+		}
+		
+		if ($this->method == 'POST' && isset ( $this->query ['action'] )) {
+			$action = $this->query ['action'];
+			$action = strtolower ( $action );
+			$action = ucfirst ( $action );
+			
+			$function = "view$action";
+			if (method_exists ( $this, $function )) {
+				
+				$this->$function ();
+			
+			} else {
+				die ( $function );
+			}
+		} else {
+			
+			if (isset ( $path_params [2] )) {
+				$action = $path_params [2];
+				
+				$action = preg_replace ( '/[^a-zA-z_]/isuU', ' ', $action );
+				$action = strtolower ( $action );
+				$action = ucwords ( $action );
+				$action = preg_replace ( '/\s/', '', $action );
+				$function = "view$action";
+				
+				if (method_exists ( $this, $function )) {
+					
+					$this->$function ();
+				
+				} else {
+					
+					$this->errorPage ();
+				}
+			}
+		
+		}
+	
+	}
+	
+	/*
+	 * view Functions
+	 */
+	
+	function viewMarathonResult() {
+		if (isset ( $_SESSION ['siteusers'] )) {
+			
+			$db = db::getInstance ();
+			$this->headScripts [] = "/scripts/gchart/jquery.gchart.js";
+			$this->headScripts [] = "/scripts/viewMarathonResult.js";
+			$db = db::getInstance ();
+			if(Request::$xRequestedWith)
+			{
+				
+				$lastMonth = date('Y-m-d',strtotime("-15 day"));
+				//$marathon_results = $db->getArray ( "marathon_results", "*", "`siteusers_id`={$_SESSION ['siteusers']['id']} AND `date` > '$lastMonth'",'`date` DESC' );
+				
+				$ssuserid = $_SESSION ['siteusers']['id'];
+				if($ssuserid == 3)
+				{
+					$ssuserid = 9;
+				}
+				$marathon_results = $db->getArray ( "marathon_results", "*", "`siteusers_id`=$ssuserid AND `date` > '$lastMonth'",'`date` ASC' );
+				$dataLabels = array();
+				$labelsMin = time();
+				$labelsMax = time();
+				$max = 0;
+				foreach ($marathon_results	 as &$result)
+				{
+					$result['total'] = $result['true']+$result['wrong'];
+					$result['wrong_pr'] = $result['wrong']*100/$result['total'];
+					$result['true_pr'] = $result['true']*100/$result['total'];
+					
+					$dataLabels[] =date('d/m',strtotime( $result['date']));
+					
+					$series['true']['data'][] = $result['true'];
+					$series['wrong']['data'][] = $result['wrong'];
+					if($max < $result['total'])
+					{
+					 	$max = $result['total'];
+					}
+					
+					if(strtotime( $result['date']) < $labelsMax)
+					{
+						$labelsMax = strtotime( $result['date']);
+					}
+					if(strtotime( $result['date']) > $labelsMin)
+					{
+						$labelsMin = strtotime( $result['date']);
+					}
+				}
+				$labelsMaxDate = date("d.m.Y",$labelsMax);
+				$labelsMinDate = date("d.m.Y",$labelsMin);
+				$series['wrong']['title'] = HelperFunction::trans(array('term'=>'wrong_answers_pr'));
+				$series['true']['title'] = HelperFunction::trans(array('term'=>'true_answers_pr'));
+				
+				
+				$series['wrong']['color'] = 'ff0000';
+				$series['true']['color'] = '058642';
+				
+				
+				
+				$chartLabel = HelperFunction::trans(array('term'=>'marathone_results','default'=>'Results from %s to %s ','min'=>$labelsMaxDate,'max'=>$labelsMinDate));
+				
+				$return = array('dataLabels'=>$dataLabels,'max'=>$max,'chartLabel'=>$chartLabel,'series'=>$series,'axis'=>range(0, 100,1));
+				die(json_encode($return));
+			}
+			$this->mainTpl = "users/viewMarathonResult.tpl.html";
+		
+		} else {
+			$this->viewLogin ();
+		}
+	}
+	function viewSavemarathonresult() {
+		
+		if (isset ( $_SESSION ['siteusers'] )) {
+			
+			$db = db::getInstance ();
+			$saveResult = array ();
+			$saveResult ['true'] = 0;
+			$saveResult ['wrong'] = 0;
+			if (isset ( $_SESSION ['marathon_results'] )) {
+				$return = $_SESSION ['marathon_results'];
+				
+				foreach ( $return as $q ) {
+					$saveResult ['status'] [$q ['id']] = $q ['status'];
+					if ($q ['status'] == "true") {
+						$saveResult ['true'] ++;
+					} else {
+						$saveResult ['wrong'] ++;
+					}
+				
+				}
+				$query = "REPLACE INTO `marathon_results`(`siteusers_id`, `date`, `true`, `wrong`) VALUES (?,?,?,?)";
+				$stmt = $db->stmt_init ();
+				if ($stmt->prepare ( $query )) {
+					$date = date ( 'Y-m-d' );
+					$siteusers_id = $_SESSION ['siteusers'] ['id'];
+					$true = $saveResult ['true'];
+					$wrong = $saveResult ['wrong'];
+					$stmt->bind_param ( 'isii', $siteusers_id, $date, $true, $wrong );
+					$exec = $stmt->execute ();
+				}
+				$saveResult ['exec_tatus'] = $exec;
+				$stmt->close ();
+				if (Request::$xRequestedWith) {
+					
+					die ( json_encode ( $saveResult ) );
+				}
+                
+                 else {
+					base::redirect ( HelperFunction::link ( array ('users', 'marathon-result' ) ) );
+				}
+			}
+		
+		} else {
+            $_SESSION ['return_to_results'] = 1; 
+			header ( 'HTTP/1.0 401 Unauthorized' );
+			die ( "Unauthorized" );
+		}
+	
+	}
+	function viewSuccessNewPasswordSend() {
+	}
+    function viewSuccessProfileEdit() {
+	}
+    /*function viewDeleteselecteditems()*/
+	function viewDeleteOffer() {
+	    
+        $db = db::getInstance ();
+		//$query = " DELETE FROM offers WHERE id in (" . implode ( ",", $this->post ['offer'] ) . ")";
+        $query = " DELETE FROM offers WHERE `id` = '{$this->post ['offer']}'";
+        $db->query ( $query );
+		//$query = " DELETE FROM offers_filed_options_rel WHERE id in (" . implode ( ",", $this->post ['offer'] ) . ")";
+        $query = " DELETE FROM offers_filed_options_rel WHERE `id` = '{$this->post ['offer']}'";
+		$db->query ( $query );
+		//$query = " DELETE FROM offers_image_rel WHERE id in (" . implode ( ",", $this->post ['offer'] ) . ")";
+        $query = " DELETE FROM offers_image_rel WHERE `id` = '{$this->post ['offer']}'";
+		$db->query ( $query );
+		
+		base::redirect ( HelperFunction::link ( 'users', 'mycars' ) );
+	}
+	function viewRegistration() {
+		$registration_email_content = $this->LoadText ( 'registration_email_content', 1 );
+		
+		
+		$db = db::getInstance ();
+		$this->headScripts [] = "/scripts/jquery.validate.js";
+		$this->headScripts [] = "/scripts/registration.js";
+		$this->headScripts [] = HelperFunction::link ( array ('home' ) ) . "?external=1&itpl=users/registration.tpl.js";
+		
+		if ($this->method == 'POST') {
+			$InsertData ['main'] ['login'] = trim ( $this->post ['data_login'] );
+			$InsertData ['main'] ['name'] = trim ( $this->post ['data_name'] );
+			$InsertData ['main'] ['email'] = trim ( $this->post ['data_email'] );
+			
+		/*	if ($this->post ['user_phone1_code'] && $this->post ['user_phone1'])
+				$InsertData ['main'] ['phone1'] = "({$this->post['user_phone1_code']}) " . $this->post ['user_phone1'];
+			
+			if ($this->post ['user_phone2_code'] && $this->post ['user_phone2'])
+				$InsertData ['main'] ['phone2'] = "({$this->post['user_phone2_code']}) " . $this->post ['user_phone2'];*/
+			
+			$InsertData ['main'] ['password'] = md5 ( $this->post ['data_password'] );
+			
+			$InsertData ['main'] ['data_currentcar_brand'] = $this->post ['data_currentcar_brand'] ? $this->post ['data_currentcar_brand'] : 0;
+			$InsertData ['main'] ['data_currentcar_brand_model'] = $this->post ['data_currentcar_brand_model'] ? $this->post ['data_currentcar_brand_model'] : 0;
+			
+			//$InsertData ['main'] ['data_dream_model'] = $this->post ['data_dream_model'] ? $this->post ['data_dream_model'] : 0;
+			//$InsertData ['main'] ['data_dream_brand'] = $this->post ['data_dream_brand'] ? $this->post ['data_dream_brand'] : 0;
+			
+			$InsertData ['main'] ['regdate'] = date ( 'Y-m-d' );
+			$InsertData ['main'] ['date_of_birth'] = date ( 'Y-m-d', mktime ( 0, 0, 0, $this->post ['data_month'], $this->post ['data_day'], $this->post ['data_year'] ) );
+			
+			foreach ( $this->languages as $lng ) {
+				$InsertData ['ml'] ['addres'] [$lng ['id']] = ' ';
+				$InsertData ['ml'] ['description'] [$lng ['id']] = ' ';
+			}
+			
+			$registration_email_content = $this->LoadText ( 'registration_email_content', 1 );
+			
+			$sucsess = $db->insertQuery ( 'siteusers', $InsertData );
+			
+			if ($sucsess) {
+				$confirm_code = md5 ( microtime ( 1 ) );
+				$pos = mt_rand ( 0, strlen ( $confirm_code ) - 6 );
+				$confirm_code = substr ( $confirm_code, $pos, 5 );
+				
+				foreach ( $registration_email_content as $key => $row ) {
+					$row ['content'] = str_replace ( '{login}', $InsertData ['main'] ['login'], $row ['content'] );
+					$row ['content'] = str_replace ( '{password}', $this->post ['data_password'], $row ['content'] );
+					
+					$db->query ( "UPDATE siteusers SET confirm_code = '$confirm_code' WHERE id='$sucsess'" );
+					
+					$row ['content'] = str_replace ( '{url}', 'http://' . $_SERVER ['HTTP_HOST'] . "" . HelperFunction::link ( array ('users', 'confirm' ) ) . "?code={$confirm_code}", $row ['content'] );
+					$registration_email_content [$key] = $row;
+				}
+				
+				$mail_body = "";
+				$subject = $registration_email_content [$this->defLng ['id']] ['title'];
+				
+				foreach ( $registration_email_content as $conetnt ) {
+					$mail_body .= $conetnt ['title'] . "<br/>";
+					$mail_body .= $conetnt ['content'] . "<br/><hr/>";
+				
+				}
+				$fromEmail = $this->config ['site_admin_mail'];
+				base::mailSend ( $mail_body, $subject, $InsertData ['main'] ['email'], $InsertData ['main'] ['name'], $fromEmail );
+				
+				if (isset ( $this->post ['data_subscribe'] )) {
+					$contacts ['date'] = date ( 'Y-m-d' );
+					$contacts ['active'] = 1;
+					$contacts ['name'] = $InsertData ['main'] ['name'];
+					$contacts ['email'] = $InsertData ['main'] ['email'];
+					
+					foreach ( $contacts as $key => $value ) {
+						
+						$newsLeater [] = " `$key`='" . ss ( $value ) . "'";
+					}
+					
+					$newsLeater_str = implode ( ",", $newsLeater );
+					
+					$query = "INSERT IGNORE  INTO newsletter SET $newsLeater_str ";
+					$db->query ( $query );
+				}
+				$link = HelperFunction::link ( array ('page' => 'users', 'action' => 'registration-complete' ) );
+				base::redirect ( $link );
+			
+			} else {
+				return $this->errorPage ();
+			}
+		
+		}
+		$this->contentTpl = 'users/registration.tpl.html';
+	}
+	function viewConfirm() {
+		$db = db::getInstance ();
+		$code = $this->get ['code'];
+		$row = $db->getRow ( 'siteusers', '*', 'confirm_code=\'' . $code . "' " );
+		if (empty ( $row )) {
+			return $this->errorPage ();
+		
+		} elseif ($row ['confirmed']) {
+		      return $this->errorPage ();
+		} else {
+			$db->query ( "UPDATE siteusers SET confirmed=1,active=1 WHERE id={$row['id']}" );
+			base::redirect ( HelperFunction::link ( array ('users', 'confirm-success' ) ) );
+		}
+	
+	}
+	function viewLogin() {
+		
+		$db = db::getInstance ();
+		if ($this->method == 'POST') {
+			
+			$login = $this->post ['user_login'];
+			$password = $this->post ['user_password'];
+			$password = md5 ( $password );
+			
+		
+			if(isset($_POST['token'])){
+				
+				$s = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);
+				$user = json_decode($s, true);
+				if(!empty($user)){
+					if($user['network']=='odnoklassniki'){
+					$user['photo']='';
+					$user['photo_big']='';
+				}
+               // die('<pre>'.print_r($user,1));
+				$q  = "INSERT INTO  `siteusers` (`login`,`regdate`,`active`,`confirmed`,`email`,`network`,`name`,`identity`,`photo`,`photo_big`) values('{$user['email']}',NOW(),'1','1','{$user['email']}','{$user['network']}',concat('{$user['first_name']} ', ' {$user['last_name']}'),'{$user['identity']}','{$user['photo']}','{$user['photo_big']}') ON DUPLICATE KEY UPDATE `lastactivity`=NOW(),`name`='{$user['first_name']} {$user['last_name']}',`photo`='{$user['photo']}',`photo_big`='{$user['photo_big']}',`network`='{$user['network']}',`identity`='{$user['identity']}'";
+				
+				$db->query($q);
+				
+				$row = $db->getRow ( 'siteusers', '*', "`active`='1' AND `identity`='{$user['identity']}'" );
+			}	
+			}
+			else if(!empty($login) && !empty($password ))
+			{
+				$row = $db->getRow ( 'siteusers', '*', " siteusers.login='{$login}' AND `password`='{$password}' AND `active` and `confirmed`" );
+				
+				if(! empty($row ))
+				{
+					$row['diff'] = $db->getRow('siteusers',"DATEDIFF(NOW(),`regdate`) as diff","`siteusers`.`id`={$row['id']}");
+					$row['data_currentcar_brand'] = $db->getRow( 'brandmodel', 'label', "`id`={$row['data_currentcar_brand']}");
+					$row['data_currentcar_brand_model'] = $db->getRow( 'brandmodel', 'label', "`id` = {$row['data_currentcar_brand_model']}");
+				}
+                
+            }
+			
+	
+			if (empty ( $row ) ) {
+				$this->_loginError = true;
+			
+			} else {
+				$_SESSION ['siteusers'] = $row;
+				$myCars = HelperFunction::link ( array ('users', 'profile' ) );
+                if (isset ( $_SESSION ['return_to_results'] ))
+                {
+                    $this->viewSavemarathonresult ();
+                }
+                else{
+                   base::redirect ( $myCars );
+                }
+			}
+		
+		}
+		$this->contentTpl = 'users/login.tpl.html';
+	}
+	function viewLogout() {
+		session_unset ( 'siteusers' );
+		base::redirect ( HelperFunction::link ( array ('home') ) );
+	}
+	function viewProfile() {
+	   $this->getMyCars ();
+		$this->contentTpl = 'users/profile.tpl.html';
+	}
+	function viewForgot() {
+		
+		$db = db::getInstance ();
+		if ($this->method == 'POST') {
+			
+			$newPassword = md5 ( microtime ( 1 ) );
+			$newPassword1 = substr ( $newPassword, mt_rand ( 2, strlen ( $newPassword ) - 5 ), 3 );
+			$newPassword2 = substr ( $newPassword, mt_rand ( 0, strlen ( $newPassword ) - 5 ), 3 );
+			$newPassword1 = strtoupper ( $newPassword1 );
+			$newPassword = $newPassword2 . $newPassword1;
+			
+			$confirm_code = md5 ( $newPassword );
+			$pos = mt_rand ( 0, strlen ( $confirm_code ) - 6 );
+			$confirm_code = substr ( $confirm_code, $pos, 5 );
+			
+			$row = $db->getRow ( 'siteusers', '*', "email='{$this->post['data_email']}'" );
+			if (empty ( $row )) {
+				return $this->errorPage ();
+			}
+			
+			$forgot_email_content = $this->LoadText ( 'forgot_email_content', 1 );
+			
+			$confirm_code = md5 ( microtime ( 1 ) );
+			$pos = mt_rand ( 0, strlen ( $confirm_code ) - 6 );
+			$confirm_code = substr ( $confirm_code, $pos, 5 );
+			
+			foreach ( $forgot_email_content as $key => $rowt ) {
+				$rowt ['content'] = str_replace ( '{login}', $row ['login'], $rowt ['content'] );
+				$rowt ['content'] = str_replace ( '{password}', $newPassword, $rowt ['content'] );
+				$rowt ['content'] = str_replace ( '{url}', 'http://' . $_SERVER ['HTTP_HOST'] . "" . HelperFunction::link ( array ('users', 'successnewpasswordsend' ) ) . "?code={$confirm_code}", $rowt ['content'] );
+				$forgot_email_content [$key] = $rowt;
+			}
+			
+			$mail_body = "";
+			$subject = $forgot_email_content [$this->defLng ['id']] ['title'];
+			
+			foreach ( $forgot_email_content as $conetnt ) {
+				$mail_body .= $conetnt ['title'] . "<br/>";
+				$mail_body .= $conetnt ['content'] . "<br/><hr/>";
+			
+			}
+			$query = " UPDATE siteusers SET active=0 ,confirmed=0,confirm_code='$confirm_code',password=MD5('$newPassword') WHERE email='{$this->post['data_email']}'";
+			
+			$db->query ( $query );
+			$mail_body = stripcslashes ( $mail_body );
+			$mail_body = str_replace ( "/admin/", '', $mail_body );
+			base::mailSend ( $mail_body, $subject, $row ['email'], $row ['name'], $this->config ['site_admin_mail'], $this->config ['site_mail_from'] );
+			
+			base::redirect ( HelperFunction::link ( array ('users', 'success-new-password-send' ) ) );
+		
+		}
+		
+		$this->contentTpl = 'users/forgot.tpl.html';
+	}
+	function viewChangepassword() {
+		$db = db::getInstance ();
+		if ($this->method == 'POST') {
+			
+			$query = "UPDATE siteusers SET  `password`=MD5('{$this->post['data_password']}') WHERE id='{$_SESSION['siteusers']['id']}'";
+			$db->query ( $query );
+			base::redirect ( HelperFunction::link ( 'users', 'sucsess-password-changed' ) );
+		}
+		
+		$this->contentTpl = 'users/changepassword.tpl.html';
+	}
+	function viewChangeprofildata() {
+		$db = db::getInstance ();
+		
+		$this->headScripts [] = "/scripts/jquery.validate.js";
+		$this->headScripts [] = "/scripts/registration.js";
+		$this->headScripts [] = HelperFunction::link ( array ('home' ) ) . "?external=1&itpl=users/edit-profile.tpl.js";
+		
+		if ($this->method == "POST") {
+			
+			// $InsertData['main']['name'] = $this->post['data_name'];
+			$InsertData ['main'] ['phone1'] = $this->post ['user_phone1'];
+			$InsertData ['main'] ['phone2'] = $this->post ['user_phone2'];
+			
+			if ($this->post ['data_password'])
+				$InsertData ['main'] ['password'] = md5 ( $this->post ['data_password'] );
+			
+			$InsertData ['main'] ['data_currentcar_brand'] = $this->post ['data_currentcar_brand'] ? $this->post ['data_currentcar_brand'] : 0;
+			$InsertData ['main'] ['data_currentcar_brand_model'] = $this->post ['data_currentcar_brand_model'] ? $this->post ['data_currentcar_brand_model'] : 0;
+			
+			//$InsertData ['main'] ['data_dream_model'] = $this->post ['data_dream_model'] ? $this->post ['data_dream_model'] : 0;
+			//$InsertData ['main'] ['data_dream_brand'] = $this->post ['data_dream_brand'] ? $this->post ['data_dream_brand'] : 0;
+			
+			//$InsertData ['main'] ['regdate'] = date ( 'Y-m-d' );
+			$InsertData ['main'] ['date_of_birth'] = date ( 'Y-m-d', mktime ( 0, 0, 0, $this->post ['data_month'], $this->post ['data_day'], $this->post ['data_year'] ) );
+			
+			foreach ( $this->languages as $lng ) {
+				$InsertData ['ml'] ['addres'] [$lng ['id']] = ' ';
+				$InsertData ['ml'] ['description'] [$lng ['id']] = 'XC';
+			}
+			
+			
+			foreach ( $InsertData ['main'] as $f => $v ) {
+				$updateQueryBody [] = "`$f`='$v'";
+			}
+			
+			 $updateQuery = " UPDATE siteusers SET  " . implode ( ",", $updateQueryBody ) . " WHERE id='{$_SESSION ['siteusers']['id']}'";
+			 $db->query ( $updateQuery );
+			
+			
+			//$_SESSION ['siteusers'] = $row;
+            
+            $row = $db->getRow ( 'siteusers', '*', " siteusers.id='{$_SESSION ['siteusers']['id']}'");
+			
+            $row['diff'] = $db->getRow('siteusers',"DATEDIFF(NOW(),`regdate`) as diff","`siteusers`.`id`={$row['id']}");
+		    $row['data_currentcar_brand'] = $db->getRow( 'brandmodel', 'label,id', "`id` = {$InsertData['main']['data_currentcar_brand']}" );
+            $row['data_currentcar_brand_model'] = $db->getRow( 'brandmodel', 'label,id', "`id` = {$InsertData['main']['data_currentcar_brand_model']}" );
+			$_SESSION ['siteusers'] = $row;
+            
+			$arrr = HelperFunction::link ( array('users', 'success-profile-edit') );
+            base::redirect($arrr);
+		
+		}
+		$this->contentTpl = 'users/editprofile.tpl.html';
+	}
+	function viewMycars() {
+		$this->getMyCars ();
+		
+		$this->contentTpl = "users/mycars.tpl.html";
+	
+	}
+	function getMyCars() {
+		require_once (ROOT_DIR . '/ini/offers.php');
+		$db = db::getInstance ();
+		// OFFER_ID OFFER_BRAND OFFER_MODEL OFFER_YEAR_ISUS OFFER_PRICE
+		// OFFER_CURRENCY OFFER_EXP_DATE
+		$query = " SELECT 		  count(offers.id) as qty
+					FROM offers
+								  
+		                  WHERE 
+		                   siteuser ={$_SESSION['siteusers']['id']} 
+		                   
+		                 ";
+		
+		$count = $db->queryFetchOne ( $query );
+		
+		$page = isset ( $this->pages ['mycars'] ) ? $this->pages ['mycars'] : 1;
+		$page = $page < 1 ? 1 : $page;
+		
+		$limit_str = " LIMIT " . (($page - 1) * $this->config ['fe_paging_limit']) . ", {$this->config['fe_paging_limit']} ";
+		
+		$query = " SELECT 		  offers.id,
+								  offers.name, 
+				                  offers.filed_car_brand as brand_id,
+				                  brand.alias as brandalias,
+				                  model.alias as modelalias,
+				                  CONCAT( brand.label,' ',model.label) as `brandmodel`,
+				                  brand.label as brand,
+				                  offers.filed_car_brand_model as model_id,
+				                  model.label as model,
+				                  offers.filed_release_date_year as year,
+                                  offers.service_price as  price,
+				                  offers.filed_release_date_month as month,  
+				                  offers.filed_currency as currency_id,
+				                  offers.filed_main_image as image,
+				                  offers.filed_release_date_year as date_year,
+				                  offers.filed_milage as milage,
+				                  offers.filed_milage_kayficent as milagek,
+				                  offers.filed_engine as engine,
+				                  offers.filed_contract as contract,
+				                  currency.iso  as `currency`,
+				                  filed_end_date as `end_date`
+				                  FROM offers
+				                  INNER JOIN brandmodel       as brand ON ( offers.filed_car_brand       = brand.id )
+				                  LEFT JOIN brandmodel       as model ON ( offers.filed_car_brand_model = model.id )
+				                 
+				                  LEFT JOIN currency      ON (currency.id = offers.filed_currency )
+		                  WHERE 
+		                   siteuser ={$_SESSION['siteusers']['id']} 
+		                   
+		                  
+		                 ";
+		$order = '';
+		if (isset ( $this->query ['order_by'] )) {
+			
+			$order_by = $this->query ['order_by'];
+			$haystack = array ('brandmodel', 'price', 'engine', 'milage' );
+			
+			if (in_array ( $order_by, $haystack )) {
+				$order = "ORDER BY $order_by";
+			}
+			if (isset ( $this->query ['direction'] ) && in_array ( $this->query ['direction'], array ('asc', 'desc' ) )) {
+				$order .= " " . $this->query ['direction'];
+			
+			}
+		}
+		$this->userOffers = $db->queryFetch ( $query . $order, $limit_str );
+		$this->foundQty = $count ['qty'];
+		$this->_page = $page;
+	
+	}
+	function viewAddoffer() {
+	   $this->headStyleSheets [] = "/css/combo.css";
+              	   
+	     
+		$this->headStyleSheets [] = "/css/user.offer.css";
+        $this->headScripts [] = "/scripts/jquery.maskedinput.min.js";
+		$this->headScripts [] = "/scripts/addoffer.js";
+		$db = db::getInstance ();
+        
+        $this->states = $db->getTree('states','*',"`lng_id` = '{$this->defLng['id']}'",'','position');
+        
+        
+		$this->viewtime = explode(',', $this->config['view_time']);
+		if ($this->method == 'POST' && isset ( $this->post ['addThisOffer'] )) {
+		  
+            //$req ['filed_milage'] = $this->post['main']['filed_milage'];
+            $req ['filed_car_brand_model'] = intval($this->post['main']['filed_car_brand_model']);
+            $req ['filed_car_brand'] = intval($this->post['main']['filed_car_brand']);
+            $req ['filed_release_date_year'] = intval($this->post['main']['filed_release_date_year']);
+            $req ['phone1'] = $this->post['user_phone1'];
+            
+            
+            $this->errors = array();
+            
+            foreach($req as $req_k =>$req_v)
+            {
+                if(!isset($req_k) || empty($req_v) || $req_v !=0)
+                {
+                    
+                    $this->errors[$req_k] = HelperFunction::trans ( array ('term' => "err_$req_k" ) );
+                     
+                }
+            }
+            
+            print_r($this->post);
+                
+                        
+            if(empty($this->errors))
+            {
+               
+                die('sadgasdfgadsg');
+                
+    			$main = $this->post ['main'];
+    			$rel ['filed_options'] = isset ( $this->post ['rel'] ['filed_options'] ) ? $this->post ['rel'] ['filed_options'] : array ();
+    			$images = isset ( $this->post ['rel'] ['image'] ) ? $this->post ['rel'] ['image'] : array ();
+    			
+    			if ($this->post['user_phone1'])
+    				$main ['phone1'] = "{$this->post['user_phone1']}";
+    			
+    			if ($this->post['user_phone2'])
+    				$main ['phone2'] = "{$this->post['user_phone2']}";
+    			
+               
+                
+                
+    			$main ['siteuser'] = $_SESSION ['siteusers'] ['id'];
+    			$main ['dealer'] = ($_SESSION ['siteusers'] ['dealer']) ? 1 : 0;
+    			
+    			$main ['filed_state'] = $main ['filed_state'] ? $main ['filed_state'] : 0;
+                $main ['filed_country'] = $main ['filed_country'] ? $main ['filed_country'] : 0;
+    			$main ['filed_milage'] = $main ['filed_milage'] ? $main ['filed_milage'] : 0;
+    			$main ['filed_engine_power'] = $main ['filed_engine_power'] ? $main ['filed_engine_power'] : 0;
+                $main ['filed_engine'] = $main ['filed_engine'] ? $main ['filed_engine'] : 0;
+    			$main ['filed_bargaining'] = $main ['filed_bargaining'] ? $main ['filed_bargaining'] : 0;
+    			$main ['filed_warranty'] = $main ['filed_warranty'] ? $main ['filed_warranty'] : 0;
+    			$main ['filed_color'] = $main ['filed_color'] ? $main ['filed_color'] : 0;
+    			$main ['filed_fuel'] = $main ['filed_fuel'] ? $main ['filed_fuel'] : 0;
+    			$main ['filed_currency'] = $main ['filed_currency'] ? $main ['filed_currency'] : 0;
+    			$main ['filed_release_date_month'] = $main ['filed_release_date_month'] ? $main ['filed_release_date_month'] : 0;
+    			$main ['filed_rudder'] = $main ['filed_rudder'] ? $main ['filed_rudder'] : 0;
+    			$main ['description'] = strip_tags ( $main ['description'] );
+    			$main ['contact_name'] = $main ['contact_name'] ? $main ['contact_name'] : 0;
+                $main ['filed_city'] = $main ['filed_city'] ? $main ['filed_city'] : 0;
+                $main ['filed_other_city'] = $main ['filed_other_city'] ? $main ['filed_other_city'] : 0;
+    			$main ['active'] = 1;
+                
+                
+                
+                
+                
+                
+                
+                
+    			
+    			$dur = $db->getOptions ( 'duration', 'id', 'value', $this->defLng ['id'], 'active' );
+    			$durVal = $dur [$main ['filed_duration']];
+    			
+    			$main ['filed_srtat_date'] = date ( "Y-m-d", time () );
+    			$main ['filed_end_date'] = date ( "Y-m-d", strtotime ( "+$durVal days" ) );
+    			
+    			require_once (ROOT_DIR . '/ini/offers.php');
+    			
+    			$sizes = $root ['items'] ["image"] ['resize'];
+    			if ($main ['filed_main_image']) {
+    				
+    				$basname = basename ( $main ['filed_main_image'] );
+    				
+    				$img = $main ['filed_main_image'];
+    				if (strstr ( $basname, 'tmp-' )) {
+    					$output = microtime ( 1 ) . ($key + 1) . mt_rand ( 1000, 9999 );
+    					$output = str_replace ( ".", "-", $output );
+    					$img = str_replace ( 'small-', '', $img );
+    					foreach ( $sizes as $folder => $size ) {
+    						
+    						$newFile = base::resizeAndcopy ( $img, $size, $output, "img/offers/" . $folder );
+    					
+    					}
+    					
+    					$main ['filed_main_image'] = $output . base::getExtension ( $img );
+    				} else {
+    					$main ['filed_main_image'] = $basname;
+    				}
+    			} else {
+    				$main ['filed_main_image'] = '';
+    			}
+    			
+    			if (! empty ( $images )) {
+    				
+    				foreach ( $images as $key => $img ) {
+    					$output = microtime ( 1 ) . ($key + 1) . mt_rand ( 1000, 9999 );
+    					$output = str_replace ( ".", "-", $output );
+    					
+    					$basname = basename ( $img );
+    					$folder = dirname ( $img );
+    					$bigImage = $folder . "/" . str_replace ( 'small-', '', $basname );
+    					
+    					foreach ( $sizes as $folder => $size ) {
+    						
+    						$newFile = base::resizeAndcopy ( $bigImage, $size, $output, "img/offers/" . $folder );
+    					
+    					}
+    					$rel ['image'] [] = $output . base::getExtension ( $img );
+    				}
+    			
+    			}
+    			
+    			$querys = array ();
+    			$mainQueryInsert = array ();
+    			foreach ( $main as $key => $value ) {
+    				$value = mysql_escape_string ( $value );
+    				$mainQueryInsert [] = "`$key`='$value' ";
+    			
+    			}
+    			$mainInsert = implode ( ",\r\n", $mainQueryInsert );
+    			$querys [] = " INSERT INTO offers SET $mainInsert ";
+    			$relInserts = array ();
+    			foreach ( $rel as $tabel => $values ) {
+    				foreach ( $values as $val )
+    					if (! is_array ( $val ))
+    						$querys [] = "REPLACE INTO `offers_{$tabel}_rel` SET  `$tabel` ='$val', id=LAST_INSERT_ID()";
+    					else {
+    						foreach ( $val as $rv ) {
+    							$querys [] = "REPLACE INTO `offers_{$tabel}_rel` SET  `$tabel` ='$rv', id=LAST_INSERT_ID()";
+    						}
+    					}
+    			
+    			}
+    			
+    			$querys [] = " UPDATE offers SET `name`=CONCAT('TI',LAST_INSERT_ID()) WHERE id=LAST_INSERT_ID() ";
+    			
+    			/*
+    			 * SERVICE PRICE
+    			 */
+    			$rates ['EUR'] = $this->config ['EUR_RATE'];
+    			$rates ['USD'] = $this->config ['USD_RATE'];
+    			
+    			if ($main ['filed_currency'] == '3')
+    				$service_price = " UPDATE  `offers` SET `service_price`=`filed_price` *{$rates['USD']} WHERE id=LAST_INSERT_ID()";
+    			
+    			elseif ($main ['filed_currency'] == '4')
+    				$service_price = " UPDATE  `offers` SET `service_price`=`filed_price` *{$rates['EUR']} WHERE id=LAST_INSERT_ID()";
+    			
+    			elseif ($main ['filed_currency'] == '5')
+    				$service_price = " UPDATE  `offers` SET `service_price`=`filed_price` WHERE id=LAST_INSERT_ID()";
+    			
+    			$querys [] = $service_price;
+    			
+    			// $db->query($service_price);
+    			
+    			/*
+    			 * SERVICE PRICE
+    			 */
+    			
+    			foreach ( $querys as $q ) {
+    				$db->query ( $q );
+    			}
+    			
+    			global $smarty;
+    			$smarty->clear_cache ();
+                
+                    base::redirect ( HelperFunction::link ( array ('users', 'profile' ) ) );
+                }
+                else{
+                    $this->mainTpl = "users/addoffer.tpl.html";
+                }
+            
+            
+		}
+        $this->mainTpl = "users/addoffer.tpl.html";
+        
+	}
+    
+    public function viewDisplaythisimage()
+	{
+		
+	}
+	function viewEditoffer() {
+		$this->headStyleSheets [] = "/css/user.offer.css";
+		$this->headScripts [] = "/scripts/jquery.validate.js";
+		$this->headScripts [] = "/scripts/jquery.metadata.js";
+        $this->headScripts [] = "/scripts/jquery.maskedinput.min.js";
+		$this->headScripts [] = "/scripts/addoffer.js";
+		
+		$db = db::getInstance ();
+        
+        $this->states = $db->getTree('states','*',"`lng_id` = '{$this->defLng['id']}'",'','position');
+        
+		if (isset ( $this->path_params [3] )) {
+			
+			$this->offerID = $this->path_params [3];
+			$this->offerID = str_replace ( "TI", '', $this->offerID );
+			$this->offerID = intval ( $this->offerID );
+			$where [] = " `offers`.`id` = '{$this->offerID}'";
+		
+		} else {
+			base::redirect ( 'error', 'offer-not-found' );
+		}
+		
+		if ($this->method == 'POST' && isset ( $this->post ['addThisOffer'] )) {
+			
+			$main = $this->post ['main'];
+			
+			$rel ['filed_options'] = isset ( $this->post ['rel'] ['filed_options'] ) ? $this->post ['rel'] ['filed_options'] : array ();
+			$rel ['image'] = isset ( $this->post ['rel'] ['image'] ) ? $this->post ['rel'] ['image'] : array ();
+			
+			$images = isset ( $this->post ['rel'] ['image'] ) ? $this->post ['rel'] ['image'] : array ();
+			
+            
+            
+            
+			$main ['phone1'] = "{$this->post['user_phone1']}";
+			$main ['phone2'] = "{$this->post['user_phone2']}";
+			$main ['siteuser'] = $_SESSION ['siteusers'] ['id'];
+			$main ['dealer'] = ($_SESSION ['siteusers'] ['dealer']) ? 1 : 0;
+			
+            
+            $main ['filed_country'] = $main ['filed_country'] ? $main ['filed_country'] : 0;
+            $main ['contact_name'] = $main ['contact_name'] ? $main ['contact_name'] : 0;
+            $main ['filed_city'] = $main ['filed_city'] ? $main ['filed_city'] : 0;
+            $main ['filed_other_city'] = $main ['filed_other_city'] ? $main ['filed_other_city'] : 0;
+			$main ['filed_state'] = $main ['filed_state'] ? $main ['filed_state'] : 0;
+			$main ['filed_milage'] = $main ['filed_milage'] ? $main ['filed_milage'] : 0;
+			$main ['filed_engine_power'] = $main ['filed_engine_power'] ? $main ['filed_engine_power'] : 0;
+            $main ['filed_engine'] = $main ['filed_engine'] ? $main ['filed_engine'] : 0;
+			$main ['filed_bargaining'] = $main ['filed_bargaining'] ? $main ['filed_bargaining'] : 0;
+			$main ['filed_warranty'] = $main ['filed_warranty'] ? $main ['filed_warranty'] : 0;
+			$main ['filed_color'] = $main ['filed_color'] ? $main ['filed_color'] : 0;
+			$main ['filed_fuel'] = $main ['filed_fuel'] ? $main ['filed_fuel'] : 0;
+			$main ['filed_currency'] = $main ['filed_currency'] ? $main ['filed_currency'] : 0;
+			$main ['filed_release_date_month'] = $main ['filed_release_date_month'] ? $main ['filed_release_date_month'] : 0;
+			$main ['filed_rudder'] = $main ['filed_rudder'] ? $main ['filed_rudder'] : 0;
+            $main ['filed_customs'] = $main ['filed_customs'] ? $main ['filed_customs'] : 0;
+			$main ['description'] = strip_tags ( $main ['description'] );
+			$dur = $db->getOptions ( 'duration', 'id', 'value', $this->defLng ['id'], 'active' );
+			$durVal = $dur [$main ['filed_duration']];
+			
+			$main ['filed_srtat_date'] = date ( "Y-m-d", time () );
+			$main ['filed_end_date'] = date ( "Y-m-d", strtotime ( "+$durVal days" ) );
+			
+			require_once (ROOT_DIR . '/ini/offers.php');
+			$sizes = $root ['items'] ["image"] ['resize'];
+			
+			if ($main ['filed_main_image']) {
+				
+				$basname = basename ( $main ['filed_main_image'] );
+				$img = $main ['filed_main_image'];
+				if (strstr ( $basname, 'tmp-' )) {
+					$output = microtime ( 1 ) . ($key + 1) . mt_rand ( 1000, 9999 );
+					$output = str_replace ( ".", "-", $output );
+					$img = str_replace ( 'small-', '', $img );
+					foreach ( $sizes as $folder => $size ) {
+						
+						$newFile = base::resizeAndcopy ( $img, $size, $output, "img/offers/" . $folder );
+					
+					}
+					$main ['filed_main_image'] = $output . base::getExtension ( $img );
+				} else {
+					$main ['filed_main_image'] = $basname;
+				}
+			} else {
+				$main ['filed_main_image'] = '';
+			
+			}
+			
+			if (! empty ( $images )) {
+				
+				foreach ( $images as $key => $img ) {
+					
+					$basname = basename ( $img );
+					
+					if (strstr ( $basname, 'tmp-' )) {
+						
+						$output = microtime ( 1 ) . ($key + 1) . mt_rand ( 1000, 9999 );
+						$output = str_replace ( ".", "-", $output );
+						$img = str_replace ( 'small-', '', $img );
+						foreach ( $sizes as $folder => $size ) {
+							
+							$newFile = base::resizeAndcopy ( $img, $size, $output, "img/offers/" . $folder );
+						
+						}
+						$rel ['image'] [] = $output . base::getExtension ( $img );
+					} else {
+						$rel ['image'] [] = $basname;
+					}
+				}
+			
+			}
+			
+			$querys = array ();
+			$mainQueryInsert = array ();
+			foreach ( $main as $key => $value ) {
+				$value = mysql_escape_string ( $value );
+				$mainQueryInsert [] = "`$key`='$value' ";
+			
+			}
+			$mainInsert = implode ( ",\r\n", $mainQueryInsert );
+			$querys [] = " UPDATE offers SET $mainInsert  WHERE id={$this->post['offer_id']}";
+			$relInserts = array ();
+			foreach ( $rel as $tabel => $values ) {
+				
+				$querys [] = " DELETE FROM `offers_{$tabel}_rel` WHERE id={$this->post['offer_id']} ";
+				foreach ( $values as $val )
+					if (! is_array ( $val ))
+						$querys [] = "REPLACE INTO `offers_{$tabel}_rel` SET  `$tabel` ='$val', id={$this->post['offer_id']}";
+					else {
+						foreach ( $val as $rv ) {
+							$querys [] = "REPLACE INTO `offers_{$tabel}_rel` SET  `$tabel` ='$rv', id={$this->post['offer_id']}";
+						}
+					}
+			
+			}
+			
+			$querys [] = " UPDATE offers SET `name`=CONCAT('TI',{$this->post['offer_id']}) WHERE id={$this->post['offer_id']} ";
+			
+			// file_put_contents('qqq',implode(";\n\r",$querys));
+			
+			foreach ( $querys as $q ) {
+				$db->query ( $q );
+			}
+			
+			/*
+			 * SERVICE PRICE
+			 */
+			$rates ['EUR'] = $this->config ['EUR_RATE'];
+			$rates ['USD'] = $this->config ['USD_RATE'];
+			
+			if ($main ['filed_currency'] == '3')
+    				$service_price = " UPDATE  `offers` SET `service_price`=`filed_price` *{$rates['USD']} WHERE id=LAST_INSERT_ID()";
+    			
+    			elseif ($main ['filed_currency'] == '4')
+    				$service_price = " UPDATE  `offers` SET `service_price`=`filed_price` *{$rates['EUR']} WHERE id=LAST_INSERT_ID()";
+    			
+    			elseif ($main ['filed_currency'] == '5')
+    				$service_price = " UPDATE  `offers` SET `service_price`=`filed_price` WHERE id=LAST_INSERT_ID()";
+			$db->query ( $service_price );
+			
+			/*
+			 * SERVICE PRICE
+			 */
+			
+			global $smarty;
+			$smarty->clear_cache ();
+			
+			base::redirect ( HelperFunction::link ( array ('users', 'profile' ) ) );
+		}
+		global $smarty;
+		$smarty->assign ( '_where', $where );
+		// $this->mainTpl = 'users/add_body.tpl.html';
+		// $this->contentTpl = "users/addoffer.tpl.html";
+		$this->mainTpl = "users/addoffer.tpl.html";
+        
+        
+        
+	}
+	function viewRegistrationComplete() {
+		$this->registrationComplete = $this->LoadText ( 'registration-complete' );
+		
+		$this->currentPage ['content'] .= $this->registrationComplete ['content'];
+	
+	}
+	function viewConfirmSuccess() {
+		$this->confirmSuccess = $this->LoadText ( 'confirm-success' );
+		if (! empty ( $this->confirmSuccess ))
+			$this->currentPage ['content'] .= $this->confirmSuccess ['content'];
+		else {
+			//$this->currentPage ['content'] .= 'confirm-success';
+		}
+	}
+	function viewUploadfile() {
+		$Imagetypes = array ('image/gif' => IMAGETYPE_GIF, 'image/jpeg' => IMAGETYPE_JPEG, 'image/pjpeg' => IMAGETYPE_JPEG, 'image/png' => IMAGETYPE_PNG );
+		$this->upladError = '';
+		$files = $this->files ['upload_file'];
+		
+		if ($files ['error'] != UPLOAD_ERR_OK) {
+			$this->upladError = $files ['error'];
+			return;
+		
+		}
+		
+		if (! key_exists ( $files ['type'], $Imagetypes )) {
+			$this->upladError = 'FILE_TYPE_ERROR' . $files ['type'] . "XXX";
+			return;
+		}
+		
+		if (! $this->upladError) {
+			$ext = image_type_to_extension ( $Imagetypes [$files ['type']] );
+			$name = str_replace ( ".", '-', microtime ( 1 ) );
+			$tname = 'small-tmp-' . $name;
+			$name = 'tmp-' . $name . $ext;
+			move_uploaded_file ( $files ['tmp_name'], "img/tmp/" . $name );
+			
+			base::resizeAndcopy ( "img/tmp/" . $name, 110, $tname, 'img/tmp/' );
+			$this->uploadedFile = "img/tmp/" . $tname . $ext;
+		
+		}
+	}
+	/*
+	 * view Functions
+	 */
+}
+?>

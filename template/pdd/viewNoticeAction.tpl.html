@@ -1,0 +1,17 @@
+{assign var=client_answer value=$this->question.client_answer}
+{assign var=correct_answer value=$this->question.correct_answer}
+<div style="width:398px; padding:30px  72px  10px 72px; color:#666666; font-size:12px">
+<div class="answer_status_{$this->question.status}" >{Trans term=$this->question.status}</div>
+{if $this->question.image_original || $this->question.image}
+{include file="pdd/showResultThumb.tpl.html" width=391 height=288 image_original=$this->question.image_original image_default=$this->question.image imageType=$this->query.imageType}
+{/if}
+<div style='color:#000; padding:6px 0;'><strong>{Trans term="question"}</strong>:&nbsp;{$this->question.question}</div>
+<div  style='color:#000; padding:6px 0;'><strong>{Trans term="your_answer"}</strong>:&nbsp;{$this->question.$client_answer}</div>
+<div style='color:#000; padding:6px 0;'><strong>{Trans term="right_answer"}</strong>:&nbsp;{$this->question.$correct_answer}</div>
+{if $this->question.hint_for_correct_answer}<div style='color:#000; padding:6px 0;'><strong>{Trans term="right_answer_comment"}</strong>:&nbsp;
+{$this->question.hint_for_correct_answer}</div>
+{/if}
+
+
+</div>
+

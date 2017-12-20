@@ -1,0 +1,36 @@
+QUERY 
+ SELECT 
+		                    parent_ml.label as parent_opt,parent.id as id, parent.pid as pid,
+		                    options_ml.label as opt
+		           FROM   
+		           options    INNER JOIN options as parent 
+		           									ON (options.pid = parent.id)
+		           			  INNER JOIN options_ml  
+		           			  						ON (options.id = options_ml.id AND options_ml.lng_id=5)
+		           			  INNER JOIN options_ml as parent_ml  
+		           			  						ON (parent.id = parent_ml.id AND parent_ml.lng_id=5)
+		                      INNER JOIN offers_filed_options_rel 
+		                      						ON (offers_filed_options_rel.filed_options = options.id AND offers_filed_options_rel.id='2235')
+		           	ORDER BY parent.pid , parent.position,options.position
+		           
+		           
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+2.17075514793
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	287
+File => /home/transinf/public_html/template_c/%%22^22B^22BB7518%%user.offer.options.tpl.html.php	 LINE 	5
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%46^466^466AEB61%%user.offer.tpl.html.php	 LINE 	152
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%22^228^228114FA%%body.tpl.html.php	 LINE 	4
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%5E^5ED^5ED718EC%%index.tpl.html.php	 LINE 	127
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/index.php	 LINE 	23

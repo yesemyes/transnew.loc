@@ -1,0 +1,26 @@
+QUERY 
+SELECT 
+							`city`.`id`,
+							`city_ml`.`value` 
+						FROM 
+							`city`
+							INNER JOIN `city_ml` ON (`city_ml`.`id` = `city`.`id`)
+							INNER JOIN `cameras` ON (`cameras`.`city` = `city`.`id`)
+						WHERE  
+							`city_ml`.`lng_id` = 7
+						AND `cameras`.`camera_type`='violation'
+						GROUP  BY `city`.`id`
+                        ORDER  BY  `city`.`position`
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+9.88620305061
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Content/feRoadpolice.class.php	 LINE 	122
+File => /home/transinf/public_html/cls/Content/feRoadpolice.class.php	 LINE 	20
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

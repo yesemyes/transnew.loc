@@ -1,0 +1,41 @@
+QUERY 
+ SELECT                 
+								  offers.id as id,
+								  offers.name, 
+								  offers.filed_main_image, 
+								  offers.service_price, 
+								  offers.filed_car_brand as brand_id,
+				                  brand.label as brand,
+				                  offers.filed_car_brand_model as model_id,
+				                  model.label as model,
+				                  brand.label as brand,
+				                  model.alias as model_alias,
+				                  brand.alias as brand_alias,
+				                  currency.iso as currency,
+				                  filed_price as price,
+				                  filed_contract, 
+				                  filed_release_date_year as year,
+				                  siteusers.login as login
+				                  
+				                  
+				                   FROM offers
+				                  
+				        		  INNER JOIN brandmodel    as brand ON ( offers.filed_car_brand       = brand.id )
+				                  INNER JOIN brandmodel    as model ON ( offers.filed_car_brand_model = model.id )
+				                  LEFT JOIN currency      	ON          (currency.id = `offers`.`filed_currency` )
+				                  INNER JOIN siteusers      	ON          (siteusers.id = `offers`.`siteuser` )
+				                  
+				                   WHERE  `offers`.`active`='1' ORDER BY modify_date DESC LIMIT 0,30
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+5.29168391228
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	145
+File => /home/transinf/public_html/cls/Content/feHome.class.php	 LINE 	19
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

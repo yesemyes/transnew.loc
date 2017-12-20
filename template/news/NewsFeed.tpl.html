@@ -1,0 +1,23 @@
+{*<div class="wleft">
+{if !empty($this->CurrnetCategory)}{$this->CurrnetCategory.name} {else} {$this->currentPage.label} {/if}
+</div>
+<br class="cb" />
+*}
+
+
+{foreach from=$this->feed item=news name=newsFeed}
+{if $news.title}
+<div class="news_item atom_{cycle values='even,odd'}" style="position: relative;border-bottom: 1px solid #b2afaf;padding-bottom: 4px;width: 745px;
+margin-left: 5px;">
+	{include file=news/atom.tpl.html _news =$news  _iterator=$smarty.foreach.newsFeed}
+</div>
+
+<br class="cb" />
+
+{/if}
+{/foreach}
+
+
+<br class="cb" />
+{include file="default/paging.tpl.html"  found_rows=$this->news_found_rows limit=$this->limit page=$this->page}
+<br class="cb" />

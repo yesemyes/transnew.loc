@@ -1,0 +1,45 @@
+<div class="CarMainTbl"> {if !empty($this->brandModels)}
+  <div class="titles2 cb shadowbg">{Trans term="sale_of_brand" default= "Продажа автомобилей"}&nbsp;<span style="color: #00B9FF;">{$this->CurentBrand.label}</span></div>
+  <!--<div class="carsalelist">
+  <ul class="UlNoStyle ModelMainTbl">
+  {assign var = count value=$this->brandModels|@count}
+  {assign var = countt value=$count/4|ceil}
+  <div class="abcdef" style="float: left;width: 160px; padding-left: 30px;background:url(/css/images/border.png)repeat-y center right;">
+   {foreach from=$this->brandModels item=model name=ii}
+   
+    {Link page='cars' CurentBrand=$this->CurentBrand.alias modelAlias=$model.alias assign=modelHref}
+    <li style=" width: 140px; text-align:left; padding:5px; " class="{if $this->offerModel ==$model.alias } current{/if}"> {if $model.image}
+      {assign var=imgPath value="/img/brandmodel/image/`$model.image`" }
+      {else}
+      {assign var=imgPath value="/img/brandmodel/small/`$this->CurentBrand.image`" }
+      {/if} <span class="titles3  {if $this->offerModel ==$model.alias } current{/if}"> <a href="{$modelHref}" class="titles3 fs11 {if $this->offerModel ==$model.alias } current{/if}"> {$model.label}</a>&nbsp;({$model.offers_count|default:0}) </span> </li>
+      {if $smarty.foreach.ii.iteration%$countt ==0}
+      
+      </div><div class="abcdef" style="float: left;width: 160px; padding-left: 30px;background:url(/css/images/border.png)repeat-y center right;">
+      {/if}
+    {/foreach}
+    </div>
+  
+  </ul>
+  <br class="cb" />
+  </div>-->
+  {/if} 
+  
+  {*<hr class="cb" />*}
+  {*{if !empty($this->brandOldModels)}
+  <ul class="UlNoStyle ModelMainTbl">
+    {foreach from=$this->brandOldModels item=model name=ii}
+    
+    {Link page='brand' CurentBrand=$this->CurentBrand.alias modelAlias=$model.alias assign=modelHref}
+    <li style="width:224px; text-align:left; padding:0px; {if $smarty.foreach.ii.iteration%3!=0}margin-right:50px;{/if} "> {assign var=imgPath value="/img/brandmodel/image/`$model.image`" } <span class="titles3"> <a href="{$modelHref}" class="titles3 fs11 "> {$model.label}</a> {if $model.offerscount > 0}
+      ({$model.offerscount|default:0})
+      {/if} </span> </li>
+    {/foreach}
+  </ul>
+  {/if} <br />*}
+
+{*if $this->offerModel*}
+  {include file="cars/offerList.tpl.html"} 
+  <br class="cb"/>
+    {*/if*}
+</div>

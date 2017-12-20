@@ -1,0 +1,65 @@
+<div id="content" class="advanced_c ">
+{include file=default/middle.tpl.html}
+<br class="cb"/>
+
+<aside class="share-btns">
+			
+			
+			<div class="share__item share__item-like">
+				<div class="fb-like" data-href="http://www.transinfo.am/roadpolice/cameras.html" data-width="150" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+			</div>
+            <div class="fb-share-button" data-href="http://www.transinfo.am/roadpolice/cameras.html" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.transinfo.am%2Froadpolice%2Fcameras.html&amp;src=sdkpreparse">Поделиться</a></div>
+			
+			<!--<div class="share__item">
+				<!--<div class="fb-share-button" data-href="http://www.transinfo.am/roadpolice/cameras.html" data-layout="button_count"></div>
+				<a href="#" class="share-btn__fb-like" data-text="Share" rel="nofollow"><i></i></a>
+				<span>0</span>
+			</div>
+			<div class="share__item">
+				<a href="#" class="share-btn__ok" data-text="Класс" rel="nofollow"><i></i></a>
+				<span>0</span>
+			</div>
+			<div class="share__item">
+				<a href="#" class="share-btn__vk" data-text="Нравится" rel="nofollow"><i></i></a>
+				<span>0</span>
+			</div>
+			
+			<div class="share__item">
+				<a href="#" class="share-btn__tw" data-text="Tweet" rel="nofollow"><i></i></a>
+				<span>0</span>
+			</div>-->
+					
+</aside>
+		
+<div class="street-desc fl">
+<select name='type' id='select-type'>
+	<option value='0'>{Trans term='select_type'}</option>
+	<option value='speed'>{Trans term='speed_camera'}</option>
+	<option value='violation'>{Trans term='violation_camera'}</option>
+</select>
+</div>
+<div class="street-desc fl">
+		<select name='city' id='select-city'>
+		<option value='0'>{Trans term='select_city'}</option>
+		{foreach from=$this->citys item=city}
+			<option value='{$city.id}'>{$city.value}</option>
+		{/foreach}
+		</select>
+</div>
+<div class="street-desc fl">
+		<select name='street' id='select-street'>
+			<option value='0'>{Trans term='select_street'}</option>
+		</select>
+</div>
+
+	
+<div class="street-desc fl" id="street-desc" style="width:358px"></div>
+<br class='cb'/>
+<br class='cb'/>
+<div id="map_main_canvas" style="width: 765px; height: 500px"></div>
+<br class='cb'/>
+<div class="fb-comments" data-colorscheme="dark" data-href="http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}" data-width="765" data-num-posts="10"></div>
+<br class='cb'/>
+
+</div>
+{include file=default/right.tpl.html}

@@ -1,0 +1,27 @@
+<div class="CarMainTbl"> {if !empty($this->brandModels)}
+  <div class="titles2 cb shadowbg">{Trans term="models_of_brand" default="Моделный ряад %s" barnd=$this->CurentBrand.label}</div>
+  <ul class="UlNoStyle ModelMainTbl">
+    {foreach from=$this->brandModels item=model name=ii}
+    
+    {Link  page='brand'  CurentBrand=$this->CurentBrand.alias modelAlias=$model.alias assign=modelHref}
+    <li style="float:left; width:140px; text-align:left; padding:5px; border-right:1px solid #124e66;border-left:1px solid #376e82" class="{if $this->offerModel ==$model.alias } current{/if}"> {if $model.image}
+      {assign var=imgPath value="/img/brandmodel/image/`$model.image`" }
+      {else}
+      
+      **********
+      {assign var=imgPath value="/img/brandmodel/small/`$this->CurentBrand.image`" }
+      {/if} <span class="titles3  {if $this->offerModel ==$model.alias } current{/if}"> <a href="{$modelHref}" class="titles3 fs11 {if $this->offerModel ==$model.alias } current{/if}"> {$model.label}</a></span> </li>
+    {/foreach}
+  </ul>
+  {/if} <br class="cb" />
+  <hr class="cb" />
+  {if !empty($this->brandOldModels)}
+  <ul class="UlNoStyle ModelMainTbl">
+    {foreach from=$this->brandOldModels item=model name=ii}
+    
+    {Link page='brand' CurentBrand=$this->CurentBrand.alias modelAlias=$model.alias assign=modelHref}
+    <li style="width:224px; text-align:left; padding:0px; {if $smarty.foreach.ii.iteration%3!=0}margin-right:50px;{/if} "> {assign var=imgPath value="/img/brandmodel/image/`$model.image`" } <span class="titles3"> <a href="{$modelHref}" class="titles3 fs11 "> {$model.label}</a> </span> </li>
+    {/foreach}
+  </ul>
+  {/if} <br />
+</div>

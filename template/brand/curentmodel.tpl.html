@@ -1,0 +1,51 @@
+{strip}
+<div class="wleft">
+<a href="{Link page='brand' brand=$this->CurentBrand.alias}" class="inv">{$this->CurentBrand.label}</a>
+{if $this->CurentSmodel}{$this->CurentSmodel.label}-{/if}{$this->CurentModel.label}</div>
+<div class="wright"></div>
+<div class="wleftContent">
+    {assign var=imgPath value="/img/brandmodel/image/`$this->CurentModel.image`"}
+     {assign var=bimgPath value="/img/brandmodel/big/`$this->CurentModel.image`"}
+     {if $this->CurentModel.image}<img src="{$imgPath}" alt="{$this->CurentModel.label}" title="{$this->CurentModel.label}" align="left" class="imgmarg needOverlay" rel="{$bimgPath}" />{/if}
+    {$this->CurentModel.short}
+    <br  class="cb"/><br  class="cb"/>
+    {$this->CurentModel.full}
+    {if $this->CurentModel.link1}<strong class="black">{Trans param='officialwebpage'}:</strong> 
+    <a href="{Link page=goto}?p={$this->CurentBrand.link1}" target="_blank" class="hov margL10">{$this->CurentModel.link1|replace:"http://":''}</a><br  class="cb"/>{/if}
+    {if $this->CurentModel.link2}<strong class="black">{Trans param='regionalwebpage'}:</strong>
+    <a href="{Link page=goto}?p={$this->CurentBrand.link2}" target="_blank" class="hov margL10">{$this->CurentModel.link2|replace:"http://":''}</a><br  class="cb"/>{/if}
+</div>
+<div class="wbot cb"></div>
+{assign var=imagesCount value=$this->CurentModelGalery|@count}
+{if !empty($this->CurentModelGalery)}
+
+<div {if $imagesCount > 3}id="jCarouselLiteDemo"{/if} class="cEnd">
+  <div class="primaryContent">
+    <div id="demo" class="cEnd tabs-container">
+      <div class="carousel default">
+        <a class="prev left-ico" href="#"></a>
+        <div class="jCarouselLite"  >
+          <ul class="UlNoStyle">
+           {foreach from=$this->CurentModelGalery item = galerItem}
+            {assign var = path value= "/img/brandmodel/small/`$galerItem.galery`"}
+            {assign var = bigpath value= "/img/brandmodel/big/`$galerItem.galery`"}
+            {assign var=style value=''}
+            {if $imagesCount <= 3} {assign var=style value='style="float:left; margin: 0 10px 0 10px;"'} {/if}
+            
+            <li {$style}>
+            
+            <a href="{$bigpath}" rel="fnacyImage" title="{$this->CurentBrand.label} {$this->CurentModel.label}">
+				<img  src="{$path}" rel="{$bigpath}" alt="{$this->CurentBrand.label} {$this->CurentSmodel.label}"/>
+            </a>
+            </li>
+            {/foreach}
+          </ul>
+        </div>
+       <a class="next right-ico " href="#"></a>
+      </div>
+    </div>
+  </div>
+</div>
+{/if}
+
+{/strip} 

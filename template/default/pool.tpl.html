@@ -1,0 +1,9 @@
+{assign var=pool value=$this->getPool()}
+{if $pool}
+<br class="cb"/>
+<div class="specialProjectTit">{Trans term="pool" default="Հարցում"}</div>
+<div class="adsbg services">
+{include file=$pool.inner_tpl}
+</div>
+<br class="cb"/>
+{/if}

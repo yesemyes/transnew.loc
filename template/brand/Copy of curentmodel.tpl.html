@@ -1,0 +1,41 @@
+{strip}
+<div class="wleft"><a href="{$this->_mklink('brand',$this->CurentBrand.alias)}" class="inv">{$this->CurentBrand.label}</a>-{$this->CurentModel.label}</div>
+<div class="wright"></div>
+<div class="wleftContent">
+  <div class="wrightContent">
+    <div class="orangeBorder"></div>
+    {assign var=imgPath value="/img/brandmodel/image/`$this->CurentModel.image`"}
+    <img src="{$imgPath}" alt="{$this->CurentModel.alias}" title="{$this->CurentModel.alias}" align="left" class="imgmarg" />
+    {$this->CurentModel.short}
+    <br  class="cb"/><br  class="cb"/>
+    {if $this->CurentModel.link1}<strong>{$this->trans('officialwebpage')}:</strong> <a href="{$this->_mklink('redirect')}?p={$this->CurentBrand.link1}" class="hov margL10">{$this->CurentModel.link1|replace:"http://"}</a><br  class="cb"/>{/if}
+    {if $this->CurentModel.link2}<strong>{$this->trans('regionalwebpage')}:</strong><a href="{$this->_mklink('redirect')}?p={$this->CurentBrand.link2}" class="hov margL10">{$this->CurentModel.link2|replace:"http://"}</a><br  class="cb"/>{/if}
+
+     </div>
+</div>
+<br class="cb" />
+<br class="cb" />
+<div id="jCarouselLiteDemo" class="cEnd">
+  <div class="primaryContent">
+    <div id="demo" class="cEnd tabs-container">
+      <div class="carousel default">
+        <a class="prev" href="#"></a>
+        <div class="jCarouselLite">
+          <ul>
+           {foreach from=$this->CurentModelGalery item = galerItem}
+           
+            {assign var = path value= "/img/brandmodel/small/`$galerItem.galery`"}
+            <li><img src="{$path}"  alt="" /></li>
+            {/foreach}
+          </ul>
+        </div>
+       <a class="next" href="#"></a>
+        <div class="cb"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<br class="cb" />
+<br class="cb" />
+{include file=cars/offerList.tpl.html _where="filed_car_brand_model=`$this->CurentModel.id`"}
+{/strip} 

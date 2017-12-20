@@ -1,0 +1,23 @@
+/* Slider
+----------------------------------*/
+.ui-slider { position: relative; text-align: left; width:386px; }
+.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 30px; height: 33px; cursor: pointer;}
+.ui-slider .ui-slider-range { position: absolute; z-index: 1; display: block; border: 0; background-position: 0 0; }
+.ui-slider-horizontal { height: 71px; width:386px;}
+.ui-slider-horizontal .ui-slider-handle { top: 17px; }
+.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+.ui-slider-horizontal .ui-slider-range-min { left: 0; }
+.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+/*
+.ui-slider-vertical { width: .8em; height: 100px; }
+.ui-slider-vertical .ui-slider-handle { left: -.3em; margin-left: 0; margin-bottom: -.6em; }
+.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
+.ui-slider-vertical .ui-slider-range-min { bottom: 0; }
+.ui-slider-vertical .ui-slider-range-max { top: 0; }
+*/
+.ui-state-default2 { border: 0px solid #000; background:url(/img/slider.png) no-repeat; width:30px; height:33px; font-weight: normal; color: #fff; outline: none; font-weight:bold; display:block; }
+.ui-state-default2 a, .ui-state-default2 a:link, .ui-state-default2 a:visited { color: #fff; text-decoration: none; outline: none; }
+.ui-state-hover2, .ui-state-focus2 { border: 0px solid #000; font-weight: normal; color: #182028; outline: none; }
+.ui-state-hover2 a, .ui-state-hover2 a:hover { background:url(/img/slider.png) no-repeat; width:30px; height:33px; font-weight: normal; color: #182028; outline: none; font-weight:bold; display:block; border: 0px solid #000; }
+.ui-state-active2 { background:url(/img/slider.png) no-repeat; width:30px; height:33px; font-weight: normal; color: #182028; outline: none; font-weight:bold; border: 0px solid #000; display:block; }
+.ui-state-active2 a, .ui-state-active2 a:link, .ui-state-active2 a:visited { background:url(/img/slider.png) no-repeat; width:30px; height:33px; font-weight: normal; color: #182028; outline: none; font-weight:bold; border: 0px solid #000; display:block; }

@@ -1,0 +1,12 @@
+<?php /* Smarty version 2.6.26, created on 2017-02-02 17:16:33
+         compiled from cars/body.tpl.html */ ?>
+<div id="content" class=""  style="width:782px; margin:0"  ><?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => $this->_tpl_vars['this']->contentTpl, 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?></div>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "default/right.tpl.html", 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>

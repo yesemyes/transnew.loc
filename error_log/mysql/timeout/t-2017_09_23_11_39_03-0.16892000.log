@@ -1,0 +1,22 @@
+QUERY 
+SELECT `pool_questions_rel`.`questions` as `key`,`votes` as `value` FROM  `pool_questions_rel`  WHERE `id`=48 ;
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.01630616188
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	848
+File => /home/transinf/public_html/template_c/%%8D^8D4^8D440FE4%%pool.tpl.html.php	 LINE 	5
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%06^06F^06FA073D%%left.tpl.html.php	 LINE 	26
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%90^902^90278D1B%%body.tpl.html.php	 LINE 	6
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%5E^5ED^5ED718EC%%index.tpl.html.php	 LINE 	127
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/index.php	 LINE 	23

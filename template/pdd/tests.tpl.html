@@ -1,0 +1,19 @@
+<div id="content" class="advanced_c ">
+<!--<br class="cb"/>-->
+{*{include file=default/middle.tpl.html}*}
+<!--<br class="cb"/>-->
+<h2 class="tickets-bg">{Trans term="PDD_TICKETS" default="Билеты ПДД"}</h2>
+<div class="tickets-list-bg">
+<ul class="tests-holders">
+{foreach from=$this->tests	item=test}
+<li><a href="{Link page='pdd' action='to-pass-the-exam'}?test={$test.id}">{$test.title}</a></li>
+ 
+ {/foreach}
+</ul>
+<br class="cb"/>
+</div>
+<br class="cb"/>
+<br class="cb"/>
+</div>
+
+{include file=default/right.tpl.html}

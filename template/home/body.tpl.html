@@ -1,0 +1,46 @@
+{include file=default/left.tpl.html}
+<div id="content" style="margin: 0 9px;"> 
+	
+  {assign var=LastNews value=$this->getLastNews()}
+  
+  {if !empty($LastNews)}
+  
+  
+  
+  
+  
+  	<div id="showcase" class="Newsshowcase">
+		<!-- Each child div in #showcase with the class .showcase-slide represents a slide. -->
+        {foreach from=$LastNews item=NewsLast name=LastNewsIteration}
+        {Link assign=_href page='news' catalias=$NewsLast.catalias alias=$NewsLast.alias}
+        
+		<div class="showcase-slide">
+			<!-- Put the slide content in a div with the class .showcase-content. -->
+            {if $NewsLast.image}
+			<div class="showcase-content">
+				<img src="/img/news/slide/{$NewsLast.image}" alt="{$NewsLast.title}" width="428" height="auto"/>
+			</div>
+			<!-- Put the thumbnail content in a div with the class .showcase-thumbnail -->
+			<div class="showcase-thumbnail">
+				<img src="/img/news/thumb/{$NewsLast.image}" alt="{$NewsLast.title}" width="120" height="75" />
+				<!-- The div below with the class .showcase-thumbnail-caption contains the thumbnail caption. -->
+				<div class="showcase-thumbnail-caption">{$NewsLast.title|mb_truncate:35}</div>
+				<!-- The div below with the class .showcase-thumbnail-cover is used for the thumbnails active state. -->
+				<div class="showcase-thumbnail-cover"></div>
+			</div>
+            {/if}
+			<!-- Put the caption content in a div with the class .showcase-caption -->
+			<div class="showcase-caption">
+				<h2 style="color: #000;font-size: 1.7em;font-weight: normal;"><a style="text-decoration: none;" href="{$_href}">{$NewsLast.title|mb_truncate:100}</a></h2>
+			</div>
+		</div>
+        {/foreach}
+	</div>
+  
+
+  {/if}
+  <div style="margin:20px 0; text-align:center;"> {include file=default/ads.tpl.html _place='ads_home_bot'} </div>
+  {include file=home/homeNewsTabs.tpl.html}
+  
+</div>
+{include file=default/right.tpl.html} 

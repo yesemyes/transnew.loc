@@ -1,0 +1,44 @@
+{strip}
+<div id="left" class="">
+
+{*<div class="carsSale">
+
+<a href="{Link page = 'users' curr = 'addoffer'}">
+    <span class="saletext">{Trans term = 'carsale'}</span>
+    <img src="/css/images/carsale.png"/>
+    </a>
+</div>
+<br class="cb"/>
+ *}
+{include file=default/ads.tpl.html _place="ads_left_verytop" assign="ads_left_verytop"}
+
+  {if $ads_left_verytop}
+  <div class="adsbg">{$ads_left_verytop}</div>
+  <br class="cb" />
+  {/if}  
+
+
+{include file=default/ads.tpl.html _place="ads_left_top" assign="ads_left_top"}
+
+  {if $ads_left_top}
+  <div class="specialProjectTit">{Trans param='special_projects'}</div>
+  <div class="adsbg">{$ads_left_top}</div>
+  <br class="cb" />
+  {/if}  
+  
+  
+  {include file=default/ads.tpl.html _place='ads_left_bot' assign='ads_left_bot' }
+  {if $ads_left_bot}
+{$ads_left_bot} <br class="cb" />
+  {/if}
+  <div class="specialProjectTit">{Trans param='services'}</div>
+  <div class="adsbg services"> {foreach from=$this->dictonary.servicescategory item=servicescategory} <a href="{Link page='transport' category=$servicescategory.alias}" title="{$servicescategory.name|htmlentities} ({$servicescategory.qty})"> {$servicescategory.name}</a> {/foreach}
+   <a href="{Link page="transport" action="add-service"}" class="btn fr">{Trans term="add_Service" default="Ավելացնել"}</a> </div>
+    
+  
+ 
+ 
+  
+  {include file="default/pool.tpl.html"}
+</div>
+{/strip}

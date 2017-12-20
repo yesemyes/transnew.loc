@@ -1,0 +1,10 @@
+Options +SymLinksIfOwnerMatch
+
+RewriteEngine on
+RewriteBase   /admin/
+
+
+
+RewriteCond %{REQUEST_URI} !\.(htm|html|js|ico|gif|jpg|png|css|jpeg|swf|flv|php|zip|gzip|htc)$
+
+RewriteRule (.*) index2.php

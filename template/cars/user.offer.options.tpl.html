@@ -1,0 +1,29 @@
+{assign var =offerOptions value=$this->getOfferOptions($offer.id)}
+{if !empty($offerOptions)}
+<div class="des"> <span class="title"> {Trans term="offer_equipment_set" default="Комплектация автомобиля"} </span> <span class="fl text">
+  <ul class="UlNoStyle">
+    {assign var =lockeds value=""}
+    {foreach from=$offerOptions key=p item=opt name=opeach}
+    {assign var=found value=$lockeds|@strstr:$p}
+    {if !$found}
+    <li class="fl w250" style="margin:7px;"><strong class="fs15 " style="color: #67d5ff;">{$p}</strong> {if !empty($opt)}
+      <ul>
+        {foreach from=$opt  item=_opt}
+        <li class="fs12">{*<strong>*}{$_opt}{*</strong> *}{if key_exists($_opt,$offerOptions)}
+          {assign var =lockeds value=$lockeds|cat:"|`$_opt`|"}
+          <ul>
+            {foreach from=$offerOptions.$_opt item=i}
+            <li class="fs11">{$i}</li>
+            {/foreach}
+          </ul>
+          {/if} </li>
+        {/foreach}
+      </ul>
+      {/if} </li>
+    {if $smarty.foreach.opeach.index %2} <br class="cb"/>
+    {/if}
+    {/if}
+    {/foreach}
+  </ul>
+  </span> </div>
+{/if}

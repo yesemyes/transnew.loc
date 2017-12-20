@@ -1,0 +1,143 @@
+{strip}
+<div class="currentNews" style="width: 758px;
+min-height: 800px;
+/*background: url(/css/images/bg_body.png) repeat;
+box-shadow: 0 0 10px 0 #FCFCFC;
+border-radius: 3px;*/">
+<br class="cb"/>
+<div style="width: 711px;position: relative;">
+ {assign var = _news value= $this->CurrnetNews}
+{ImageExists frame=false base='/img/news/image/' image=$_news.image assign=isImageExists}
+{if $isImageExists}
+<div class="img-holder">
+<img src="{CatImageToSize width=169 height=106 frame=false base='/img/news/image/' image=$_news.image}"   class="fl imgmarg2" style="max-width:169px;"/>
+</div>
+{/if}
+<h2 class="fl" style="font-size:15px; padding-left:5px; width:525px; font-weight:normal;color: #000;">{$_news.title}</h2>
+<div class="fr time">{$_news.date}</div>
+<br class="cb"/>
+</div>
+
+<br class="cb"/>
+<div style="width: 728px; float: left; padding-left: 14px;color: #000; font-size: 14px;">
+{$_news.content}
+<br class="cb"/>
+{if $_news.youtube}
+<div>
+                  
+	<iframe width="728" height="400" src="//www.youtube-nocookie.com/embed/{$_news.youtube}?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+				   
+</div>
+{/if}
+{if $_news.images}
+<br class="cb"/>
+	<div class="showcase newsGal">
+		<!-- Each child div in #showcase with the class .showcase-slide represents a slide. -->
+        {foreach from = $_news.images item = nItem name = images}
+        
+		<div class="showcase-slide">
+			<!-- Put the slide content in a div with the class .showcase-content. -->
+			<div class="showcase-content" style="position: relative;">
+
+            {CatImageToSize width=729 height=375 frame=false base='/img/news/big/' image=$nItem.images assign=_path0}
+				<img src="{$_path0}" alt="01"/>
+                <div class="like" >
+                    <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ftransinfo.one%2Fimg%2Fnews%2Fslide%{$nItem.images}&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true" send="false"></iframe>
+                </div>
+            </div>
+			<!-- Put the thumbnail content in a div with the class .showcase-thumbnail -->
+			<div class="showcase-thumbnail">
+
+            {CatImageToSize width=154 height=75 frame=true base='/img/news/big/' image=$nItem.images assign=_path}
+				<img src="{$_path}" alt="01" width="158px" />
+			</div>
+			<!-- Put the caption content in a div with the class .showcase-caption -->
+        </div>
+        {/foreach}
+	</div>
+ {/if}    
+{if $_news.href}
+<br class="cb"/>
+<span class="fl" style="margin-right: 10px;">{Trans term = 'source'} </span>
+<a class="fl" target="_blank" href="{$_news.href}">{$_news.href|regex_replace:"[^https?://]":""}</a>
+<br class="cb"/>
+{/if}
+{assign var=thisCat value =$this->NewsCategorys[$_news.newscategory] } <br class="cb" />
+<div style="padding: 10px;background: url('/css/images/tr_bg.png') repeat scroll 0 0;height: 19px;" > 
+	<div class="fb-like" data-width="180" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+<!--	<div id="ok_shareWidget"  style="display: inline-block; margin-left: 8px;"></div>-->
+<!--<table style="float: right;">
+	<tr>
+		<td>
+			<div class="fr" style="margin-left: 5px; color: #000;">
+				<span class="fl" >{Trans term = 'view_count'}</span>
+				<span class="fl" style="margin: 0 5px;">{$_news.view_count}</span>
+				<span>{Trans term = 'times'}</span>
+				<br class="cb"/>
+			</div>
+		</td>
+	</tr>
+</table>-->
+
+</div>
+
+    <div>
+        <div class="bannerads_home_bot_27">
+                
+            <!-- Яндекс.Директ
+
+        <script type="text/javascript">
+        yandex_partner_id = 134800;
+        yandex_site_bg_color = 'FFFFFF';
+        yandex_stat_id = 1;
+        yandex_ad_format = 'direct';
+        yandex_direct_type = '728x90';
+        yandex_direct_border_type = 'block';
+        yandex_direct_border_radius = true;
+        yandex_direct_links_underline = true;
+        yandex_direct_header_bg_color = 'FEEAC7';
+        yandex_direct_bg_color = 'FFF9F0';
+        yandex_direct_border_color = 'FBE5C0';
+        yandex_direct_title_color = '0000CC';
+        yandex_direct_url_color = '006600';
+        yandex_direct_text_color = '000000';
+        yandex_direct_hover_color = '0066FF';
+        yandex_direct_sitelinks_color = '0000CC';
+        yandex_direct_favicon = true;
+        yandex_no_sitelinks = false;
+        document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
+        </script> -->
+        </div>
+    </div>
+
+<br class="cb"/>
+<div class="fb-comments" data-colorscheme="light" data-href="http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}" data-width="728" data-num-posts="10"></div>
+</div>
+</div>
+
+
+
+
+  
+{/strip}
+
+
+
+
+
+
+
+
+{*<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c65377351a774d0"></script>*}
+{*<a onclick="history.back(0)" class="more2">{Trans param='BACK_TO_CATEGORY'}</a>*}
+{*<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_22x22_style">
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_odnoklassniki_ru"></a>
+</div>*}
+{*
+<span class='st_mail_ru_large' displayText='mail.ru'></span>
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_vkontakte_large' displayText='Vkontakte'></span>
+<span class='st_odnoklassniki_large' displayText='Odnoklassniki'></span>
+*}

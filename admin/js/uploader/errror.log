@@ -1,0 +1,19 @@
+Array
+(
+    [type] => 2
+    [message] => move_uploaded_file() [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: SAFE MODE Restriction in effect.  The script whose uid/gid is 1107/99 is not allowed to access / owned by uid/gid 0/0
+    [file] => /home/transinf/public_html/admin/js/uploader/uploadify.php
+    [line] => 31
+)
+Exception Object
+(
+    [message:protected] => System Error
+    [string:private] => 
+    [code:protected] => 0
+    [file:protected] => /home/transinf/public_html/admin/js/uploader/uploadify.php
+    [line:protected] => 33
+    [trace:private] => Array
+        (
+        )
+
+)

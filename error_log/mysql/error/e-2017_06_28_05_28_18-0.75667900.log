@@ -1,0 +1,25 @@
+QUERY 
+ 		SELECT 	 
+							count(offers.id) as `qty`
+				                  
+				        FROM offers
+				                  inner JOIN brandmodel    as brand   ON          (`brand`.`id` = `offers`.`filed_car_brand` )
+				                  LEFT JOIN brandmodel    as model   ON          (`model`.`id` = `offers`.`filed_car_brand_model` )
+				        		  LEFT JOIN siteusers       ON          (`siteusers`.`id` = `offers`.`siteuser` )
+				                  LEFT JOIN siteusers_ml    ON          (`siteusers`.`id` = `siteusers_ml`.`id`  AND  `siteusers_ml`.`lng_id`=7)  
+				        		 
+		                   WHERE `filed_release_date_year%5Bfrom%5D` ='1990'  AND `filed_release_date_year%5Bto%5D` ='2015'  AND `price%5Bto%5D` ='5000'  
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+Unknown column 'filed_release_date_year%5Bfrom%5D' in 'where clause'
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	390
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	181
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	337
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	44
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

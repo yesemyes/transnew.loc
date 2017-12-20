@@ -1,0 +1,10 @@
+<div class="fl" style="width:340px;">
+<span class="formtit w100 textR fl">
+{assign var=phone1 value=$smarty.session.siteusers.phone1|@sExplode:')'}
+<label for="user_phone1" class="req_field">{Trans param='user_phone1'}</label>
+</span> <input value="{$phone1.0|trim:" ("}" type="text"  maxlength="3" size="3" name="user_phone1_code" id="user_phone1_code"   class="inp margL10 fl" style="width:48px;" /><input size="6" maxlength="6" type="text" name="user_phone1" id="user_phone1"  value="{$phone1.1|@trim}"   class="inp margL10 fl" style="width:112px;" />
+<br class="cb" /><br class="cb" />
+<span class="formtit w100 textR fl"> {assign var=phone2 value=$smarty.session.siteusers.phone2|@sExplode:')'}
+<label for="user_phone2">{Trans param='user_phone2'}</label>
+</span><input type="text" value="{$phone2.0|trim:" ("}"  maxlength="3" size="3" name="user_phone2_code" id="user_phone2_code"   class="inp margL10 fl" style="width:48px;"  /><input type="text" name="user_phone2" id="user_phone2" size="6" maxlength="6"  value="{$phone2.1|@trim:" "}"  class="inp margL10 fl" style="width:112px;" />
+</div>

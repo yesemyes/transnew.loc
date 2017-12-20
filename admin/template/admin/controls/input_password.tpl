@@ -1,0 +1,1 @@
+<input type="password" name="{$_name}" id="{$_id}" {include file=controls/events.tpl.html _setting=$_setting}/>&nbsp;<input type="password" name="re_password" id="re_{$_id}"/>

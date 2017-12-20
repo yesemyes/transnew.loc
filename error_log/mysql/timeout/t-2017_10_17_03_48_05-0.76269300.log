@@ -1,0 +1,15 @@
+QUERY 
+SELECT `offers`.`id`,`offers`.`active`,`offers`.`contact_name`,`offers`.`highlight`,`offers`.`featured`,`offers`.`name`,`offers`.`filed_main_image`,`offers`.`filed_car_brand`,`offers`.`filed_car_brand_model`,`offers`.`filed_modification`,`offers`.`filed_contract`,`offers`.`filed_engine`,`offers`.`filed_body`,`offers`.`filed_drive`,`offers`.`filed_rudder`,`offers`.`filed_gearbox`,`offers`.`filed_fuel`,`offers`.`filed_city`,`offers`.`filed_country`,`offers`.`filed_other_city`,`offers`.`filed_warranty`,`offers`.`filed_bargaining`,`offers`.`filed_release_date_year`,`offers`.`filed_release_date_month`,`offers`.`filed_milage`,`offers`.`filed_milage_kayficent`,`offers`.`filed_price`,`offers`.`filed_currency`,`offers`.`filed_color`,`offers`.`filed_metalic`,`offers`.`filed_customs`,`offers`.`filed_interchange`,`offers`.`filed_credit`,`offers`.`position`,`offers`.`siteuser`,`offers`.`description`,`offers`.`phone1`,`offers`.`phone2`,`offers`.`dealer`,`offers`.`filed_srtat_date`,`offers`.`filed_end_date`,`offers`.`filed_duration`,`offers`.`isnew`,`offers`.`filed_state`,`offers`.`intop`,`offers`.`filed_engine_power`,`offers`.`service_price`,`offers`.`price_usd`,`offers`.`modify_date`,`offers`.`filed_location`,`offers`.`view_count` FROM   `offers`  
+ WHERE `active` = 1 AND `name` = 'm_5516' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+2.03551697731
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	48
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	15
+File => /home/transinf/public_html/index.php	 LINE 	10

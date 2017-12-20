@@ -1,0 +1,14 @@
+QUERY 
+SELECT `warranty`.`id` as `key`,`value` as `value` FROM  `warranty` INNER JOIN warranty_ml ON (`warranty`.`id` = `warranty_ml`.`id` AND `warranty_ml`.`lng_id`=5)  WHERE active  ORDER BY  position ;
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+28.3637378216
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	185
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	745
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	62
+File => /home/transinf/public_html/index.php	 LINE 	10

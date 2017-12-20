@@ -1,0 +1,35 @@
+<div class="fl" style="width:340px; ">
+
+<span class="formtit w100  textR fl"  >
+<label for="filed_state">{Trans param='filed_state'}</label>
+</span>{assign var=_filed_stateoptions value=$db->getOptions('state','id','value',$this->defLng.id,'active') }
+<select   name="main[filed_state]" id="filed_state" class="sel margL10 fl w170" {if $offer.isnew} disabled="disabled"{/if}>
+  <option value="">{Trans param='select_state'}</option>
+  
+      
+        {html_options options=$_filed_stateoptions selected=$offer.filed_state}
+      
+    
+</select>
+<br class="cb" />
+<span class="formtit w100 textR fl">
+  {*filed_fuel*}
+<label for="filed_fuel">{Trans param='filed_fuel'}</label>
+</span>{assign var=_filed_fuel value=$db->getOptions('fuel','id','value',$this->defLng.id,'active','','position') }
+<select name="main[filed_fuel]" id="filed_fuel" class="sel margL10 fl w170" >
+  <option value="">{Trans param='select_state'}</option>
+  
+      
+        {html_options options=$_filed_fuel selected=$offer.filed_fuel}
+        
+      
+    
+</select>
+<br class="cb" />
+{assign var=_customsoptions value=$db->getOptions('customs','id','value',$this->defLng.id,'active') }
+<div style="float:right;width: 232px;">
+{html_radios name='filed_customs' id="filed_customs"  options=$_customsoptions  selected=$offer.filed_customs  separator='<br class="cb" />'} 
+</div>
+
+
+</div>

@@ -1,0 +1,9 @@
+{strip}
+<li {if !$_last}class="SearchbotBord"{/if} title="{$fitem.date}">
+
+{if $fitem.image} <a href="{$fitem._link}"><img src="{$fitem.image}" style="max-width:110px; max-height:110px" alt="{$fitem.title}" title="{$fitem.title}" align="left"  class="margLR5" /></a> {/if} <span class="black"> <a href="{$fitem._link}" class="inv bold">{$fitem.title}</a><br />
+  {if $fitem.short}{$fitem.short}{else}{$fitem.brand_short}{/if}<br class="cb"/>
+  </span>
+  {$fitem.image}
+  </li>
+{/strip}

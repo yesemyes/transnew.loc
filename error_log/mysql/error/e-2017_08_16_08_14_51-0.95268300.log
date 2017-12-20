@@ -1,0 +1,34 @@
+QUERY 
+ 		SELECT 	 
+							                
+								  offers.*,
+								  brand.alias as brandalias,
+								  model.alias as modelalias,
+								  CONCAT( brand.label,' ',model.label) as `brandmodel`,
+				                  siteusers.login as login,
+				                  siteusers.name  as saler,
+				                  siteusers_ml.description as user_description,
+				                  siteusers_ml.addres as user_addres
+				                  
+				                  
+				                  
+				        FROM offers
+				                  inner JOIN brandmodel    as brand   ON          (`brand`.`id` = `offers`.`filed_car_brand` )
+				                  LEFT JOIN brandmodel    as model   ON          (`model`.`id` = `offers`.`filed_car_brand_model` )
+				        		  LEFT JOIN siteusers       ON          (`siteusers`.`id` = `offers`.`siteuser` )
+				                  LEFT JOIN siteusers_ml    ON          (`siteusers`.`id` = `siteusers_ml`.`id`  AND  `siteusers_ml`.`lng_id`=7)
+		                   WHERE `open_dialog` =''   ORDER BY brandmodel  asc  LIMIT 120, 20 
+===========================
+
+ERROR NO 	
+ERROR MESSAGE / OR DURATION  
+Unknown column 'open_dialog' in 'where clause'
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	67
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	251
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	337
+File => /home/transinf/public_html/cls/Content/feCars.class.php	 LINE 	44
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

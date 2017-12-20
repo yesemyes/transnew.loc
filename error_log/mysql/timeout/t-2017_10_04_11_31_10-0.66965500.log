@@ -1,0 +1,26 @@
+QUERY 
+ SELECT     `news`.* ,
+		                      `menu`.`alias` as `catalias`,
+		                       `news_ml`.`title`,
+		                       `news`.`image`
+		           FROM `news` 
+		           LEFT JOIN news_ml USING (id)
+		           LEFT JOIN menu ON (news.newscategory = menu.id)
+		           WHERE lng_id=7 AND `news`.last AND `news`.`active` = '1'  AND `news`.`image` 
+		           ORDER BY `news`.`date` DESC , `news`.id DESC LIMIT 0,3
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+15.7164700031
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	369
+File => /home/transinf/public_html/cls/Content/feHome.class.php	 LINE 	132
+File => /home/transinf/public_html/template_c/%%90^902^90278D1B%%body.tpl.html.php	 LINE 	12
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1869
+File => /home/transinf/public_html/template_c/%%5E^5ED^5ED718EC%%index.tpl.html.php	 LINE 	127
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1263
+File => /home/transinf/public_html/cls/Smarty/Smarty.class.php	 LINE 	1106
+File => /home/transinf/public_html/index.php	 LINE 	23

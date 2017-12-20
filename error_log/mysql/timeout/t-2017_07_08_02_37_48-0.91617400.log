@@ -1,0 +1,16 @@
+QUERY 
+SELECT `transport_type`.`id`,`transport_type`.`calculator`,`transport_type`.`active`,`transport_type`.`pay`,`transport_type_ml`.`lng_id`,`transport_type_ml`.`title` FROM   `transport_type` LEFT JOIN transport_type_ml USING (`id`)  
+ WHERE `lng_id` = 7 AND `calculator` = '16' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+1.98312306404
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	223
+File => /home/transinf/public_html/cls/Content/feCalculators.class.php	 LINE 	75
+File => /home/transinf/public_html/cls/Content/feCalculators.class.php	 LINE 	29
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	82
+File => /home/transinf/public_html/index.php	 LINE 	10

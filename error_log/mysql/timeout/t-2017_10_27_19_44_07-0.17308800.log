@@ -1,0 +1,15 @@
+QUERY 
+SELECT label FROM   `brandmodel` LEFT JOIN brandmodel_ml USING (`id`)  
+ WHERE `active` AND `id` = '' 
+===========================
+
+ERROR NO 	777
+ERROR MESSAGE / OR DURATION  
+33.0839400291
+===========================
+
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	60
+File => /home/transinf/public_html/cls/Core/db.class.php	 LINE 	242
+File => /home/transinf/public_html/cls/Front/frontEnd.class.php	 LINE 	52
+File => /home/transinf/public_html/cls/Front/front.class.php	 LINE 	15
+File => /home/transinf/public_html/index.php	 LINE 	10

@@ -1,0 +1,45 @@
+﻿<div class="fl pdd "   id="pdd-main-continer" data-min-wrong-count="{$this->config.pdd_min_wrong_count}" style="height:100%">
+{*<span class="fl size25 blue"> {Trans term="PDD_marathon" default="ÐœÐ°Ñ€Ð°Ñ„Ð¾Ð½ ÐŸÐ”Ð”"} </span> *}
+ 
+{if ! empty($this->quetions)}
+
+  <div class="cb fl exam_left" style="margin-top: 16px; margin-left: 14px;"> <span class="fl title" style="width: 70px; padding-left: 9px;">{Trans term="exam_questions" default="Ð’Ð¾Ð¿Ñ€Ð¾Ñ�Ñ‹:"}</span> <br class="cb"/>
+    <div class="scroll-pane fl" >
+      <div class="numbers fl" {if $this->loadLink}data-load="{$this->loadLink}"{/if}>
+        <ul>
+          {foreach from=$this->quetions item=quetion key=index name=numbers}
+          <li id="data-question-{$quetion.id}" class="marathone-questions"><span>{$index+1}</span></li>
+		  
+          {/foreach}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="fl exam_right" style="width:685px;"> 
+  <div  id="marathon-questions-holder">
+  {foreach from=$this->quetions item=quetion key=index}
+     
+    {include file="pdd/question.tpl" question_number=$index+1  ticket=$quetion showHint=show numberoff=1} 
+	 
+    {/foreach} 
+  </div>	
+	<br class="cb"/>
+     <button class="fl btn" id="next-btn">{Trans term="answer" default="Պատասխանել" }</button>
+     <button class="fl btn" id="fake-next-btn">{Trans term="next_question" default="Следующий вопрос"}</button>
+     &nbsp;
+     <button class="fl btn" id="finish-btn">{Trans term="finsh_test" default="Завершит" }</button>
+      &nbsp;
+<label style="float:left; margin:3px 0  0 10px; padding:15px;">    <input type="checkbox" id="turn-off-hints" ><span style="padding-left:10px; margin-top:-1px; float:right">{Trans term="turn_off_hints"}</span></label>
+  <br class="cb"/>
+  </div>
+  <br class="cb"/>
+{else}
+<h2>{Trans term="no_questions_found" default="Извените раздел находится в стадии разработки"}</h2>
+{/if} 
+<br class="cb"/> 
+<div style="margin: 30px 10px;"><div class="fb-comments" data-colorscheme="dark" data-href="http://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}" data-width="765" data-num-posts="10"></div></div>
+</div>
+<div id="resultView" style="display:none;float: left;"></div>
+ 
+
+{include file=default/right.tpl.html}
